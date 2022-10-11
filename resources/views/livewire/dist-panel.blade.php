@@ -108,6 +108,7 @@
         /*}*/
 
         .tech_box > .order-non-dragable,
+        .gu-mirror,
         .tech_box > .order {
             cursor: pointer;
             margin-bottom: 5px;
@@ -117,6 +118,16 @@
             font-size: .75rem;
             text-align: center;
         }
+        /* .gu-transit,
+        .gu-mirror {
+            cursor: pointer;
+            margin-bottom: 5px !important;
+            border-radius: 5px !important;
+            padding: 10px !important;
+            color: white !important;
+            font-size: .75rem !important;
+            text-align: center !important;
+        } */
         .unassigned_box > .order {
             width: 244px;
             min-width: 244px;
@@ -176,13 +187,13 @@
 
             function loadDataFromDragulaJs() {
                 const boxNodes = document.querySelectorAll('.box');
-
                 const draggableBoxes = [].slice.call(boxNodes);
 
-                dragula(draggableBoxes, {
-                    ignoreInputTextSelection: false
+                var drake = dragula(draggableBoxes, {
+                    ignoreInputTextSelection: false,
                 })
-                .on('drop', function (order,boxTo,boxFrom) {
+                drake.canMove('.order')
+                drake.on('drop', function (order,boxTo,boxFrom) {
                     var order_id = order.id;
                     var tech_id = boxTo.id;
                     var positions = [];
