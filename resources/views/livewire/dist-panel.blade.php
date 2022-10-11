@@ -161,38 +161,60 @@
 
 @section('scripts')
     <script src="{{asset('vendors/sortable/Sortable.js')}}"></script>
+    <script src="{{asset('vendors/dragula/dragula.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('vendors/dragula/dragula.css')}}">    
     <script src="{{asset('js/app.js')}}"></script>
     <script>
         $(document).ready(function () {
 
-            loadData();
+            loadDataFromDragulaJs();
 
             window.Echo.channel('OrderCreatedChannel')
                 .listen('OrderCreatedEvent', (e) => {
                 @this.refresh_data();
                 });
 
-            function loadData() {
-                var el = $('.box');
-                $(el).each(function (i, e) {
-                    var sortable = Sortable.create(e, {
-                        sort: true,
-                        animation: 150,
-                        // multiDrag: true,
-                        group: 'box', // set both lists to same group
-                        draggable: ".order",  // Specifies which items inside the element should be draggable
-                        onEnd: function (/**Event*/evt) {
-                            var order_id = evt.item.id;
-                            var tech_id = evt.to.id;
-                            var positions = [];
-                            $('#' + evt.to.id).children().each(function (index) {
-                                positions.push([$(this).attr('id'),index]);
-                            });
-                            @this.change_technician(order_id, tech_id, positions);
-                        },
+            function loadDataFromDragulaJs() {
+                const boxNodes = document.querySelectorAll('.box');
+
+                const draggableBoxes = [].slice.call(boxNodes);
+
+                dragula(draggableBoxes, {
+                    ignoreInputTextSelection: false
+                })
+                .on('drop', function (order,boxTo,boxFrom) {
+                    var order_id = order.id;
+                    var tech_id = boxTo.id;
+                    var positions = [];
+                    $('#' + boxTo.id).children().each(function (index) {
+                        positions.push([$(this).attr('id'),index]);
                     });
+                    @this.change_technician(order_id, tech_id, positions);
+
+                    // console.log(order.id,boxTo.id,positions);
                 });
             }
+            // function loadDataFromSortableJs() {
+            //     var el = $('.box');
+            //     $(el).each(function (i, e) {
+            //         var sortable = Sortable.create(e, {
+            //             sort: true,
+            //             animation: 150,
+            //             // multiDrag: true,
+            //             group: 'box', // set both lists to same group
+            //             draggable: ".order",  // Specifies which items inside the element should be draggable
+            //             onEnd: function (/**Event*/evt) {
+            //                 var order_id = evt.item.id;
+            //                 var tech_id = evt.to.id;
+            //                 var positions = [];
+            //                 $('#' + evt.to.id).children().each(function (index) {
+            //                     positions.push([$(this).attr('id'),index]);
+            //                 });
+            //                 @this.change_technician(order_id, tech_id, positions);
+            //             },
+            //         });
+            //     });
+            // }
         });
     </script>
 @endsection

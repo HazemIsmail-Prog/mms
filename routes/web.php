@@ -3,8 +3,10 @@
 use App\Events\OrderCreatedEvent;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use React\EventLoop\Timer\Timer;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,26 +22,13 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 Route::get('/websockets', function () {
-
-
-    try {
-        Artisan::call('websockets:serve');
-        return redirect()->back();
-    } catch (\Throwable $th) {
-        dd($th);
-    }
+    Artisan::call('websockets:serve');
 })->name('websockets');
 
 
 Route::get('/migrate', function () {
-
-
-    try {
-        Artisan::call('migrate:fresh --seed');
-        return redirect()->back();
-    } catch (\Throwable $th) {
-        dd($th);
-    }
+    Artisan::call('migrate:fresh --seed');
+    return redirect()->route('home');
 })->name('migrate');
 
 Route::get('test', function () {
