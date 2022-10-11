@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Events\OrderCreatedEvent;
 use App\Models\Order;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class TechnicianPage extends Component
@@ -44,6 +45,7 @@ class TechnicianPage extends Component
             'completed_at' => now(),
             'index' => null,
         ]);
+        Artisan::call('websockets:serve');
         event(new OrderCreatedEvent);
     }
 }

@@ -55,13 +55,7 @@ return [
     */
 
 
-
-//        'asset_url' => null,
-    'asset_url' => 'http://localhost/miskalddar/public',
-//        'asset_url' => url('/'),
-//        'asset_url' => asset(rtrim('/','/')),
-//        'asset_url' => Config('app.url'),
-    //    'asset_url'  => rtrim(asset('/'),'/'),
+    'asset_url' => env('APP_URL'),
 
 
     /*
