@@ -17,16 +17,25 @@
             </li>
         @endcan
 
-        @can('technician_page_menu')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{route('technician_page')}}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                    </svg>
-                    @lang('messages.technician_page')
-                </a>
-            </li>
-        @endcan
+        @if (auth()->user()->role_id == 1)
+            
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{route('websockets')}}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                </svg>
+                @lang('messages.websockets')
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{route('migrate')}}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                </svg>
+                @lang('messages.migrate_fresh_seed')
+            </a>
+        </li>
+        @endif
 
         @can('settings_menu')
             <li class="c-sidebar-nav-title text-info">
