@@ -45,7 +45,6 @@ class TechnicianPage extends Component
             'completed_at' => now(),
             'index' => null,
         ]);
-        Artisan::call('websockets:serve');
         event(new OrderCreatedEvent);
     }
 }
