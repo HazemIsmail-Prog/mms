@@ -17,6 +17,20 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
+
+
+Route::get('/websockets', function () {
+
+
+    try {
+        Artisan::call('php artisan websockets:serve');
+        return redirect()->back();
+    } catch (\Throwable $th) {
+        dd($th);
+    }
+})->name('websockets');
+
+
 Route::get('/migrate', function () {
 
 
