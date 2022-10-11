@@ -23,7 +23,7 @@ Route::get('/websockets', function () {
 
 
     try {
-        Artisan::call('php artisan websockets:serve');
+        Artisan::call('websockets:serve');
         return redirect()->back();
     } catch (\Throwable $th) {
         dd($th);
