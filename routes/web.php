@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\OrderCreatedEvent;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -15,6 +16,17 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/migrate', function () {
+
+
+    try {
+        Artisan::call('migrate:fresh --seed');
+        return redirect()->back();
+    } catch (\Throwable $th) {
+        dd($th);
+    }
+})->name('migrate');
 
 Route::get('test', function () {
     event(new OrderCreatedEvent());
