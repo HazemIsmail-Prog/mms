@@ -1,0 +1,61 @@
+body {
+    /*font-family: 'Cairo', sans-serif;*/
+    /*font-family: 'Almarai', sans-serif;*/
+    /*font-family: 'Markazi Text', sans-serif;*/
+    font-family: 'El Messiri', sans-serif;
+    /*font-family: 'Amiri', serif;*/
+}
+
+.table td, .table th {
+    padding: 0.25rem;
+}
+
+.c-sidebar-nav-dropdown-toggle, .c-sidebar-nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.card-header {
+    background-color: #3c4b64;
+    color: white;
+}
+
+.pagination {
+    margin: 0;
+    justify-content: center;
+}
+
+.form-control.is-invalid {
+    background-image: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.form-control {
+    background: transparent;
+    text-align: center;
+}
+
+select {
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+.d-flex {
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+form {
+    margin-bottom: 10px;
+}
