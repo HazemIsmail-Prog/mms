@@ -23,9 +23,6 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if($request->user()->title_id == 10 || $request->user()->title_id == 11 ){
-                    return redirect(RouteServiceProvider::TECHNICIAN_PAGE);
-                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }
