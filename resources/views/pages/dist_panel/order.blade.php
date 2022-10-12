@@ -1,6 +1,6 @@
 <div style="background: {{$order->status->color}}" 
     class="order{{$order->status_id == 3 ? '-non-dragable' : '' }}" 
-    id="{{$order->id}}"
+    id="order{{$order->id}}"
     draggable='{{$order->status_id == 3 ? 'false' : 'true' }}'
     >
     <div>{{$order->id}}</div>

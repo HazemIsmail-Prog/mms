@@ -1,8 +1,4 @@
 <div>
-    <!-- Modal -->
-{{-- @include('pages.dist_panel.order_modal') --}}
-<!-- Modal -->
-
     <div class="d-flex align-items-start justify-content-start flex-wrap flex-md-nowrap">
 
         {{-- Date Filter --}}
@@ -64,7 +60,7 @@
     <div class="card">
         <div class="card-header text-center">{{__('messages.unassigned')}}</div>
         <div class="card-body p-0">
-            <div id="0" class="box unassigned_box">
+            <div id="tech0" class="box unassigned_box">
                 @foreach($orders->whereNull('technician_id') as $order)
                     @include('pages.dist_panel.order')
                 @endforeach
@@ -87,7 +83,7 @@
                     @endif --}}
                 </div>
                 <div class="card-body p-0">
-                    <div id="{{$technician->id}}" class="box tech_box">
+                    <div id="tech{{$technician->id}}" class="box tech_box">
                         @foreach($orders->where('technician_id',$technician->id) as $order)
                             @include('pages.dist_panel.order')
                         @endforeach
@@ -101,44 +97,22 @@
 
 @section('styles')
     <style>
-
-        /*.order {*/
-        /*    width: 250px;*/
-        /*    min-width: 250px;*/
-        /*}*/
-
         .tech_box > .order-non-dragable,
         .gu-mirror,
-        .tech_box > .order {
+        .tech_box > .order,
+        .unassigned_box > .order {
             cursor: pointer;
             margin-bottom: 5px;
             border-radius: 5px;
             padding: 10px;
             color: white;
             font-size: .75rem;
-            text-align: center;
         }
-        /* .gu-transit,
-        .gu-mirror {
-            cursor: pointer;
-            margin-bottom: 5px !important;
-            border-radius: 5px !important;
-            padding: 10px !important;
-            color: white !important;
-            font-size: .75rem !important;
-            text-align: center !important;
-        } */
         .unassigned_box > .order {
+            margin: 0 3px;
             width: 244px;
             min-width: 244px;
-            cursor: pointer;
-            margin: 0 3px;
-            border-radius: 5px;
-            padding: 10px;
-            color: white;
-            font-size: .75rem;
         }
-
         .unassigned_box {
             min-height: 100px;
             overflow-y: hidden;
@@ -148,23 +122,9 @@
             flex-direction: row;
             align-items: start;
         }
-
         .tech_box {
             min-height: 250px;
             padding: 10px;
-        }
-
-        /*.tech_list::-webkit-scrollbar,*/
-        /*.tech_box::-webkit-scrollbar {*/
-        /*    display: none;*/
-        /*}*/
-
-        .modal-dialog {
-            max-width: 95%;
-        }
-
-        .modal.fade.show {
-            padding-left: 0;
         }
 
     </style>
@@ -178,8 +138,8 @@
     <script>
         $(document).ready(function () {
 
-            loadDataFromDragulaJs();
-            // loadDataFromSortableJs();
+            // loadDataFromDragulaJs();
+            loadDataFromSortableJs();
 
             window.Echo.channel('OrderCreatedChannel')
                 .listen('OrderCreatedEvent', (e) => {
@@ -191,7 +151,7 @@
                 const boxNodes = document.querySelectorAll('.box');
                 const draggableBoxes = [].slice.call(boxNodes);
                 var drake = dragula(draggableBoxes, {
-                    ignoreInputTextSelection: false,
+                    // ignoreInputTextSelection: false,
                     moves: function (el, source, handle, sibling) {
                         return el.draggable;
                     },
@@ -204,12 +164,14 @@
                     }
                 });
                 drake.on('drop', function (order,boxTo,boxFrom) {
-                    var order_id = order.id;
-                    var tech_id = boxTo.id;
+                    var order_id = order.id.replace('order', '');
+                    var tech_id = boxTo.id.replace('tech', '');
+                    // console.log(order_id,tech_id);
                     var positions = [];
-                    $('#' + boxTo.id).children().each(function (index) {
-                        positions.push([$(this).attr('id'),index]);
+                    $('#tech' + tech_id).children().each(function (index) {
+                        positions.push([$(this).attr('id').replace('order',''),index]);
                     });
+                    // console.log(positions);
                     @this.change_technician(order_id, tech_id, positions);
                 });
             }
@@ -223,12 +185,13 @@
                         group: 'box', // set both lists to same group
                         draggable: ".order",  // Specifies which items inside the element should be draggable
                         onEnd: function (/**Event*/evt) {
-                            var order_id = evt.item.id;
-                            var tech_id = evt.to.id;
+                            var order_id = evt.item.id.replace('order', '');
+                            var tech_id = evt.to.id.replace('tech', '');
                             var positions = [];
-                            $('#' + evt.to.id).children().each(function (index) {
-                                positions.push([$(this).attr('id'),index]);
+                            $('#tech' + tech_id).children().each(function (index) {
+                                positions.push([$(this).attr('id').replace('order',''),index]);
                             });
+                            // console.log(positions);
                             @this.change_technician(order_id, tech_id, positions);
                         },
                     });
