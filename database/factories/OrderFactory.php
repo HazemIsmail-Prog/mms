@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,61 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
-    }
+        $customer = Customer::find(rand(1,Customer::count()));
+        $status_id = rand(1,2); 
+        $department_id = rand(2,4);
+        $technicians = array_values(User::query()
+            ->whereIn('title_id', [10, 11])
+            ->whereHas('departments', function ($q) use ($department_id) {
+                $q->where('departments.id', $department_id);
+            })
+            ->pluck('id')->toArray());
+        $technician_array = [];
+        foreach($technicians as $key=>$technician){
+            array_push($technician_array,$technician);
+        }
+        shuffle($technician_array);
+        $tech_id =  $technician_array[0];
+            
+            return [
+                'customer_id'           => $customer->id,
+                'address_id'            => $customer->addresses->first()->id,
+                'phone_id'              => $customer->phones->first()->id,
+                'updated_by'            => 1,
+                'created_by'            => 1,
+                'status_id'             => $status_id,
+                'technician_id'         => $status_id == 1 ? null : $tech_id,
+                'index'                 => null,
+                'department_id'         => $department_id,
+                'notes'                 => 'notes test',
+                'completed_at'          => null,
+                'order_description'     => 'description test',
+                'cancelled_at'          => null,
+                'estimated_start_date'  => today(),
+            ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // switch ($department_id){
+            //     case 2:
+            //         $tech_id = rand(8,10);
+            //         break;
+            //     case 3:
+            //         $tech_id = rand(11,13);
+            //         break;
+            //     case 4:
+            //         $tech_id = rand(14,16);
+            //         break;
+            // }
+}
 }

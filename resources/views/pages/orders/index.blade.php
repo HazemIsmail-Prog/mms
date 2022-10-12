@@ -51,7 +51,7 @@
                                             <div class="form-group w-100">
                                                 <label for="area_id">{{__('messages.area')}}</label>
                                                 <select class="form-control" name="area_id" id="area_id">
-                                                    <option disabled selected value="">---</option>
+                                                    <option selected value="">---</option>
                                                     @foreach($areas->sortBy->name as $area)
                                                         <option
                                                             {{request('area_id') == $area->id ? 'selected' : ''}} value="{{$area->id}}">{{$area->name}}</option>
@@ -78,7 +78,7 @@
                                             <div class="form-group w-100">
                                                 <label for="creator_id">{{__('messages.creator')}}</label>
                                                 <select class="form-control" name="creator_id" id="creator_id">
-                                                    <option disabled selected value="">---</option>
+                                                    <option selected value="">---</option>
                                                     @foreach($creators as $creator)
                                                         <option
                                                             {{request('creator_id') == $creator->id ? 'selected' : ''}} value="{{$creator->id}}">{{$creator->name}}</option>
@@ -102,7 +102,7 @@
                                             <div class="form-group w-100">
                                                 <label for="technician_id">{{__('messages.technician')}}</label>
                                                 <select class="form-control" name="technician_id" id="technician_id">
-                                                    <option disabled selected value="">---</option>
+                                                    <option selected value="">---</option>
                                                     @foreach($technicians as $technician)
                                                         <option
                                                             {{request('technician_id') == $technician->id ? 'selected' : ''}} value="{{$technician->id}}">{{$technician->name}}</option>
@@ -113,7 +113,7 @@
                                             <div class="form-group w-100">
                                                 <label for="department_id">{{__('messages.department')}}</label>
                                                 <select class="form-control" name="department_id" id="department_id">
-                                                    <option disabled selected value="">---</option>
+                                                    <option selected value="">---</option>
                                                     @foreach($departments as $department)
                                                         <option
                                                             {{request('department_id') == $department->id ? 'selected' : ''}} value="{{$department->id}}">{{$department->name}}</option>

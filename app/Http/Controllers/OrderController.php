@@ -60,6 +60,17 @@ class OrderController extends Controller
             ->when($request->creator_id != "", function ($q) use ($request) {
                 $q->where('created_by', $request->creator_id);
             })
+
+
+
+
+            ->when($request->status_id != "", function ($q) use ($request) {
+                $q->whereIn('status_id', $request->status_id);
+            })
+
+
+
+
             ->when($request->start_created_at != "", function ($q) use ($request) {
                 $q->whereDate('created_at', '>=', $request->start_created_at);
             })

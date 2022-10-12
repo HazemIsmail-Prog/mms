@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             CustomerSeeder::class,
             StatusSeeder::class,
+            OrderSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
