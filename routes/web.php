@@ -60,8 +60,23 @@ Route::group([
 
         // Super Admin Routes
         Route::group(['middleware' => 'super_admin'], function () {
+
+            // Run Websockets
             Route::get('/websockets', function () {Artisan::call('websockets:serve');})->name('websockets');
-            Route::get('/migrate', function () {Artisan::call('migrate:fresh --seed');return redirect()->route('home');})->name('migrate');
+
+            // Run Migrate Fresh with Seed
+            Route::get('/migrate', function () {
+                Artisan::call('migrate:fresh --seed');
+                return redirect()->route('home');})->name('migrate');
+
+            // Clear Cache
+            Route::get('/clear', function () {
+                Artisan::call('cache:clear');
+                Artisan::call('view:clear');
+                Artisan::call('route:clear');
+                Artisan::call('clear-compiled');
+                Artisan::call('config:cache');
+                return redirect()->route('home');})->name('clear');
         });
 
 

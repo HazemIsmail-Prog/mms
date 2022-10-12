@@ -35,6 +35,14 @@
                 @lang('messages.migrate_fresh_seed')
             </a>
         </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{route('clear')}}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                </svg>
+                @lang('messages.clear_cache')
+            </a>
+        </li>
         @endif
 
         @can('settings_menu')
