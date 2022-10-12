@@ -84,9 +84,7 @@ class DistPanel extends Component
             $currentOrderId = $position[0]; 
             $currentOrderIndex = $position[1]; 
             $currentOrder = Order::find($currentOrderId);
-            if($currentOrder->index != $currentOrderIndex){
-                $currentOrder->update(['index' => $tech_id . $currentOrderIndex ]);
-            }
+            $currentOrder->update(['index' => $tech_id . $currentOrderIndex ]);
         }
 
         $this->refresh_data();

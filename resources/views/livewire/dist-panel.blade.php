@@ -179,20 +179,30 @@
         $(document).ready(function () {
 
             loadDataFromDragulaJs();
+            // loadDataFromSortableJs();
 
             window.Echo.channel('OrderCreatedChannel')
                 .listen('OrderCreatedEvent', (e) => {
                 @this.refresh_data();
                 });
 
+
             function loadDataFromDragulaJs() {
                 const boxNodes = document.querySelectorAll('.box');
                 const draggableBoxes = [].slice.call(boxNodes);
-
                 var drake = dragula(draggableBoxes, {
                     ignoreInputTextSelection: false,
-                })
-                drake.canMove('.order')
+                    moves: function (el, source, handle, sibling) {
+                        return el.draggable;
+                    },
+                    accepts: function (el, target, source, sibling) {
+                        if(sibling){
+                            return sibling.draggable;
+                        }else{
+                            return true;
+                        }
+                    }
+                });
                 drake.on('drop', function (order,boxTo,boxFrom) {
                     var order_id = order.id;
                     var tech_id = boxTo.id;
@@ -201,31 +211,29 @@
                         positions.push([$(this).attr('id'),index]);
                     });
                     @this.change_technician(order_id, tech_id, positions);
-
-                    // console.log(order.id,boxTo.id,positions);
                 });
             }
-            // function loadDataFromSortableJs() {
-            //     var el = $('.box');
-            //     $(el).each(function (i, e) {
-            //         var sortable = Sortable.create(e, {
-            //             sort: true,
-            //             animation: 150,
-            //             // multiDrag: true,
-            //             group: 'box', // set both lists to same group
-            //             draggable: ".order",  // Specifies which items inside the element should be draggable
-            //             onEnd: function (/**Event*/evt) {
-            //                 var order_id = evt.item.id;
-            //                 var tech_id = evt.to.id;
-            //                 var positions = [];
-            //                 $('#' + evt.to.id).children().each(function (index) {
-            //                     positions.push([$(this).attr('id'),index]);
-            //                 });
-            //                 @this.change_technician(order_id, tech_id, positions);
-            //             },
-            //         });
-            //     });
-            // }
+
+            function loadDataFromSortableJs() {
+                var el = $('.box');
+                $(el).each(function (i, e) {
+                    var sortable = Sortable.create(e, {
+                        sort: true,
+                        animation: 150,
+                        group: 'box', // set both lists to same group
+                        draggable: ".order",  // Specifies which items inside the element should be draggable
+                        onEnd: function (/**Event*/evt) {
+                            var order_id = evt.item.id;
+                            var tech_id = evt.to.id;
+                            var positions = [];
+                            $('#' + evt.to.id).children().each(function (index) {
+                                positions.push([$(this).attr('id'),index]);
+                            });
+                            @this.change_technician(order_id, tech_id, positions);
+                        },
+                    });
+                });
+            }
         });
     </script>
 @endsection
