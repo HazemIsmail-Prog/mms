@@ -35,7 +35,6 @@ class OrderForm extends Component
         switch ($this->action) {
             case 'create':
                 $this->departments = Department::where('is_service', 1)->get();
-                $this->technician_id = '';
                 $this->statuses = Status::limit(1)->get();
                 $this->status_id = 1;
                 $this->phone_id = $this->customer->phones->count() == 1 ? $this->customer->phones()->first()->id : null;
@@ -45,12 +44,6 @@ class OrderForm extends Component
             case 'edit':
                 $this->departments = $this->order->technician ? Department::whereId($this->order->department_id)->get() : Department::where('is_service', 1)->get();
                 $this->department_id = $this->order->department_id;
-                $this->technicians = User::
-                whereActive(1)
-                    ->whereIn('title_id', [10, 11])
-                    ->whereHas('departments', function ($q) {
-                        $q->where('department_id', $this->department_id);
-                    })->get();
                 $this->customer = $this->order->customer;
                 $this->phone_id = $this->order->phone->id;
                 $this->address_id = $this->order->address->id;
@@ -85,23 +78,16 @@ class OrderForm extends Component
     public function updated($key)
     {
         if (in_array($key, ['department_id', 'estimated_start_date', 'address_id'])) {
-            $this->technicians = User::
-            whereActive(1)
-                ->whereIn('title_id', [10, 11])
-                ->whereHas('departments', function ($q) {
-                    $q->where('department_id', $this->department_id);
-                })
-                ->get();
-            $this->technician_id = '';
-            $this->dup_orders_count = Order::where([
+            $this->dup_orders_count = Order::query()
+            ->where([
                 'address_id' => $this->address_id,
                 'department_id' => $this->department_id,
                 'estimated_start_date' => $this->estimated_start_date,
             ])
-                ->when($this->action == 'edit', function ($q) {
-                    $q->where('id', '!=', $this->order->id);
-                })
-                ->count();
+            ->when($this->action == 'edit', function ($q) {
+                $q->where('id', '!=', $this->order->id);
+            })
+            ->count();
         }
     }
 
@@ -124,7 +110,6 @@ class OrderForm extends Component
                     'order_description' => $this->order_description,
                 ];
                 $this->order = Order::create($data);
-                // Artisan::call("websockets:serve");
                 event(new OrderCreatedEvent);
                 session()->flash('success', __('messages.added_successfully'));
                 return redirect()->route('customers.index');
@@ -139,22 +124,13 @@ class OrderForm extends Component
                     'department_id' => $this->department_id,
                     'estimated_start_date' => $this->estimated_start_date,
                     'notes' => $this->orderNotes,
-                    'technician_id' => $this->technician_id != '' ? $this->technician_id : null,
                     'order_description' => $this->order_description,
                 ];
                 $this->order->update($data);
-                // Artisan::call("websockets:serve");
                 event(new OrderCreatedEvent);
                 session()->flash('success', __('messages.updated_successfully'));
-                return redirect()->to('/' . config('app.locale') . '/orders');
+                return redirect()->route('orders.index');
                 break;
-        }
-    }
-
-    public function attachStatus()
-    {
-        if ($this->action == 'create' || $this->status_id != $this->order->latest_status()->id) {
-            $this->order->statuses()->attach($this->status_id, ['user_id' => auth()->id()]);
         }
     }
 }

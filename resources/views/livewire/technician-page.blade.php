@@ -13,7 +13,16 @@
                 </tr>
                 <tr>
                     <th>{{__('messages.address')}}</th>
-                    <td>{{$order->address->full_address()}}</td>
+                    <td>
+                        <span>{{$order->address->full_address()}}</span>
+                        <a class="text-dark btn btn-sm" target="_blank"
+                            href="{{$order->address->maps_search()}}">
+                            <svg style="width: 15px;height: 15px">
+                                <use
+                                    xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-location-pin')}}"></use>
+                            </svg>
+                        </a>
+                    </td>
                 </tr>
                 @if($order->order_description)
                     <tr>
