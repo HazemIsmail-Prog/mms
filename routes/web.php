@@ -1,12 +1,18 @@
 <?php
 
-use App\Events\OrderCreatedEvent;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DistPanelController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StatusesController;
+use App\Http\Controllers\TitleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use React\EventLoop\Timer\Timer;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,50 +26,49 @@ use React\EventLoop\Timer\Timer;
 */
 
 
-
-Route::get('/websockets', function () {
-    Artisan::call('websockets:serve');
-})->name('websockets');
-
-
-Route::get('/migrate', function () {
-    Artisan::call('migrate:fresh --seed');
-    return redirect()->route('home');
-})->name('migrate');
-
-Route::get('test', function () {
-    event(new OrderCreatedEvent());
-});
-
-Route::group(['prefix' => LaravelLocalization::setLocale(),    'middleware' => [
-    'localeSessionRedirect',
-    'localizationRedirect',
-    'localeViewPath',
-],], function () {
-    Auth::routes();
-});
-
-
+// LaravelLocalization Middleware & Prefix
 Route::group([
-    'middleware'=> [
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [
         'localeSessionRedirect',
         'localizationRedirect',
-        'localeViewPath' ,
-        'auth',
-    ], 
-    'prefix' => LaravelLocalization::setLocale()
+        'localeViewPath',
+    ],
 ], function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/departments', \App\Http\Controllers\DepartmentController::class);
-    Route::resource('/roles', \App\Http\Controllers\RoleController::class);
-    Route::resource('/titles', \App\Http\Controllers\TitleController::class);
-    Route::resource('/statuses', \App\Http\Controllers\StatusesController::class);
-    Route::resource('/users', \App\Http\Controllers\UserController::class);
-    Route::resource('/customers', \App\Http\Controllers\CustomerController::class);
-    Route::resource('/orders', \App\Http\Controllers\OrderController::class);
 
-    Route::get('/dis_panel', [\App\Http\Controllers\DistPanelController::class, 'index'])->name('dist_panel.index');
-    Route::get('/technician_page', [\App\Http\Controllers\DistPanelController::class, 'technician_page'])->name('technician_page');
+    // Auth Routes
+    Auth::routes();
+
+    // Group for All Auth Users Including Technicians & Formen
+    Route::group(['middleware' => ['auth']], function () {
+
+        Route::get('/technician_page', [DistPanelController::class, 'technician_page'])->name('technician_page');
+
+        // Group for All Auth Users Excluding Technicians & Formen
+        Route::group(['middleware' => 'no_technicians'], function () {
+            Route::get('/', [HomeController::class, 'index'])->name('home');
+            Route::resource('/departments', DepartmentController::class);
+            Route::resource('/roles', RoleController::class);
+            Route::resource('/titles', TitleController::class);
+            Route::resource('/statuses', StatusesController::class);
+            Route::resource('/users', UserController::class);
+            Route::resource('/customers', CustomerController::class);
+            Route::resource('/orders', OrderController::class);
+            Route::get('/dis_panel', [DistPanelController::class, 'index'])->name('dist_panel.index');
+        });
+
+
+        // Super Admin Routes
+        Route::group(['middleware' => 'super_admin'], function () {
+            Route::get('/websockets', function () {Artisan::call('websockets:serve');})->name('websockets');
+            Route::get('/migrate', function () {Artisan::call('migrate:fresh --seed');return redirect()->route('home');})->name('migrate');
+        });
+
+
+    });
 });
+
+
+
 
 
