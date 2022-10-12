@@ -4,6 +4,10 @@
         @if ($order)
             <table class="table table-striped table-borderless">
                 <tr>
+                    <th>{{__('messages.order_number')}}</th>
+                    <td>{{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}</td>
+                </tr>
+                <tr>
                     <th>{{__('messages.customer_name')}}</th>
                     <td>{{$order->customer->name}}</td>
                 </tr>

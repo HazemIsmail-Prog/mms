@@ -34,18 +34,36 @@
                             <div class="card">
                                 <div class="card-header">{{__('messages.permissions')}}</div>
                                 <div class="card-body">
+                                    <table class=" table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>@lang('messages.section')</th>
+                                                <th>@lang('messages.permissions')</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($permissions as $section)
+                                                <tr>
+                                                    <td class=" align-middle">{{ $section->first()->section_name }}</td>
+                                                    <td class=" align-middle">
+                                                        @foreach ($section as $permission)
+                                                            <div class="form-check inline-block">
+                                                                <input class="form-check-input" type="checkbox" value="{{$permission->id}}"
+                                                                    {{$role->permissions->pluck('id')->contains($permission->id) ? 'checked' : ''}}
+                                                                    name="permissions[]"
+                                                                    id="{{$permission->id}}">
+                                                                <label class="form-check-label" for="{{$permission->id}}">
+                                                                    {{$permission->description}}
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach 
+                                        </tbody>
+                                    </table>
                                     @error('permissions')<span class="small text-danger">{{ $message }}</span>@enderror
-                                    @foreach($permissions as $permission)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{$permission->id}}"
-                                                   {{$role->permissions->pluck('id')->contains($permission->id) ? 'checked' : ''}}
-                                                   name="permissions[]"
-                                                   id="{{$permission->id}}">
-                                            <label class="form-check-label" for="{{$permission->id}}">
-                                                {{$permission->description}}
-                                            </label>
-                                        </div>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>

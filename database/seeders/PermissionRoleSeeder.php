@@ -43,8 +43,6 @@ class PermissionRoleSeeder extends Seeder
             array('id' => '29', 'role_id' => '5', 'permission_id' => '11', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '30', 'role_id' => '5', 'permission_id' => '9', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '31', 'role_id' => '5', 'permission_id' => '7', 'created_at' => NULL, 'updated_at' => NULL),
-            array('id' => '32', 'role_id' => '6', 'permission_id' => '14', 'created_at' => NULL, 'updated_at' => NULL),
-            array('id' => '33', 'role_id' => '7', 'permission_id' => '14', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '35', 'role_id' => '1', 'permission_id' => '15', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '36', 'role_id' => '1', 'permission_id' => '16', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '37', 'role_id' => '1', 'permission_id' => '17', 'created_at' => NULL, 'updated_at' => NULL),
@@ -66,7 +64,6 @@ class PermissionRoleSeeder extends Seeder
             array('id' => '53', 'role_id' => '1', 'permission_id' => '32', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '54', 'role_id' => '1', 'permission_id' => '10', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '55', 'role_id' => '1', 'permission_id' => '11', 'created_at' => NULL, 'updated_at' => NULL),
-            array('id' => '56', 'role_id' => '1', 'permission_id' => '14', 'created_at' => NULL, 'updated_at' => NULL),
             array('id' => '57', 'role_id' => '1', 'permission_id' => '5', 'created_at' => NULL, 'updated_at' => NULL)
         );
 

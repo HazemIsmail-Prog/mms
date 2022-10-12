@@ -164,6 +164,7 @@
                             <table class="table table-hover table-outline mb-0">
                                 <thead class="thead-light">
                                 <tr>
+                                    <th class="text-center">@lang('messages.order_number')</th>
                                     <th class="text-center">@lang('messages.created_at')</th>
                                     <th class="text-center">@lang('messages.estimated_start_date')</th>
                                     <th class="text-center">@lang('messages.status')</th>
@@ -178,6 +179,9 @@
 
                                 @forelse($orders as $order)
                                     <tr>
+                                        <td class="text-center" nowrap>
+                                            {{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}
+                                        </td>
                                         <td class="text-center" nowrap>
                                             <div
                                                 class="small badge badge-pill badge-dark">{{$order->creator->name}}</div>

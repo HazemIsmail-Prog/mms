@@ -76,7 +76,7 @@
             {{-- Technician Card --}}
             <div class="card" style="min-width: 266px">
                 <div class="card-header text-center d-flex justify-content-between mb-0">
-                    <div>{{$technician->name}} {{ $technician->id }}</div>
+                    <div>{{$technician->name}}</div>
                     {{-- @if($technician->completed_orders > 0)
                         <a class="bg-success px-2 pt-1 rounded-circle text-white"
                            href="">{{$technician->completed_orders}}</a>

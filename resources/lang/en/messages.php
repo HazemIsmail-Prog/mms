@@ -168,5 +168,10 @@ return [
     'permissions'                                   => 'Permissions',
     'add_role'                                      => 'New Role',
     'edit_user'                                     => 'Edit User',
+    'section'                                       => 'Section',
+    'role'                                          => 'Role',
+    'order_number'                                  => 'Order Number',
+    'accept'                                        => 'Accept',
+    'done'                                          => 'Done',
 
 ];
