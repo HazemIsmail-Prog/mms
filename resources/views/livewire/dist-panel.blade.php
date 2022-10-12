@@ -184,7 +184,7 @@
                         draggable: ".order",  // Specifies which items inside the element should be draggable
                         sort: true,
                         animation: 150,
-                        delay: 1000,
+                        delay: 500,
                         ghostClass: 'blue-background-class',
                         swapThreshold : 1,
                         onEnd: function (/**Event*/evt) {
