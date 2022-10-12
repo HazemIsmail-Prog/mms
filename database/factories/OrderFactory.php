@@ -24,15 +24,11 @@ class OrderFactory extends Factory
         $technicians = array_values(User::query()
             ->whereIn('title_id', [10, 11])
             ->whereHas('departments', function ($q) use ($department_id) {
-                $q->where('departments.id', $department_id);
+                $q->where('department_id', $department_id);
             })
             ->pluck('id')->toArray());
-        $technician_array = [];
-        foreach($technicians as $key=>$technician){
-            array_push($technician_array,$technician);
-        }
-        shuffle($technician_array);
-        $tech_id =  $technician_array[0];
+        shuffle($technicians);
+        $tech_id =  $technicians[0];
             
             return [
                 'customer_id'           => $customer->id,
@@ -44,9 +40,9 @@ class OrderFactory extends Factory
                 'technician_id'         => $status_id == 1 ? null : $tech_id,
                 'index'                 => null,
                 'department_id'         => $department_id,
-                'notes'                 => 'notes test',
+                'notes'                 => $this->faker->sentence(5),
                 'completed_at'          => null,
-                'order_description'     => 'description test',
+                'order_description'     => $this->faker->sentence(10),
                 'cancelled_at'          => null,
                 'estimated_start_date'  => today(),
             ];

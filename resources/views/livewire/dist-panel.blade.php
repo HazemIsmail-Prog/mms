@@ -107,11 +107,12 @@
             padding: 10px;
             color: white;
             font-size: .75rem;
+            width: 244px;
+            min-width: 244px;
         }
         .unassigned_box > .order {
             margin: 0 3px;
-            width: 244px;
-            min-width: 244px;
+
         }
         .unassigned_box {
             min-height: 100px;
@@ -138,8 +139,8 @@
     <script>
         $(document).ready(function () {
 
-            // loadDataFromDragulaJs();
-            loadDataFromSortableJs();
+            loadDataFromDragulaJs();
+            // loadDataFromSortableJs();
 
             window.Echo.channel('OrderCreatedChannel')
                 .listen('OrderCreatedEvent', (e) => {
