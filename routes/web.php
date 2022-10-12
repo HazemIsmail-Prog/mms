@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusesController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
@@ -41,7 +42,6 @@ Route::group([
 
     // Group for All Auth Users Including Technicians & Formen
     Route::group(['middleware' => ['auth']], function () {
-
         Route::get('/technician_page', [DistPanelController::class, 'technician_page'])->name('technician_page');
 
         // Group for All Auth Users Excluding Technicians & Formen
@@ -57,29 +57,11 @@ Route::group([
             Route::get('/dis_panel', [DistPanelController::class, 'index'])->name('dist_panel.index');
         });
 
-
         // Super Admin Routes
         Route::group(['middleware' => 'super_admin'], function () {
-
-            // Run Websockets
-            Route::get('/websockets', function () {Artisan::call('websockets:serve');})->name('websockets');
-
-            // Run Migrate Fresh with Seed
-            Route::get('/migrate', function () {
-                Artisan::call('migrate:fresh --seed');
-                return redirect()->route('home');})->name('migrate');
-
-            // Clear Cache
-            Route::get('/clear', function () {
-                Artisan::call('cache:clear');
-                Artisan::call('view:clear');
-                Artisan::call('route:clear');
-                Artisan::call('clear-compiled');
-                Artisan::call('config:cache');
-                return redirect()->route('home');})->name('clear');
+            Route::get('/artisan', [SuperAdminController::class, 'index'])->name('artisan.index');
+            Route::post('/run', [SuperAdminController::class, 'artisan_run'])->name('artisan.run');
         });
-
-
     });
 });
 

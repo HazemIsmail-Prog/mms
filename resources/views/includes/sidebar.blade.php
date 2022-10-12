@@ -20,14 +20,14 @@
         @if (auth()->user()->role_id == 1)
             
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{route('websockets')}}">
+            <a class="c-sidebar-nav-link" href="{{route('artisan.index')}}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                 </svg>
-                @lang('messages.websockets')
+                @lang('messages.artisan_commands')
             </a>
         </li>
-        <li class="c-sidebar-nav-item">
+        {{-- <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{route('migrate')}}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
@@ -42,7 +42,7 @@
                 </svg>
                 @lang('messages.clear_cache')
             </a>
-        </li>
+        </li> --}}
         @endif
 
         @can('settings_menu')
