@@ -29,20 +29,20 @@ class LoginController extends Controller
      * @var string
      */
 
-    protected function authenticated(Request $request, $user)
-    {
-        switch ($user->title_id) {
-            case 10 : //supervisor
-            case 11 : //technician
-            return redirect()->route('technician_page');
-                break;
-            default :
-                return redirect()->route('home');
-                break;
-        }
-    }
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     switch ($user->title_id) {
+    //         case 10 : //supervisor
+    //         case 11 : //technician
+    //         return redirect()->route('technician_page');
+    //             break;
+    //         default :
+    //             return redirect()->route('home');
+    //             break;
+    //     }
+    // }
 
-//    protected $redirectTo = RouteServiceProvider::HOME;
+   protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
