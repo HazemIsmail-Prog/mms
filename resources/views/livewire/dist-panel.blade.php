@@ -1,5 +1,5 @@
 <div>
-    <div class="d-flex align-items-start justify-content-start flex-wrap flex-md-nowrap">
+    <div class="d-flex align-items-start justify-content-start flex-row flex-wrap flex-md-nowrap">
 
         {{-- Date Filter --}}
         <div class="form-group w-100">
@@ -180,10 +180,13 @@
                 var el = $('.box');
                 $(el).each(function (i, e) {
                     var sortable = Sortable.create(e, {
-                        sort: true,
-                        animation: 150,
                         group: 'box', // set both lists to same group
                         draggable: ".order",  // Specifies which items inside the element should be draggable
+                        sort: true,
+                        animation: 150,
+                        delay: 1000,
+                        ghostClass: 'blue-background-class',
+                        swapThreshold : 1,
                         onEnd: function (/**Event*/evt) {
                             var order_id = evt.item.id.replace('order', '');
                             var tech_id = evt.to.id.replace('tech', '');

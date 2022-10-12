@@ -3,8 +3,7 @@
     id="order{{$order->id}}"
     draggable='{{$order->status_id == 3 ? 'false' : 'true' }}'
     >
-    <div>{{$order->id}}</div>
-    <div>{{$order->index}}</div>
+    <div>{{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}</div>
     <div>{{$order->status->name}}</div>
     <div>{{$order->customer->name}}</div>
     <div>{{$order->phone->number}}</div>
