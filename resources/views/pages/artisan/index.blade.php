@@ -17,7 +17,7 @@
                             <h4>cache:clear</h4> 
                             <h4>view:clear</h4> 
                             <h4>route:clear</h4> 
-                            <h4>clear-comh4iled</h4> 
+                            <h4>clear-compiled</h4> 
                             <h4>config:cache</h4> 
                             <hr>
                             <h4>websockets:serve</h4>

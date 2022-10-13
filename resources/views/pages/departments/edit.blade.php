@@ -32,12 +32,21 @@
                                 @error('name_en')<span class="small text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="name">@lang('messages.status')</label>
+                                <label for="active">@lang('messages.status')</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="active"
                                            {{old('active') || $department->active == 1 ? 'checked' : ''}} id="active">
                                     <label class="form-check-label" for="active">
                                         @lang('messages.active')
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_service"
+                                           {{old('is_service') || $department->is_service == 1 ? 'checked' : ''}} id="is_service">
+                                    <label class="form-check-label" for="is_service">
+                                        @lang('messages.is_service')
                                     </label>
                                 </div>
                             </div>

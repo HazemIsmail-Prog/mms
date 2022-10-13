@@ -181,7 +181,7 @@ return [
 
     
     //copy from here to english
-    ''                                              => '',
+    'is_service'                                    => 'خدمة',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

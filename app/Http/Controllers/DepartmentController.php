@@ -51,7 +51,8 @@ class DepartmentController extends Controller
         $data = [
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
-            'active' => $request->active ? 1 : 0
+            'active' => $request->active ? 1 : 0,
+            'is_service' => $request->is_service ? 1 : 0,
         ];
 
         Department::create($data);
@@ -96,7 +97,8 @@ class DepartmentController extends Controller
         $data = [
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
-            'active' => $request->active ? 1 : 0
+            'active' => $request->active ? 1 : 0,
+            'is_service' => $request->is_service ? 1 : 0,
         ];
 
         $department->update($data);
