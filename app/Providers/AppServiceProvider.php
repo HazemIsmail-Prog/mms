@@ -26,7 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        shell_exec('php artisan websockets:serve');
+        try{
+            Artisan::call('websockets:serve');
+        }finally{
+            
+        }
         Paginator::useBootstrap();
         Model::preventLazyLoading();
     }
