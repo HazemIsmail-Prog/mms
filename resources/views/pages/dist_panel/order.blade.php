@@ -30,13 +30,14 @@
             </tr>
         </table>
     </div>
-    <div class=" d-flex justify-content-center mb-0 p-2" style="border-top: 1px solid {{$order->status->color}}">
+    <div class=" d-flex justify-content-between align-items-center mb-0 p-2" style="border-top: 1px solid {{$order->status->color}}">
         <a class="btn btn-sm" href="{{route('orders.show',$order)}}">
             <svg style="width: 15px;height: 15px">
-                <use
-                    xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>
+                <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>
             </svg>
         </a>
+        <button wire:click="change_technician({{ $order->id }}, 'cancel' , [])" class=" btn text-danger">
+            @lang('messages.cancel_order')
+        </button>
     </div>
 </div>
-

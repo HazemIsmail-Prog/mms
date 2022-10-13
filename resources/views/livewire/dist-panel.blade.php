@@ -60,8 +60,8 @@
     <div class="card">
         <div class="card-header text-center">{{__('messages.unassigned')}}</div>
         <div class="card-body p-0">
-            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2 mb-0">
-                @foreach($orders->whereNull('technician_id') as $order)
+            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2 m-0">
+                @foreach($orders->whereNull('technician_id')->whereNotIn('status_id',5) as $order)
                     @include('pages.dist_panel.order')
                 @endforeach
             </div>
@@ -71,15 +71,34 @@
     {{-- Technicians --}}
     <div class="d-flex align-items-start justify-content-start tech_list"
          style="overflow: auto">
+        {{-- On Hold Orders Box --}}
+        <div class="card" style="min-width: 266px">
+            <div class="card-header text-center d-flex justify-content-between m-0" style="background: gray">
+                <div>@lang('messages.on_hold')</div>
+            </div>
+            <div class="card-body p-0">
+                <div 
+                    id="techhold" 
+                    class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
+                    >
+                    @foreach($orders->where('status_id',5) as $order)
+                        @include('pages.dist_panel.order')
+                    @endforeach
+                </div>
+            </div>
+        </div>
         @foreach($technicians as $technician)
 
-            {{-- Technician Card --}}
+            {{-- Technician Box --}}
             <div class="card" style="min-width: 266px">
-                <div class="card-header text-center d-flex justify-content-between mb-0">
+                <div class="card-header text-center d-flex justify-content-between m-0">
                     <div>{{$technician->name}}</div>
                 </div>
                 <div class="card-body p-0">
-                    <div id="tech{{$technician->id}}" class="box tech_box d-flex flex-column p-2 mb-0">
+                    <div 
+                        id="tech{{$technician->id}}" 
+                        class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
+                        >
                         @foreach($orders->where('technician_id',$technician->id) as $order)
                             @include('pages.dist_panel.order')
                         @endforeach
@@ -100,8 +119,8 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: .75rem;
-            width: 244px;
-            min-width: 244px;
+            width: 250px;
+            min-width: 250px;
             overflow: hidden;
         }
         .unassigned_box {

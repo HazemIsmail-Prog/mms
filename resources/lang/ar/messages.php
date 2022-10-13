@@ -173,17 +173,17 @@ return [
     'order_number'                                  => 'رقم الطلب',
     'accept'                                        => 'قبول',
     'done'                                          => 'تم',
-
-
-
-
-
-
-    
-    //copy from here to english
     'is_service'                                    => 'خدمة',
-    ''                                              => '',
-    ''                                              => '',
+    'on_hold'                                       => 'توقف مؤقت',
+    'cancel_order'                                  => 'الغاء الطلب',
+
+
+
+
+
+
+
+    //copy from here to english
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

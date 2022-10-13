@@ -17,7 +17,6 @@ class DistPanel extends Component
     public $show_completed = false;
     public $show_cancelled = false;
     public $orders_date_filter = 'show_all';
-    public $selected_order;
 
     public function render()
     {
@@ -66,15 +65,31 @@ class DistPanel extends Component
 
     public function change_technician($order_id, $tech_id, $positions)
     {
-        
-        $tech_id = $tech_id == 0 ? null : $tech_id;
-        
+
+        // dd($order_id, $tech_id, $positions);
+
         $order = Order::find($order_id);
-        
-        $order->technician_id = $tech_id;
-        
-        if ($order->status_id <= 2) {
-            $order->status_id = $tech_id == 0 ? 1 : 2;
+
+        switch ($tech_id){
+            case 0: //unassgined box
+                $order->technician_id = null;
+                $order->status_id = 1;
+                break;
+
+            case 'hold': // hold box
+                $order->technician_id = null;
+                $order->status_id = 5;
+                break;
+
+            case 'cancel': // cancel button clicked
+                $order->technician_id = null;
+                $order->status_id = 6;
+                break;
+
+            default:
+                $order->technician_id = $tech_id;
+                $order->status_id = 2;
+
         }
         
         $order->save();
@@ -84,7 +99,7 @@ class DistPanel extends Component
             $currentOrderId = $position[0]; 
             $currentOrderIndex = $position[1]; 
             $currentOrder = Order::find($currentOrderId);
-            $currentOrder->update(['index' => $tech_id . $currentOrderIndex ]);
+            $currentOrder->update(['index' => $currentOrderIndex ]);
         }
 
         $this->refresh_data();

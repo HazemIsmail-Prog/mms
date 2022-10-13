@@ -173,5 +173,9 @@ return [
     'order_number'                                  => 'Order Number',
     'accept'                                        => 'Accept',
     'done'                                          => 'Done',
+    'is_service'                                    => 'Is Service',
+    'on_hold'                                       => 'On Hold',
+    'cancel_order'                                  => 'الغاء الطلب',
+
 
 ];
