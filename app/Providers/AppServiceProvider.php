@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Artisan::call('schedule:run');
         Paginator::useBootstrap();
         Model::preventLazyLoading();
     }

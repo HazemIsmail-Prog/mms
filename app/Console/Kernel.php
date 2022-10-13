@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('php artisan websockets:serve')->everyMinute();
+        // $schedule->command('inspire')->hourly();
     }
 
     /**
