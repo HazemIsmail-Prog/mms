@@ -8,6 +8,7 @@ body {
 
 .table td, .table th {
     padding: 0.25rem;
+    vertical-align: middle;
 }
 
 .c-sidebar-nav-dropdown-toggle, .c-sidebar-nav-link {

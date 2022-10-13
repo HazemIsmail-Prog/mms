@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        shell_exec('php artisan websockets:serve');
         Paginator::useBootstrap();
         Model::preventLazyLoading();
-
     }
 }

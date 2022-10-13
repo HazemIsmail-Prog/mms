@@ -60,7 +60,7 @@
     <div class="card">
         <div class="card-header text-center">{{__('messages.unassigned')}}</div>
         <div class="card-body p-0">
-            <div id="tech0" class="box unassigned_box">
+            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2">
                 @foreach($orders->whereNull('technician_id') as $order)
                     @include('pages.dist_panel.order')
                 @endforeach
@@ -70,20 +70,16 @@
 
     {{-- Technicians --}}
     <div class="d-flex align-items-start justify-content-start tech_list"
-         style="column-gap: 10px;overflow: auto">
+         style="overflow: auto">
         @foreach($technicians as $technician)
 
             {{-- Technician Card --}}
             <div class="card" style="min-width: 266px">
                 <div class="card-header text-center d-flex justify-content-between mb-0">
                     <div>{{$technician->name}}</div>
-                    {{-- @if($technician->completed_orders > 0)
-                        <a class="bg-success px-2 pt-1 rounded-circle text-white"
-                           href="">{{$technician->completed_orders}}</a>
-                    @endif --}}
                 </div>
                 <div class="card-body p-0">
-                    <div id="tech{{$technician->id}}" class="box tech_box">
+                    <div id="tech{{$technician->id}}" class="box tech_box d-flex flex-column p-2">
                         @foreach($orders->where('technician_id',$technician->id) as $order)
                             @include('pages.dist_panel.order')
                         @endforeach
@@ -102,31 +98,20 @@
         .tech_box > .order,
         .unassigned_box > .order {
             cursor: pointer;
-            margin-bottom: 5px;
             border-radius: 5px;
             font-size: .75rem;
             width: 244px;
             min-width: 244px;
             overflow: hidden;
         }
-        .unassigned_box > .order {
-            margin: 0 3px;
-
-        }
         .unassigned_box {
             min-height: 100px;
             overflow-y: hidden;
             overflow-x: scroll;
-            padding: 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: start;
         }
         .tech_box {
             min-height: 250px;
-            padding: 10px;
         }
-
     </style>
 @endsection
 
@@ -137,16 +122,15 @@
     <script src="{{asset('js/app.js')}}"></script>
     <script>
         $(document).ready(function () {
-
-            loadDataFromDragulaJs();
-            // loadDataFromSortableJs();
-
+            if(screen.width<992){
+                loadDataFromSortableJs();
+            }else{
+                loadDataFromDragulaJs();
+            }
             window.Echo.channel('OrderCreatedChannel')
                 .listen('OrderCreatedEvent', (e) => {
                 @this.refresh_data();
                 });
-
-
             function loadDataFromDragulaJs() {
                 const boxNodes = document.querySelectorAll('.box');
                 const draggableBoxes = [].slice.call(boxNodes);
@@ -175,7 +159,6 @@
                     @this.change_technician(order_id, tech_id, positions);
                 });
             }
-
             function loadDataFromSortableJs() {
                 var el = $('.box');
                 $(el).each(function (i, e) {
