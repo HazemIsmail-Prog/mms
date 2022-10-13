@@ -104,11 +104,10 @@
             cursor: pointer;
             margin-bottom: 5px;
             border-radius: 5px;
-            padding: 10px;
-            color: white;
             font-size: .75rem;
             width: 244px;
             min-width: 244px;
+            overflow: hidden;
         }
         .unassigned_box > .order {
             margin: 0 3px;

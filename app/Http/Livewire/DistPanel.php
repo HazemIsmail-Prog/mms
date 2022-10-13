@@ -44,7 +44,7 @@ class DistPanel extends Component
             ->get();
 
         $this->orders = Order::query()
-            ->with(['phone', 'customer', 'address','status'])
+            ->with(['phone', 'customer', 'address','status','creator'])
             ->where('department_id', $this->department->id)
 
             ->when($this->orders_date_filter == 'show_today_orders_only', function ($q) {

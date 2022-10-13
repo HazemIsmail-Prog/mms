@@ -42,7 +42,7 @@ class OrderFactory extends Factory
                 'department_id'         => $department_id,
                 'notes'                 => $this->faker->sentence(5),
                 'completed_at'          => null,
-                'order_description'     => $this->faker->sentence(10),
+                'order_description'     => $this->faker->sentence(7),
                 'cancelled_at'          => null,
                 'estimated_start_date'  => today(),
             ];
