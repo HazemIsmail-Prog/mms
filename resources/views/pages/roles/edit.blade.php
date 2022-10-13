@@ -34,7 +34,7 @@
                             <div class="card">
                                 <div class="card-header">{{__('messages.permissions')}}</div>
                                 <div class="card-body">
-                                    <table class=" table table-bordered">
+                                    <table class=" table table-sm table-striped">
                                         <thead>
                                             <tr>
                                                 <th>@lang('messages.section')</th>

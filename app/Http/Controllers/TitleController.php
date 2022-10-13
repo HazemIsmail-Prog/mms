@@ -119,7 +119,7 @@ class TitleController extends Controller
      */
     public function destroy(Title $title) :RedirectResponse
     {
-//        $title->delete();
-//        return redirect(route('titles.index'))->with('success', __('messages.deleted_successfully'));
+       $title->delete();
+       return redirect(route('titles.index'))->with('success', __('messages.deleted_successfully'));
     }
 }

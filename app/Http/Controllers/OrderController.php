@@ -32,6 +32,9 @@ class OrderController extends Controller
 
             // For Search #########################################################
 
+            ->when($request->has('customer_id'), function ($q) use ($request) {
+                $q->where('customer_id', $request->customer_id);
+            })
             ->when($request->name != "", function ($q) use ($request) {
                 $q->whereHas('customer', function ($q2) use ($request) {
                     $q2->where('name', 'like', $request->name . '%');
@@ -60,22 +63,8 @@ class OrderController extends Controller
             ->when($request->creator_id != "", function ($q) use ($request) {
                 $q->where('created_by', $request->creator_id);
             })
-
-
-
-
             ->when($request->status_id != "", function ($q) use ($request) {
                 $q->whereIn('status_id', $request->status_id);
-            })
-
-
-
-
-            ->when($request->start_created_at != "", function ($q) use ($request) {
-                $q->whereDate('created_at', '>=', $request->start_created_at);
-            })
-            ->when($request->end_created_at != "", function ($q) use ($request) {
-                $q->whereDate('created_at', '<=', $request->end_created_at);
             })
             ->when($request->technician_id != "", function ($q) use ($request) {
                 $q->where('technician_id', $request->technician_id);
@@ -83,10 +72,18 @@ class OrderController extends Controller
             ->when($request->department_id != "", function ($q) use ($request) {
                 $q->where('department_id', $request->department_id);
             })
-            ->when($request->has('customer_id'), function ($q) use ($request) {
-                $q->where('customer_id', $request->customer_id);
+            ->when($request->start_created_at != "", function ($q) use ($request) {
+                $q->whereDate('created_at', '>=', $request->start_created_at);
             })
-
+            ->when($request->end_created_at != "", function ($q) use ($request) {
+                $q->whereDate('created_at', '<=', $request->end_created_at);
+            })
+            ->when($request->start_completed_at != "", function ($q) use ($request) {
+                $q->whereDate('completed_at', '>=', $request->start_completed_at);
+            })
+            ->when($request->end_completed_at != "", function ($q) use ($request) {
+                $q->whereDate('completed_at', '<=', $request->end_completed_at);
+            })
             //#####################################################################
 
             ->with(['address', 'department', 'technician', 'creator','status', 'customer', 'phone'])

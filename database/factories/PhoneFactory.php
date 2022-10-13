@@ -16,9 +16,15 @@ class PhoneFactory extends Factory
      */
     public function definition()
     {
+        $number = $this->faker->randomElement([
+            $this->faker->numerify('9#######'), 
+            $this->faker->numerify('6#######'), 
+            $this->faker->numerify('5#######')
+        ]);
+
         return [
             'type' => 'mobile',
-            'number' => $this->faker->numerify('########'),
+            'number' => $number,
         ];
     }
 }
