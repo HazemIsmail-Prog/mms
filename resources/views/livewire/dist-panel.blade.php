@@ -60,7 +60,7 @@
     <div class="card">
         <div class="card-header text-center">{{__('messages.unassigned')}}</div>
         <div class="card-body p-0">
-            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2">
+            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2 mb-0">
                 @foreach($orders->whereNull('technician_id') as $order)
                     @include('pages.dist_panel.order')
                 @endforeach
@@ -79,7 +79,7 @@
                     <div>{{$technician->name}}</div>
                 </div>
                 <div class="card-body p-0">
-                    <div id="tech{{$technician->id}}" class="box tech_box d-flex flex-column p-2">
+                    <div id="tech{{$technician->id}}" class="box tech_box d-flex flex-column p-2 mb-0">
                         @foreach($orders->where('technician_id',$technician->id) as $order)
                             @include('pages.dist_panel.order')
                         @endforeach
