@@ -35,7 +35,8 @@
     <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">
-                @yield('content')
+                {{-- @yield('content') --}}
+                {{ $slot }}
             </div>
         </main>
         @include('includes.footer')

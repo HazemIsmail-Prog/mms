@@ -19,8 +19,8 @@
         <main class="c-main">
             <div class="container-fluid">
                 <div>
-                    @yield('content')
-                    {{-- {{ $slot }} --}}
+                    {{-- @yield('content') --}}
+                    {{ $slot }}
                 </div>
             </div>
         </main>

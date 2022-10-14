@@ -3,28 +3,30 @@
 namespace App\Http\Livewire;
 
 use App\Events\OrderCreatedEvent;
+use App\Models\Department;
 use App\Models\Order;
 use App\Models\User;
 use Livewire\Component;
 
 class DistPanel extends Component
 {
-
-    public $date;
+    public $orders;
+    public $department_id;
     public $department;
-    public $technicians = [];
-    public $orders = [];
     public $show_completed = false;
     public $show_cancelled = false;
     public $orders_date_filter = 'show_all';
 
+
     public function render()
     {
-        return view('livewire.dist-panel');
+        return view('livewire.dist-panel')->layout('layouts.slot');
     }
 
-    public function mount()
+    public function mount($id)
     {
+        $this->department_id = $id;
+        $this->department = Department::find($this->department_id);
         $this->date = today()->format('Y-m-d');
         $this->refresh_data();
     }
@@ -39,12 +41,12 @@ class DistPanel extends Component
     public function refresh_data()
     {
         $this->technicians = User::query()
-            ->activeTechnicinasByDepartmentId($this->department->id)
+            ->activeTechnicinasByDepartmentId($this->department_id)
             ->get();
 
         $this->orders = Order::query()
-            ->with(['phone', 'customer', 'address','status','creator'])
-            ->where('department_id', $this->department->id)
+            ->with(['phone', 'customer', 'address', 'status', 'creator'])
+            ->where('department_id', $this->department_id)
 
             ->when($this->orders_date_filter == 'show_today_orders_only', function ($q) {
                 $q->whereDate('created_at', $this->date);
@@ -54,7 +56,7 @@ class DistPanel extends Component
             })
 
             ->when($this->show_completed == false, function ($q) {
-                $q->whereNotIn('status_id',[4]);
+                $q->whereNotIn('status_id', [4]);
             })
             ->when($this->show_cancelled == false, function ($q) {
                 $q->whereNotIn('status_id', [6]);
@@ -70,7 +72,7 @@ class DistPanel extends Component
 
         $order = Order::find($order_id);
 
-        switch ($tech_id){
+        switch ($tech_id) {
             case 0: //unassgined box
                 $order->technician_id = null;
                 $order->status_id = 1;
@@ -89,17 +91,16 @@ class DistPanel extends Component
             default:
                 $order->technician_id = $tech_id;
                 $order->status_id = 2;
-
         }
-        
+
         $order->save();
 
-        
+
         foreach ($positions as $position) {
-            $currentOrderId = $position[0]; 
-            $currentOrderIndex = $position[1]; 
+            $currentOrderId = $position[0];
+            $currentOrderIndex = $position[1];
             $currentOrder = Order::find($currentOrderId);
-            $currentOrder->update(['index' => $currentOrderIndex ]);
+            $currentOrder->update(['index' => $currentOrderIndex]);
         }
 
         $this->refresh_data();

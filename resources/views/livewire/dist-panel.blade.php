@@ -1,123 +1,134 @@
-<div>
-    <div class="d-flex align-items-start justify-content-start flex-row flex-wrap flex-md-nowrap">
-
-        {{-- Date Filter --}}
-        <div class="form-group w-100">
-            <label for="date">{{__('messages.date')}}</label>
-            <input type="date" wire:model="date" class="form-control @error('date') is-invalid @enderror" id="date">
-            @error('date')<span
-                class="small text-danger">{{ $message }}</span>@enderror
-        </div>
-
-        <div class="w-100 align-self-end form-group">
-            {{-- Show Completed Orders Filter --}}
-            <div class="form-check">
-                <input wire:model="show_completed" class="form-check-input" type="checkbox" name="active"
-                       id="show_completed">
-                <label class="form-check-label" for="show_completed">{{__('messages.show_completed')}}</label>
-            </div>
-
-            {{-- Show Cancelled Orders Filter --}}
-            <div class="form-check">
-                <input wire:model="show_cancelled" class="form-check-input" type="checkbox" name="active"
-                       id="show_cancelled">
-                <label class="form-check-label" for="show_cancelled">{{__('messages.show_cancelled')}}</label>
-            </div>
-        </div>
-
-        <div class="w-100 align-self-end form-group">
-
-            {{-- Show All Orders Filter --}}
-            <div class="custom-control custom-radio">
-                <input type="radio" id="show_all" wire:model="orders_date_filter" value="show_all"
-                       name="orders_date_filter" class="custom-control-input">
-                <label class="custom-control-label" for="show_all">
-                    {{__('messages.show_all')}}
-                </label>
-            </div>
-
-            {{-- Show Today's Orders Filter --}}
-            <div class="custom-control custom-radio">
-                <input type="radio" id="show_today_orders_only" wire:model="orders_date_filter"
-                       value="show_today_orders_only" name="orders_date_filter" class="custom-control-input">
-                <label class="custom-control-label" for="show_today_orders_only">
-                    {{__('messages.show_today_orders_only')}}
-                </label>
-            </div>
-
-            {{-- Show Previous Orders Filter --}}
-            <div class="custom-control custom-radio">
-                <input type="radio" id="show_previous_orders_only" wire:model="orders_date_filter"
-                       value="show_previous_orders_only" name="orders_date_filter" class="custom-control-input">
-                <label class="custom-control-label" for="show_previous_orders_only">
-                    {{__('messages.show_previous_orders_only')}}
-                </label>
-            </div>
-        </div>
-    </div>
-
-
-    <div wire:loading>
-        @include('components.spinner')
-    </div>
-    
-
-    {{-- Unassigned Orders Card --}}
-    <div class="card">
-        <div class="card-header text-center">{{__('messages.unassigned')}}</div>
-        <div class="card-body p-0">
-            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2 m-0">
-                @foreach($orders->whereNull('technician_id')->whereNotIn('status_id',5) as $order)
-                    @include('pages.dist_panel.order')
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    {{-- Technicians --}}
-    <div class="d-flex align-items-start justify-content-start tech_list"
-         style="overflow: auto">
-        {{-- On Hold Orders Box --}}
-        <div class="card" style="min-width: 266px">
-            <div class="card-header text-center d-flex justify-content-between m-0" style="background: gray">
-                <div>@lang('messages.on_hold')</div>
-            </div>
-            <div class="card-body p-0">
-                <div 
-                    id="techhold" 
-                    class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
-                    >
-                    @foreach($orders->where('status_id',5) as $order)
-                        @include('pages.dist_panel.order')
-                    @endforeach
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>{{$department->name}}</div>
                 </div>
-            </div>
-        </div>
-        @foreach($technicians as $technician)
-
-            {{-- Technician Box --}}
-            <div class="card" style="min-width: 266px">
-                <div class="card-header text-center d-flex justify-content-between m-0">
-                    <div>{{$technician->name}}</div>
-                </div>
-                <div class="card-body p-0">
-                    <div 
-                        id="tech{{$technician->id}}" 
-                        class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
-                        >
-                        @foreach($orders->where('technician_id',$technician->id) as $order)
-                            @include('pages.dist_panel.order')
+                <div class="card-body">
+                    {{-- Loading Spinner --}}
+                    <div wire:loading>
+                        @include('components.spinner')
+                    </div>
+                    {{-- Top Filters --}}
+                    <div class="d-flex align-items-start justify-content-start flex-row flex-wrap flex-md-nowrap">
+                
+                        {{-- Date Filter --}}
+                        <div class="form-group w-100">
+                            <label for="date">{{__('messages.date')}}</label>
+                            <input type="date" wire:model="date" class="form-control @error('date') is-invalid @enderror" id="date">
+                            @error('date')<span
+                                class="small text-danger">{{ $message }}</span>@enderror
+                        </div>
+                
+                        <div class="w-100 align-self-end form-group">
+                            {{-- Show Completed Orders Filter --}}
+                            <div class="form-check">
+                                <input wire:model="show_completed" class="form-check-input" type="checkbox" name="active"
+                                    id="show_completed">
+                                <label class="form-check-label" for="show_completed">{{__('messages.show_completed')}}</label>
+                            </div>
+                
+                            {{-- Show Cancelled Orders Filter --}}
+                            <div class="form-check">
+                                <input wire:model="show_cancelled" class="form-check-input" type="checkbox" name="active"
+                                    id="show_cancelled">
+                                <label class="form-check-label" for="show_cancelled">{{__('messages.show_cancelled')}}</label>
+                            </div>
+                        </div>
+                
+                        <div class="w-100 align-self-end form-group">
+                
+                            {{-- Show All Orders Filter --}}
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="show_all" wire:model="orders_date_filter" value="show_all"
+                                    name="orders_date_filter" class="custom-control-input">
+                                <label class="custom-control-label" for="show_all">
+                                    {{__('messages.show_all')}}
+                                </label>
+                            </div>
+                
+                            {{-- Show Today's Orders Filter --}}
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="show_today_orders_only" wire:model="orders_date_filter"
+                                    value="show_today_orders_only" name="orders_date_filter" class="custom-control-input">
+                                <label class="custom-control-label" for="show_today_orders_only">
+                                    {{__('messages.show_today_orders_only')}}
+                                </label>
+                            </div>
+                
+                            {{-- Show Previous Orders Filter --}}
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="show_previous_orders_only" wire:model="orders_date_filter"
+                                    value="show_previous_orders_only" name="orders_date_filter" class="custom-control-input">
+                                <label class="custom-control-label" for="show_previous_orders_only">
+                                    {{__('messages.show_previous_orders_only')}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Unassigned Orders Card --}}
+                    <div class="card">
+                        <div class="card-header text-center">{{__('messages.unassigned')}}</div>
+                        <div class="card-body p-0">
+                            <div id="tech0" class="box unassigned_box d-flex align-items-start p-2 m-0">
+                                @foreach($orders->whereNull('technician_id')->whereNotIn('status_id',5) as $order)
+                                    @include('components.order')
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Technicians --}}
+                    <div class="d-flex align-items-start justify-content-start tech_list"
+                        style="overflow: auto">
+                        {{-- On Hold Orders Box --}}
+                        <div class="card" style="min-width: 266px">
+                            <div class="card-header text-center d-flex justify-content-between m-0" style="background: gray">
+                                <div>@lang('messages.on_hold')</div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div 
+                                    id="techhold" 
+                                    class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
+                                    >
+                                    @foreach($orders->where('status_id',5) as $order)
+                                        @include('components.order')
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @foreach($technicians as $technician)
+                
+                            {{-- Technician Box --}}
+                            <div class="card" style="min-width: 266px">
+                                <div class="card-header text-center d-flex justify-content-between m-0">
+                                    <div>{{$technician->name}}</div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div 
+                                        id="tech{{$technician->id}}" 
+                                        class="box tech_box d-flex flex-column p-2 m-0 align-items-center"
+                                        >
+                                        @foreach($orders->where('technician_id',$technician->id) as $order)
+                                            @include('components.order')
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                
                         @endforeach
                     </div>
                 </div>
             </div>
-
-        @endforeach
+        </div>
     </div>
 </div>
 
 @section('styles')
     <style>
+        .box > div {
+            z-index: 10;
+        }
         .tech_box > .order-non-dragable,
         .gu-mirror,
         .tech_box > .order,
@@ -211,4 +222,3 @@
         });
     </script>
 @endsection
-

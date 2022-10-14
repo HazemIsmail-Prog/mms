@@ -10,7 +10,8 @@ use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Livewire\DistPanel;
+use App\Http\Livewire\TechnicianPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -42,7 +43,7 @@ Route::group([
 
     // Group for All Auth Users Including Technicians & Formen
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/technician_page', [DistPanelController::class, 'technician_page'])->name('technician_page');
+        Route::get('/technician_page', TechnicianPage::class)->name('technician_page');
 
         // Group for All Auth Users Excluding Technicians & Formen
         Route::group(['middleware' => 'no_technicians'], function () {
@@ -54,7 +55,7 @@ Route::group([
             Route::resource('/users', UserController::class);
             Route::resource('/customers', CustomerController::class);
             Route::resource('/orders', OrderController::class);
-            Route::get('/dis_panel', [DistPanelController::class, 'index'])->name('dist_panel.index');
+            Route::get('/dis_panel/{id}', DistPanel::class)->name('dist_panel.index');
         });
 
         // Super Admin Routes

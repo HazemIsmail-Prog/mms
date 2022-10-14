@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Events\OrderCreatedEvent;
 use App\Models\Order;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class TechnicianPage extends Component
@@ -14,7 +13,7 @@ class TechnicianPage extends Component
 
     public function render()
     {
-        return view('livewire.technician-page');
+        return view('livewire.technician-page')->layout('layouts.tech');
     }
 
     public function mount()
