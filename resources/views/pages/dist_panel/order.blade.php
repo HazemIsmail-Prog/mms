@@ -24,10 +24,10 @@
                 <th>@lang('messages.order_description')</th>
                 <td>{{$order->order_description ?? '-'}}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th>@lang('messages.notes')</th>
                 <td>{{$order->notes ?? '-'}}</td>
-            </tr>
+            </tr> --}}
         </table>
     </div>
     <div class=" d-flex justify-content-between align-items-center mb-0 p-2" style="border-top: 1px solid {{$order->status->color}}">

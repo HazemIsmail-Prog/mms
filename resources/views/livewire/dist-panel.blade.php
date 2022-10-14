@@ -56,6 +56,12 @@
         </div>
     </div>
 
+
+    <div wire:loading>
+        @include('components.spinner')
+    </div>
+    
+
     {{-- Unassigned Orders Card --}}
     <div class="card">
         <div class="card-header text-center">{{__('messages.unassigned')}}</div>

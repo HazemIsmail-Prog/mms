@@ -25,8 +25,8 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments');
             $table->integer('index')->nullable()->default(0);
             $table->date('estimated_start_date')->nullable();
-            $table->string('notes')->nullable();
-            $table->string('order_description')->nullable();
+            $table->text('notes')->nullable();
+            $table->text('order_description')->nullable();
             $table->dateTime('completed_at')->nullable();
             $table->dateTime('cancelled_at')->nullable();
             $table->timestamps();
