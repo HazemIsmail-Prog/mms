@@ -176,6 +176,7 @@ return [
     'is_service'                                    => 'خدمة',
     'on_hold'                                       => 'توقف مؤقت',
     'cancel_order'                                  => 'الغاء الطلب',
+    'todays_orders_only'                            => 'طلبات اليوم فقط',
 
 
 
@@ -184,7 +185,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

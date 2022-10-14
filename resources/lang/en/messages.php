@@ -175,7 +175,9 @@ return [
     'done'                                          => 'Done',
     'is_service'                                    => 'Is Service',
     'on_hold'                                       => 'On Hold',
-    'cancel_order'                                  => 'الغاء الطلب',
+    'cancel_order'                                  => 'Cancel Order',
+    'todays_orders_only'                            => 'Today\'s Orders Only',
+
 
 
 ];
