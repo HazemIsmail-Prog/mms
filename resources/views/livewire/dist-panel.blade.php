@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
                     {{-- Loading Spinner --}}
-                    <div wire:loading wire:target="refresh_data">
+                    <div wire:loading>
                         @include('components.spinner')
                     </div>
                     {{-- Show Today's Orders Only Filter --}}

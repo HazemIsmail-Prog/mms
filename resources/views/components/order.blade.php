@@ -1,12 +1,12 @@
-<div style=" border: 1px solid {{$order->status->color}}"
+<div style=" border: 1px solid {{$order->status_color}}"
     class="order{{$order->status_id == 3 ? '-non-dragable' : '' }}" 
     id="order{{$order->id}}"
     draggable='{{$order->status_id == 3 ? 'false' : 'true' }}'
     >
-    <div class=" p-2 text-white" style="background: {{$order->status->color}}">
+    <div class=" p-2 text-white" style="background: {{$order->status_color}}">
         <div class="d-flex justify-content-between">
-            <div>{{$order->customer->name}}</div>
-            <div>{{$order->phone->number}}</div>
+            <div>{{$order->customer_name}}</div>
+            <div>{{$order->phone_number}}</div>
         </div>
         <div>{{$order->address->full_address()}}</div>
     </div>
@@ -14,7 +14,7 @@
         <table class="table table-sm table-striped table-borderless mb-0">
             <tr>
                 <th>@lang('messages.creator')</th>
-                <td>{{$order->creator->name}}</td>
+                <td>{{$order->creator_name}}</td>
             </tr>
             <tr>
                 <th>@lang('messages.order_number')</th>
@@ -30,7 +30,7 @@
             </tr> --}}
         </table>
     </div>
-    <div class=" d-flex justify-content-between align-items-center mb-0 p-2" style="border-top: 1px solid {{$order->status->color}}">
+    <div class=" d-flex justify-content-between align-items-center mb-0 p-2" style="border-top: 1px solid {{$order->status_color}}">
         <a class="btn btn-sm" href="{{route('orders.show',$order)}}">
             <svg style="width: 15px;height: 15px">
                 <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>

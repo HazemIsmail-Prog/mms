@@ -37,19 +37,31 @@ class DistPanel extends Component
 
     public function refresh_data()
     {        
-        $this->technicians = User::query()
-            ->activeTechnicinasByDepartmentId($this->department_id)
-            ->get();
+        $this->technicians = $this->department->technicians()->whereActive(1)->get();
 
-        $this->orders = Order::query()
-            ->with(['phone', 'customer', 'address', 'status', 'creator'])
-            ->where('department_id', $this->department_id)
+        $this->orders = $this->department->orders()
+            ->withCount(
+                ['phone as phone_number'=>function($q){
+                    $q->select(['number']);
+            }])
+            ->withCount(['customer as customer_name'=>function($q){
+                $q->select(['name']);
+            }])
+            ->withCount(['creator as creator_name'=>function($q){
+                $q->select(['name_' .app()->getLocale()]);
+            }])
+            ->withCount(['status as status_color'=>function($q){
+                $q->select(['color']);
+            }])
+            ->with([ 'address'])
             ->whereNotIn('status_id', [4,6])
             ->when($this->todays_orders_only, function ($q) {
                 $q->whereDate('created_at', today()->format('Y-m-d'));
             })
             ->orderBy('index')
             ->get();
+
+            // dd($this->orders);
     }
 
     public function change_technician($order_id, $tech_id, $positions)

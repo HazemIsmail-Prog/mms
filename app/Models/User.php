@@ -88,14 +88,4 @@ class User extends Authenticatable
         }
     }
 
-    public function scopeActiveTechnicinasByDepartmentId($query,$department_id)
-    {
-        return $query
-        ->whereIn('title_id', [10, 11])
-        ->whereActive(1)
-        ->whereHas('departments', function ($q) use ($department_id) {
-            $q->where('department_id', $department_id);
-        });
-    }
-
 }
