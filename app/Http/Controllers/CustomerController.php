@@ -49,10 +49,7 @@ class CustomerController extends Controller
 
             //#####################################################################
 
-            ->with('phones')
-            ->with(['addresses' => function($q){
-                $q->with('area');
-            }])
+            ->with(['phones', 'addresses'])
             ->withCount('orders')
             ->orderByDesc('id')
             ->paginate(10);

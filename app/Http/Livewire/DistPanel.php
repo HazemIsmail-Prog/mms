@@ -13,9 +13,7 @@ class DistPanel extends Component
     public $orders;
     public $department_id;
     public $department;
-    public $show_completed = false;
-    public $show_cancelled = false;
-    public $orders_date_filter = 'show_all';
+    public $todays_orders_only = false;
 
 
     public function render()
@@ -27,19 +25,18 @@ class DistPanel extends Component
     {
         $this->department_id = $id;
         $this->department = Department::find($this->department_id);
-        $this->date = today()->format('Y-m-d');
         $this->refresh_data();
     }
 
     public function updated($key)
     {
-        if (in_array($key, ['date', 'show_completed', 'show_cancelled', 'orders_date_filter'])) {
+        if (in_array($key, ['todays_orders_only'])) {
             $this->refresh_data();
         }
     }
 
     public function refresh_data()
-    {
+    {        
         $this->technicians = User::query()
             ->activeTechnicinasByDepartmentId($this->department_id)
             ->get();
@@ -47,19 +44,9 @@ class DistPanel extends Component
         $this->orders = Order::query()
             ->with(['phone', 'customer', 'address', 'status', 'creator'])
             ->where('department_id', $this->department_id)
-
-            ->when($this->orders_date_filter == 'show_today_orders_only', function ($q) {
-                $q->whereDate('created_at', $this->date);
-            })
-            ->when($this->orders_date_filter == 'show_previous_orders_only', function ($q) {
-                $q->whereDate('created_at', '<', $this->date);
-            })
-
-            ->when($this->show_completed == false, function ($q) {
-                $q->whereNotIn('status_id', [4]);
-            })
-            ->when($this->show_cancelled == false, function ($q) {
-                $q->whereNotIn('status_id', [6]);
+            ->whereNotIn('status_id', [4,6])
+            ->when($this->todays_orders_only, function ($q) {
+                $q->whereDate('created_at', today()->format('Y-m-d'));
             })
             ->orderBy('index')
             ->get();
@@ -67,9 +54,6 @@ class DistPanel extends Component
 
     public function change_technician($order_id, $tech_id, $positions)
     {
-
-        // dd($order_id, $tech_id, $positions);
-
         $order = Order::find($order_id);
 
         switch ($tech_id) {
@@ -94,7 +78,6 @@ class DistPanel extends Component
         }
 
         $order->save();
-
 
         foreach ($positions as $position) {
             $currentOrderId = $position[0];

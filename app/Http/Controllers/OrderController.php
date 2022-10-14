@@ -9,7 +9,6 @@ use App\Models\Order;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 
 class OrderController extends Controller
