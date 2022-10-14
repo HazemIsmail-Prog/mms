@@ -99,6 +99,6 @@ class DistPanel extends Component
         }
 
         $this->refresh_data();
-        event(new OrderCreatedEvent);
+        event(new OrderCreatedEvent($this->department_id));
     }
 }

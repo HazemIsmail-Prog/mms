@@ -67,7 +67,7 @@
     <script>
         $(document).ready(function () {
             
-            window.Echo.channel('OrderCreatedChannel')
+            window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
                 .listen('OrderCreatedEvent', (e) => {
                     @this.refresh_data();
                 });

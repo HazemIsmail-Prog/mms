@@ -12,20 +12,15 @@ class OrderCreatedEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
+    public $department_id;
 
+    public function __construct($department_id)
+    {
+        $this->department_id = $department_id;
+    }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
-        return new Channel('OrderCreatedChannel');
+        return new Channel('OrderCreatedChannel'.$this->department_id);
     }
 }
