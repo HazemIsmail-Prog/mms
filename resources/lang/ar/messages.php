@@ -177,6 +177,7 @@ return [
     'on_hold'                                       => 'توقف مؤقت',
     'cancel_order'                                  => 'الغاء الطلب',
     'todays_orders_only'                            => 'طلبات اليوم فقط',
+    'todays_completed'                              => 'منفذ اليوم',
 
 
 
@@ -185,7 +186,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

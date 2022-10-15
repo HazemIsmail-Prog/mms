@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Events\OrderCreatedEvent;
 use App\Models\Department;
 use App\Models\Order;
-use App\Models\User;
 use Livewire\Component;
 
 class DistPanel extends Component
@@ -37,7 +36,13 @@ class DistPanel extends Component
 
     public function refresh_data()
     {        
-        $this->technicians = $this->department->technicians()->whereActive(1)->get();
+        $this->technicians = $this->department->technicians()
+            ->withCount(['orders_technician as todays_completed_orders_count'=>function($q){
+                $q->whereDate('completed_at', today()->format('Y-m-d'));
+                $q->where('status_id', 4);
+            }])
+            ->whereActive(1)
+            ->get();
 
         $this->orders = $this->department->orders()
             ->withCount(
@@ -60,8 +65,6 @@ class DistPanel extends Component
             })
             ->orderBy('index')
             ->get();
-
-            // dd($this->orders);
     }
 
     public function change_technician($order_id, $tech_id, $positions)

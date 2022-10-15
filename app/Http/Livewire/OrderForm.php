@@ -6,8 +6,6 @@ use App\Events\OrderCreatedEvent;
 use App\Models\Department;
 use App\Models\Order;
 use App\Models\Status;
-use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class OrderForm extends Component

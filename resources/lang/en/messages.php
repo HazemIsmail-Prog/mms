@@ -177,6 +177,8 @@ return [
     'on_hold'                                       => 'On Hold',
     'cancel_order'                                  => 'Cancel Order',
     'todays_orders_only'                            => 'Today\'s Orders Only',
+    'todays_completed'                              => 'Today\'s Completed',
+
 
 
 
