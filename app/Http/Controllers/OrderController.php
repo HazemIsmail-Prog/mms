@@ -13,12 +13,6 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return View
-     */
     public function index(Request $request): View
     {
         $areas = Area::whereHas('orders')->get();
@@ -92,46 +86,11 @@ class OrderController extends Controller
         return view('pages.orders.index', compact('orders', 'areas', 'creators', 'statuses', 'technicians', 'departments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function create(Request $request): View
-    {
-        $customer = Customer::findOrFail($request->customer);
-        return view('pages.orders.create', compact('customer'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param Order $order
-     * @return View
-     */
     public function show(Order $order): View
     {
         return view('pages.orders.show', compact('order'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Order $order
-     * @return View
-     */
-    public function edit(Order $order): View
-    {
-        return view('pages.orders.edit', compact('order'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Order $order
-     * @return void
-     */
     public function destroy(Order $order)
     {
         //

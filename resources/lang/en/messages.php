@@ -178,6 +178,8 @@ return [
     'cancel_order'                                  => 'Cancel Order',
     'todays_orders_only'                            => 'Today\'s Orders Only',
     'todays_completed'                              => 'Today\'s Completed',
+    'number_already_exist'                          => 'Phone Number Already Exist',
+
 
 
 

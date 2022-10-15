@@ -22,44 +22,20 @@ class CustomerForm extends Component
     public $active = true;
 
 
-    public function rules()
-    {
-        return [
-            'name' => 'required',
-            'phones.*.type' => 'required',
-            // 'phones.*.number' => [
-            //     'required', 'numeric', 'digits_between:8,8',
-            //     'unique:phones,customer_id,' . $this->customer->id,
-            // ],
-            'addresses.*.area_id' => 'required',
-            'addresses.*.block' => 'required',
-        ];
-    }
 
-    public function messages()
-    {
-        return [
-            'name.required' => __('messages.name_required'),
-            'phones.*.number.unique' => __('messages.number_already_exist'),
-        ];
-    }
 
     public function render()
     {
-        return view('livewire.customer-form');
+        return view('livewire.customer-form')->layout('layouts.slot');
     }
 
-    // public function updated($key)
-    // {
-    //     if (explode('.', $key)[2] == 'number') {
-    //         $this->validateOnly('phones.*.number');
-    //     }
-    // }
-
-    public function mount()
+    public function mount($customer_id=null)
     {
+        $this->customer = Customer::find($customer_id);
         $this->areas = Area::all();
-        if ($this->action == 'create') {
+
+        if(!$this->customer){
+            //create
             $this->addresses [] = [
                 'id' => null,
                 'customer_id' => null,
@@ -72,14 +48,14 @@ class CustomerForm extends Component
                 'apartment' => null,
                 'notes' => null,
             ];
-
+    
             $this->phones [] = [
                 'id' => null,
                 'type' => 'mobile',
                 'number' => null,
             ];
-        }
-        if ($this->action == 'edit') {
+        }else{
+            //edit
             $this->name = $this->customer->name;
             $this->cid = $this->customer->cid;
             $this->notes = $this->customer->notes;
@@ -87,6 +63,35 @@ class CustomerForm extends Component
             $this->phones = $this->customer->phones->toArray();
             $this->addresses = $this->customer->addresses->toArray();
         }
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'phones.*.type' => 'required',
+            'phones.*.number' => [
+                'required',
+                'numeric',
+                'digits_between:8,8',
+                $this->customer 
+                ?Rule::unique('phones')->where(function ($q) {
+                    $q->where('customer_id', '!=', $this->customer->id);
+                })
+                :'unique:phones',
+            ],
+
+            'addresses.*.area_id' => 'required',
+            'addresses.*.block' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => __('messages.name_required'),
+            'phones.*.number.unique' => __('messages.number_already_exist'),
+        ];
     }
 
     public function add_row($type)
@@ -153,54 +158,70 @@ class CustomerForm extends Component
             ];
         }
 
-        switch ($this->action) {
-            case 'create':
-                DB::beginTransaction();
-                try {
-                    $customer = Customer::create($data);
-                    $customer->phones()->createMany($this->phones);
-                    $customer->addresses()->createMany($addresses);
-                    $this->customer = $customer;
-                    DB::commit();
-                } catch (\Exception $e) {
-                    DB::rollback();
-                    throw ValidationException::withMessages(['error' => __('messages.something went wrong ' . '(' . $e->getMessage() . ')')]);
+        if(!$this->customer){
+            //create
+            DB::beginTransaction();
+            try {
+                $customer = Customer::create($data);
+                $customer->phones()->createMany($this->phones);
+                $customer->addresses()->createMany($addresses);
+                $this->customer = $customer;
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw ValidationException::withMessages(['error' => __('messages.something went wrong ' . '(' . $e->getMessage() . ')')]);
+            }
+        }else{
+            //edit
+            DB::beginTransaction();
+            try {
+                $this->customer->update($data);
+                $this->customer->phones()->doesntHave('orders')->delete();
+                $this->customer->addresses()->doesntHave('orders')->delete();
+                foreach($this->phones as $phone){
+                    $this->customer
+                    ->phones()
+                    ->updateOrCreate(
+                        [
+                            'id'=>$phone['id']
+                        ],
+                        [
+                            'type'=>$phone['type'],
+                            'number'=>$phone['number'],
+                        ]
+                    );
                 }
-                break;
-
-            case 'edit' :
-                DB::beginTransaction();
-                try {
-                    $this->customer->update($data);
-                    // $this->customer->phones()->delete();
-                    $this->customer->addresses()->delete();
-                    foreach($this->phones as $phone){
-                        $this->customer
-                        ->phones()
-                        ->updateOrCreate(
-                            [
-                                'id'=>$phone['id']
-                            ],
-                            [
-                                'type'=>$phone['type'],
-                                'number'=>$phone['number'],
-                            ]
-                        );
-                    }
-                    // $this->customer->phones()->createMany($this->phones);
-                    $this->customer->addresses()->createMany($addresses);
-                    DB::commit();
-                } catch (\Exception $e) {
-                    DB::rollback();
-                    throw ValidationException::withMessages(['error' => __('messages.something went wrong ' . '(' . $e->getMessage() . ')')]);
+                foreach($this->addresses as $address){
+                    $this->customer
+                    ->addresses()
+                    ->updateOrCreate(
+                        [
+                            'id'=> $address['id']
+                        ],
+                        [
+                            'area_id' => $address['area_id'],
+                            'block' => $address['block'],
+                            'street' => $address['street'],
+                            'jadda' => $address['jadda'],
+                            'building' => $address['building'],
+                            'floor' => $address['floor'],
+                            'apartment' => $address['apartment'],
+                            'notes' => $address['notes'],
+                        ]
+                    );
                 }
-                break;
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw ValidationException::withMessages(['error' => __('messages.something went wrong ' . '(' . $e->getMessage() . ')')]);
+            }
         }
+
         if ($with_order) {
-            return redirect()->to('/' . config('app.locale') . '/orders/create?customer=' . $this->customer->id);
+            return redirect()->route('orders.form',$this->customer->id);
 
         } else {
-            return redirect()->to('/' . config('app.locale') . '/customers');
+            return redirect()->route('customers.index');
         }
     }
 }

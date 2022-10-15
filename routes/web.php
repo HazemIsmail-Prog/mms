@@ -10,7 +10,9 @@ use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\CustomerForm;
 use App\Http\Livewire\DistPanel;
+use App\Http\Livewire\OrderForm;
 use App\Http\Livewire\TechnicianPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,8 +55,10 @@ Route::group([
             Route::resource('/titles', TitleController::class);
             Route::resource('/statuses', StatusesController::class);
             Route::resource('/users', UserController::class);
-            Route::resource('/customers', CustomerController::class);
-            Route::resource('/orders', OrderController::class);
+            Route::get('/customers/form/{customer_id?}', CustomerForm::class)->name('customers.form');
+            Route::resource('/customers', CustomerController::class)->only('index', 'destroy');;
+            Route::get('/orders/{customer_id}/form/{order_id?}', OrderForm::class)->name('orders.form');
+            Route::resource('/orders', OrderController::class)->only('index', 'show', 'destroy');
             Route::get('/dis_panel/{id}', DistPanel::class)->name('dist_panel.index');
         });
 

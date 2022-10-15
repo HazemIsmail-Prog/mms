@@ -3,9 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Events\OrderCreatedEvent;
+use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Order;
-use App\Models\Status;
 use Livewire\Component;
 
 class OrderForm extends Component
@@ -19,37 +19,36 @@ class OrderForm extends Component
     public $order_description;
     public $orderNotes;
     public $dup_orders_count;
-    public $action;
     public $order;
-    public $statuses;
+    public $order_id;
 
     public function render()
     {
-        return view('livewire.order-form');
+        return view('livewire.order-form')->layout('layouts.slot');
     }
 
-    public function mount()
+    public function mount($customer_id,$order_id=null)
     {
-        switch ($this->action) {
-            case 'create':
-                $this->departments = Department::where('is_service', 1)->get();
-                $this->statuses = Status::limit(1)->get();
-                $this->status_id = 1;
-                $this->phone_id = $this->customer->phones->count() == 1 ? $this->customer->phones()->first()->id : null;
-                $this->address_id = $this->customer->addresses->count() == 1 ? $this->customer->addresses()->first()->id : null;
-                $this->estimated_start_date = today()->format('Y-m-d');
-                break;
-            case 'edit':
-                $this->departments = $this->order->technician ? Department::whereId($this->order->department_id)->get() : Department::where('is_service', 1)->get();
-                $this->department_id = $this->order->department_id;
-                $this->customer = $this->order->customer;
-                $this->phone_id = $this->order->phone->id;
-                $this->address_id = $this->order->address->id;
-                $this->department_id = $this->order->department_id;
-                $this->estimated_start_date = $this->order->estimated_start_date;
-                $this->order_description = $this->order->order_description;
-                $this->orderNotes = $this->order->notes;
-                break;
+        $this->customer = Customer::find($customer_id);
+        $this->order = Order::find($order_id);
+
+        if(!$this->order_id){
+            //create
+            $this->departments = Department::where('is_service', 1)->get();
+            $this->phone_id = $this->customer->phones->count() == 1 ? $this->customer->phones()->first()->id : null;
+            $this->address_id = $this->customer->addresses->count() == 1 ? $this->customer->addresses()->first()->id : null;
+            $this->estimated_start_date = today()->format('Y-m-d');
+        }else{
+            //edit
+            $this->departments = $this->order->technician ? Department::whereId($this->order->department_id)->get() : Department::where('is_service', 1)->get();
+            $this->department_id = $this->order->department_id;
+            $this->customer = $this->order->customer;
+            $this->phone_id = $this->order->phone->id;
+            $this->address_id = $this->order->address->id;
+            $this->department_id = $this->order->department_id;
+            $this->estimated_start_date = $this->order->estimated_start_date;
+            $this->order_description = $this->order->order_description;
+            $this->orderNotes = $this->order->notes;
         }
     }
 
@@ -82,7 +81,7 @@ class OrderForm extends Component
                 'department_id' => $this->department_id,
                 'estimated_start_date' => $this->estimated_start_date,
             ])
-            ->when($this->action == 'edit', function ($q) {
+            ->when($this->order, function ($q) {
                 $q->where('id', '!=', $this->order->id);
             })
             ->count();
@@ -92,43 +91,42 @@ class OrderForm extends Component
     public function saveOrder()
     {
         $this->validate();
-        switch ($this->action) {
-            case 'create':
-                $data = [
-                    'customer_id' => $this->customer->id,
-                    'phone_id' => $this->phone_id,
-                    'address_id' => $this->address_id,
-                    'created_by' => auth()->id(),
-                    'updated_by' => auth()->id(),
-                    'department_id' => $this->department_id,
-                    'estimated_start_date' => $this->estimated_start_date,
-                    'notes' => $this->orderNotes,
-                    'technician_id' => null,
-                    'status_id' => 1,
-                    'order_description' => $this->order_description,
-                ];
-                $this->order = Order::create($data);
-                event(new OrderCreatedEvent($this->order->department_id));
-                session()->flash('success', __('messages.added_successfully'));
-                return redirect()->route('customers.index');
-                break;
+        if (!$this->order_id) {
+            //create
+            $data = [
+                'customer_id' => $this->customer->id,
+                'phone_id' => $this->phone_id,
+                'address_id' => $this->address_id,
+                'created_by' => auth()->id(),
+                'updated_by' => auth()->id(),
+                'department_id' => $this->department_id,
+                'estimated_start_date' => $this->estimated_start_date,
+                'notes' => $this->orderNotes,
+                'technician_id' => null,
+                'status_id' => 1,
+                'order_description' => $this->order_description,
+            ];
+            $this->order = Order::create($data);
+            event(new OrderCreatedEvent($this->order->department_id));
+            session()->flash('success', __('messages.added_successfully'));
+            return redirect()->route('customers.index');
 
-            case 'edit':
-                $data = [
-                    'customer_id' => $this->customer->id,
-                    'phone_id' => $this->phone_id,
-                    'address_id' => $this->address_id,
-                    'updated_by' => auth()->id(),
-                    'department_id' => $this->department_id,
-                    'estimated_start_date' => $this->estimated_start_date,
-                    'notes' => $this->orderNotes,
-                    'order_description' => $this->order_description,
-                ];
-                $this->order->update($data);
-                event(new OrderCreatedEvent($this->order->department_id));
-                session()->flash('success', __('messages.updated_successfully'));
-                return redirect()->route('orders.index');
-                break;
+        }else{
+            //edit
+            $data = [
+                'customer_id' => $this->customer->id,
+                'phone_id' => $this->phone_id,
+                'address_id' => $this->address_id,
+                'updated_by' => auth()->id(),
+                'department_id' => $this->department_id,
+                'estimated_start_date' => $this->estimated_start_date,
+                'notes' => $this->orderNotes,
+                'order_description' => $this->order_description,
+            ];
+            $this->order->update($data);
+            event(new OrderCreatedEvent($this->order->department_id));
+            session()->flash('success', __('messages.updated_successfully'));
+            return redirect()->route('orders.index');
         }
     }
 }

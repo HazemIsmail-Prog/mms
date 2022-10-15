@@ -225,7 +225,7 @@
                                             @endcan
 
                                             @can('orders_edit')
-                                                <a class="text-info btn btn-sm" href="{{route('orders.edit',$order)}}">
+                                                <a class="text-info btn btn-sm" href="{{route('orders.form',[$order->customer_id,$order])}}">
                                                     <svg style="width: 15px;height: 15px">
                                                         <use
                                                             xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>

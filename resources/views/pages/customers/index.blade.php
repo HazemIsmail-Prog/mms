@@ -10,7 +10,7 @@
                         <div>@lang('messages.customers')</div>
                         @can('customers_create')
                             <div><a class="btn btn-info"
-                                    href="{{route('customers.create')}}">@lang('messages.add_customer')</a></div>
+                                    href="{{route('customers.form')}}">@lang('messages.add_customer')</a></div>
                         @endcan
                     </div>
 
@@ -103,16 +103,23 @@
                                         <td class="text-center" nowrap>
                                             @can('orders_create')
                                                 <a class="text-success btn btn-sm"
-                                                   href="{{route('orders.create',['customer' => $customer->id])}}">
+                                                   href="{{route('orders.form',$customer->id)}}">
                                                     <svg style="width: 15px;height: 15px">
                                                         <use
                                                             xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                                                     </svg>
                                                 </a>
+                                                {{-- <a class="text-success btn btn-sm"
+                                                   href="{{route('orders.create',['customer' => $customer->id])}}">
+                                                    <svg style="width: 15px;height: 15px">
+                                                        <use
+                                                            xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
+                                                    </svg>
+                                                </a> --}}
                                             @endcan
                                             @can('customers_edit')
                                                 <a class="text-info btn btn-sm"
-                                                   href="{{route('customers.edit',$customer)}}">
+                                                   href="{{route('customers.form',$customer->id)}}">
                                                     <svg style="width: 15px;height: 15px">
                                                         <use
                                                             xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>

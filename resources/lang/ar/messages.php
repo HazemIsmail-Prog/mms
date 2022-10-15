@@ -178,6 +178,7 @@ return [
     'cancel_order'                                  => 'الغاء الطلب',
     'todays_orders_only'                            => 'طلبات اليوم فقط',
     'todays_completed'                              => 'منفذ اليوم',
+    'number_already_exist'                          => 'رقم الهاتف مستخدم من قبل',
 
 
 
@@ -186,7 +187,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',
