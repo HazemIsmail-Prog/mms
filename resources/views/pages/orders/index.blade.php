@@ -147,7 +147,8 @@
                                         </div>
 
                                         <div class="text-center">
-                                            <button class="btn btn-sm btn-facebook">{{__('messages.search')}}</button>
+                                            <button class="btn btn-sm btn-facebook" name="action" value="search">{{__('messages.search')}}</button>
+                                            <button class="btn btn-sm btn-facebook" name="action" value="excel">{{__('messages.export_to_excel')}}</button>
                                             @if(request()->input())
                                                 <a href="{{route('orders.index')}}"
                                                    class="btn btn-sm btn-danger">{{__('messages.cancel')}}</a>

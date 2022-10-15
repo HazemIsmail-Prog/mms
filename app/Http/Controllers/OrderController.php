@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Models\Area;
-use App\Models\Customer;
-use App\Models\Department;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Status;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Department;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request)
     {
         $areas = Area::whereHas('orders')->get();
         $creators = User::whereHas('orders_creator')->get();
         $technicians = User::whereHas('orders_technician')->get();
         $departments = Department::whereHas('orders')->get();
         $statuses = Status::all();
-
         $orders = Order::query()
-
             // For Search #########################################################
-
             ->when($request->has('customer_id'), function ($q) use ($request) {
                 $q->where('customer_id', $request->customer_id);
             })
@@ -77,13 +75,19 @@ class OrderController extends Controller
             ->when($request->end_completed_at != "", function ($q) use ($request) {
                 $q->whereDate('completed_at', '<=', $request->end_completed_at);
             })
-            //#####################################################################
-
+            // //#####################################################################
             ->with(['address', 'department', 'technician', 'creator','status', 'customer', 'phone'])
-            ->latest('created_at')
-            ->paginate(10);
+            ->latest('created_at');
 
-        return view('pages.orders.index', compact('orders', 'areas', 'creators', 'statuses', 'technicians', 'departments'));
+            if ($request->action == 'excel') {
+                $orders = $orders->get();
+                return Excel::download(new OrdersExport('pages.orders.excel', 'Orders', $orders), 'Orders.xlsx');  //Excel
+            }
+
+            $orders = $orders->paginate(10);
+            return view('pages.orders.index', compact('orders', 'areas', 'creators', 'statuses', 'technicians', 'departments'));
+
+
     }
 
     public function show(Order $order): View

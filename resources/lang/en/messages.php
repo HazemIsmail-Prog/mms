@@ -182,6 +182,8 @@ return [
     'artisan_commands'                              => 'Commands',
     'command'                                       => 'Command',
     'run'                                           => 'Run',
+    'export_to_excel'                               => 'Export to Excel',
+    'cancelled_at'                                  => 'Cancellation Date',
 
 
 

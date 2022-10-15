@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Mcamara\\LaravelLocalization' => array($vendorDir . '/mcamara/laravel-localization/src'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
 );

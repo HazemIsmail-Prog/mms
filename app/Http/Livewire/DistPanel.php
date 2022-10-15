@@ -85,6 +85,7 @@ class DistPanel extends Component
             case 'cancel': // cancel button clicked
                 $order->technician_id = null;
                 $order->status_id = 6;
+                $order->cancelled_at = now();
                 break;
 
             default:

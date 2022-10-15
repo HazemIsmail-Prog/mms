@@ -58,6 +58,7 @@ Route::group([
             Route::get('/customers/form/{customer_id?}', CustomerForm::class)->name('customers.form');
             Route::resource('/customers', CustomerController::class)->only('index', 'destroy');;
             Route::get('/orders/{customer_id}/form/{order_id?}', OrderForm::class)->name('orders.form');
+            Route::get('/orders/excel',[OrderController::class,'export'])->name('orders.excel');
             Route::resource('/orders', OrderController::class)->only('index', 'show', 'destroy');
             Route::get('/dis_panel/{id}', DistPanel::class)->name('dist_panel.index');
         });

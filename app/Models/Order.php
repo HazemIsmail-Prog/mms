@@ -12,6 +12,12 @@ class Order extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'estimated_start_date' => 'date',
+        'completed_at' => 'datetime',
+        'cancelled_at' => 'datetime',
+    ];
+
     public function department()
     {
         return $this->belongsTo(Department::class);

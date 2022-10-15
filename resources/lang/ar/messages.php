@@ -182,6 +182,8 @@ return [
     'artisan_commands'                              => 'الأوامر',
     'command'                                       => 'الأمر',
     'run'                                           => 'تنفيذ',
+    'export_to_excel'                               => 'تصدير اكسيل',
+    'cancelled_at'                                  => 'تاريخ الالغاء',
 
 
 
@@ -190,8 +192,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',
