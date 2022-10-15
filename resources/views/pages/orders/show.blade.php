@@ -39,7 +39,7 @@
                                             </tr>
                                             <tr>
                                                 <th>@lang('messages.status')</th>
-                                                <td>{{$order->status->name}}</td>
+                                                <td style="color: {{$order->status->color}}">{{$order->status->name}}</td>
                                             </tr>
                                             @if($order->completed_at)
                                                 <tr>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-8">
+                            <div class="col-md-8">
                                 <div class="card shadow">
                                     <div class="card-header">{{__('messages.order_progress')}}</div>
                                     <div class="card-body">
@@ -91,21 +91,19 @@
                                             <tr>
                                                 <th class="text-center">{{__('messages.status')}}</th>
                                                 <th class="text-center">{{__('messages.technician')}}</th>
-                                                <th class="text-center">{{__('messages.comment')}}</th>
                                                 <th class="text-center">{{__('messages.date')}}</th>
                                                 <th class="text-center">{{__('messages.time')}}</th>
                                                 <th class="text-center">{{__('messages.user')}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @forelse($order->statuses->reverse() as $row)
+                                            @forelse($order->statuses as $row)
                                                 <tr>
-                                                    <td class="text-center">{{$row->name}}</td>
-                                                    <td class="text-center">{{@\App\Models\User::find($row->pivot->technician_id)->name}}</td>
-                                                    <td class="text-center">{{$row->pivot->comment}}</td>
-                                                    <td class="text-center">{{date('d-m-Y',strtotime($row->pivot->created_at))}}</td>
-                                                    <td class="text-center">{{date('H:i',strtotime($row->pivot->created_at))}}</td>
-                                                    <td class="text-center">{{\App\Models\User::find($row->pivot->user_id)->name}}</td>
+                                                    <td style="color: {{$row->status->color}}" class="text-center">{{$row->status->name}}</td>
+                                                    <td class="text-center">{{@$row->technician->name}}</td>
+                                                    <td class="text-center">{{$row->created_at->format('d-m-Y')}}</td>
+                                                    <td class="text-center">{{$row->created_at->format('H:i')}}</td>
+                                                    <td class="text-center">{{$row->creator->name}}</td>
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -117,7 +115,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             
                             {{-- <div class="col-md-4">
                                 <div class="card shadow">
@@ -159,4 +157,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{asset('js/app.js')}}"></script>
+    <script>
+        window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+            .listen('OrderUpdatedPerOrderEvent', (e) => {
+            location.reload();
+            });
+    </script>
 @endsection
