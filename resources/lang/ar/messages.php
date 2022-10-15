@@ -179,6 +179,9 @@ return [
     'todays_orders_only'                            => 'طلبات اليوم فقط',
     'todays_completed'                              => 'منفذ اليوم',
     'number_already_exist'                          => 'رقم الهاتف مستخدم من قبل',
+    'artisan_commands'                              => 'الأوامر',
+    'command'                                       => 'الأمر',
+    'run'                                           => 'تنفيذ',
 
 
 
@@ -187,9 +190,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
-    ''                                              => '',
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

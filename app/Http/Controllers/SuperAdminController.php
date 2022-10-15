@@ -18,7 +18,7 @@ class SuperAdminController extends Controller
     {
         try{
             Artisan::call($request->command);
-            return redirect()->route('home');
+            return redirect()->back();
         }catch (Exception $e){
             dd($e);
         }

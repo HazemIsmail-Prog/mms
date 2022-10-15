@@ -179,6 +179,9 @@ return [
     'todays_orders_only'                            => 'Today\'s Orders Only',
     'todays_completed'                              => 'Today\'s Completed',
     'number_already_exist'                          => 'Phone Number Already Exist',
+    'artisan_commands'                              => 'Commands',
+    'command'                                       => 'Command',
+    'run'                                           => 'Run',
 
 
 
