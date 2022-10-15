@@ -22,7 +22,7 @@ class OrderObserver
             OrderStatus::create([
                 'order_id' => $order->id,
                 'status_id' => 1,
-                'technician_id' => $order->technician_id,
+                'technician_id' => null,
                 'user_id' => auth()->id() ?? 1,
             ]);
         }
@@ -45,7 +45,6 @@ class OrderObserver
     {
         $latest_status_id = OrderStatus::where('order_id',$order->id)->orderByDesc('id')->first()->status_id;
         $latest_technician_id = OrderStatus::where('order_id',$order->id)->orderByDesc('id')->first()->technician_id;
-        // dd($latest_status);
 
         if($order->status_id != $latest_status_id || $order->technician_id != $latest_technician_id){
             OrderStatus::create([
