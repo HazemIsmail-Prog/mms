@@ -6,6 +6,8 @@ use App\Events\OrderCreatedEvent;
 use App\Events\OrderUpdatedPerOrderEvent;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use Exception;
+use Illuminate\Support\Facades\Artisan;
 
 class OrderObserver
 {
@@ -54,7 +56,6 @@ class OrderObserver
                 'user_id' => auth()->id(),
             ]);
         }
-
         event(new OrderCreatedEvent($order->department_id));
         event(new OrderUpdatedPerOrderEvent($order->id));
     }
