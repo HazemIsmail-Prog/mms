@@ -107,7 +107,6 @@ class OrderForm extends Component
                 'order_description' => $this->order_description,
             ];
             $this->order = Order::create($data);
-            event(new OrderCreatedEvent($this->order->department_id));
             session()->flash('success', __('messages.added_successfully'));
             return redirect()->route('customers.index');
 
@@ -124,7 +123,6 @@ class OrderForm extends Component
                 'order_description' => $this->order_description,
             ];
             $this->order->update($data);
-            event(new OrderCreatedEvent($this->order->department_id));
             session()->flash('success', __('messages.updated_successfully'));
             return redirect()->route('orders.index');
         }

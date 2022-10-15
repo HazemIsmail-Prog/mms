@@ -33,8 +33,6 @@ class TechnicianPage extends Component
     public function accept_order()
     {
         $this->order->update(['status_id' => 3]);
-        event(new OrderCreatedEvent($this->order->department_id));
-
     }
 
     public function complete_order()
@@ -44,6 +42,5 @@ class TechnicianPage extends Component
             'completed_at' => now(),
             'index' => null,
         ]);
-        event(new OrderCreatedEvent($this->order->department_id));
     }
 }
