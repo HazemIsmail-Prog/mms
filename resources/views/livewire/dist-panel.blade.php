@@ -101,7 +101,7 @@
     </style>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script src="{{asset('vendors/sortable/Sortable.js')}}"></script>
     <script src="{{asset('vendors/dragula/dragula.js')}}"></script>
     <link rel="stylesheet" href="{{asset('vendors/dragula/dragula.css')}}">    
@@ -171,4 +171,4 @@
             }
         });
     </script>
-@endsection
+@endpush

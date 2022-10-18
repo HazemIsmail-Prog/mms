@@ -1,7 +1,7 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand flex-column">
-{{--        <div>{{auth()->user()->name}}</div>--}}
-{{--        <div style="font-size: 0.6rem">{{auth()->user()->title->name}}</div>--}}
+       <div>{{auth()->user()->name}}</div>
+       <div style="font-size: 0.6rem">{{auth()->user()->title->name}}</div>
     </div>
     <ul class="c-sidebar-nav">
 
@@ -17,32 +17,15 @@
             </li>
         @endcan
 
-        @if (auth()->user()->role_id == 1)
-            
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{route('artisan.index')}}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                </svg>
-                @lang('messages.artisan_commands')
-            </a>
-        </li>
-        {{-- <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{route('migrate')}}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                </svg>
-                @lang('messages.migrate_fresh_seed')
-            </a>
-        </li>
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{route('clear')}}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                </svg>
-                @lang('messages.clear_cache')
-            </a>
-        </li> --}}
+        @if (auth()->user()->role_id == 1)  
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('artisan.index')}}">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                    </svg>
+                    @lang('messages.artisan_commands')
+                </a>
+            </li>
         @endif
 
         @can('settings_menu')
@@ -177,8 +160,6 @@
                 </ul>
             </li>
         @endcan
-
-
     </ul>
     <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
             data-class="c-sidebar-minimized"></button>

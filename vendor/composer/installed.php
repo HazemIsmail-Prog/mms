@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0c00922272385533d0d6dd908d0ded7d9b1f0099',
+        'reference' => '4dd56a64549a1147b57374c09d9502641425e03b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -448,6 +448,15 @@
                 0 => '*',
             ),
         ),
+        'korridor/laravel-has-many-merged' => array(
+            'pretty_version' => '0.0.3',
+            'version' => '0.0.3.0',
+            'reference' => '1c9cdc919d172aead34f9b5c278d0e29f567f4ea',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../korridor/laravel-has-many-merged',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.83.25',
             'version' => '8.83.25.0',
@@ -460,7 +469,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0c00922272385533d0d6dd908d0ded7d9b1f0099',
+            'reference' => '4dd56a64549a1147b57374c09d9502641425e03b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -886,8 +895,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(

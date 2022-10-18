@@ -62,26 +62,23 @@
     </div>
 </div>
 
-@section('scripts')
+@push('scripts')
     <script src="{{asset('js/app.js')}}"></script>
-    <script>
-        $(document).ready(function () {
-            
+    <script>            
             window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
-                .listen('OrderCreatedEvent', (e) => {
-                    @this.refresh_data();
-                });
-        });
-
-        function confirmAccept() {
-            if (confirm("Are you sure to execute this action?")) {
-                @this.accept_order();
-            }
-        }   
-        function confirmComplete() {
-            if (confirm("Are you sure to execute this action?")) {
-                @this.complete_order();
-            }
-        }   
+            .listen('OrderCreatedEvent', (e) => {
+                @this.refresh_data();
+            });
+            
+            function confirmAccept() {
+                if (confirm("Are you sure to execute this action?")) {
+                    @this.accept_order();
+                }
+            }   
+            function confirmComplete() {
+                if (confirm("Are you sure to execute this action?")) {
+                    @this.complete_order();
+                }
+            }   
     </script>
-@endsection
+@endpush

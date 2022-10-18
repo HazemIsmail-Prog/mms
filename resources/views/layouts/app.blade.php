@@ -20,6 +20,7 @@
             <div class="container-fluid">
                 <div>
                     @yield('content')
+                    {{-- @livewire('chatting-index') --}}
                     {{-- {{ $slot }} --}}
                 </div>
             </div>
@@ -28,7 +29,7 @@
     </div>
 </div>
 @include('includes.scripts')
-@yield('scripts')
+@stack('scripts')
 @livewireScripts
 </body>
 </html>

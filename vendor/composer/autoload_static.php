@@ -155,6 +155,10 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sail\\' => 13,
         ),
+        'K' => 
+        array (
+            'Korridor\\LaravelHasManyMerged\\' => 30,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -511,6 +515,10 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'Korridor\\LaravelHasManyMerged\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/korridor/laravel-has-many-merged/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -675,6 +683,7 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'App\\Events\\OrderCreatedEvent' => __DIR__ . '/../..' . '/app/Events/OrderCreatedEvent.php',
         'App\\Events\\OrderUpdatedPerOrderEvent' => __DIR__ . '/../..' . '/app/Events/OrderUpdatedPerOrderEvent.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\OrdersExport' => __DIR__ . '/../..' . '/app/Exports/OrdersExport.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -692,6 +701,7 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'App\\Http\\Controllers\\TitleController' => __DIR__ . '/../..' . '/app/Http/Controllers/TitleController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Livewire\\ChattingIndex' => __DIR__ . '/../..' . '/app/Http/Livewire/ChattingIndex.php',
         'App\\Http\\Livewire\\CustomerForm' => __DIR__ . '/../..' . '/app/Http/Livewire/CustomerForm.php',
         'App\\Http\\Livewire\\DistPanel' => __DIR__ . '/../..' . '/app/Http/Livewire/DistPanel.php',
         'App\\Http\\Livewire\\OrderForm' => __DIR__ . '/../..' . '/app/Http/Livewire/OrderForm.php',
@@ -712,6 +722,7 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\Department' => __DIR__ . '/../..' . '/app/Models/Department.php',
         'App\\Models\\DepartmentUser' => __DIR__ . '/../..' . '/app/Models/DepartmentUser.php',
+        'App\\Models\\Message' => __DIR__ . '/../..' . '/app/Models/Message.php',
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\OrderStatus' => __DIR__ . '/../..' . '/app/Models/OrderStatus.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
@@ -952,6 +963,7 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'Database\\Factories\\AreaFactory' => __DIR__ . '/../..' . '/database/factories/AreaFactory.php',
         'Database\\Factories\\CustomerFactory' => __DIR__ . '/../..' . '/database/factories/CustomerFactory.php',
         'Database\\Factories\\DepartmentFactory' => __DIR__ . '/../..' . '/database/factories/DepartmentFactory.php',
+        'Database\\Factories\\MessageFactory' => __DIR__ . '/../..' . '/database/factories/MessageFactory.php',
         'Database\\Factories\\OrderFactory' => __DIR__ . '/../..' . '/database/factories/OrderFactory.php',
         'Database\\Factories\\PermissionFactory' => __DIR__ . '/../..' . '/database/factories/PermissionFactory.php',
         'Database\\Factories\\PhoneFactory' => __DIR__ . '/../..' . '/database/factories/PhoneFactory.php',
@@ -965,6 +977,7 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DepartmentSeeder' => __DIR__ . '/../..' . '/database/seeders/DepartmentSeeder.php',
         'Database\\Seeders\\DepartmentUserSeeder' => __DIR__ . '/../..' . '/database/seeders/DepartmentUserSeeder.php',
+        'Database\\Seeders\\MessageSeeder' => __DIR__ . '/../..' . '/database/seeders/MessageSeeder.php',
         'Database\\Seeders\\OrderSeeder' => __DIR__ . '/../..' . '/database/seeders/OrderSeeder.php',
         'Database\\Seeders\\PermissionRoleSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionRoleSeeder.php',
         'Database\\Seeders\\PermissionSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionSeeder.php',
@@ -3288,6 +3301,8 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Korridor\\LaravelHasManyMerged\\HasManyMerged' => __DIR__ . '/..' . '/korridor/laravel-has-many-merged/src/HasManyMerged.php',
+        'Korridor\\LaravelHasManyMerged\\HasManyMergedRelation' => __DIR__ . '/..' . '/korridor/laravel-has-many-merged/src/HasManyMergedRelation.php',
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',

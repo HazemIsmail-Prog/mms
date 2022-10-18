@@ -30,13 +30,16 @@
 {{--            </a>--}}
 {{--        </li>--}}
         {{--        add "d-md-down-none" to hide in mobile screen--}}
-{{--        <li class="c-header-nav-item mx-2">--}}
-{{--            <a class="c-header-nav-link" href="#">--}}
-{{--                <svg class="c-icon">--}}
-{{--                    <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-envelope-open')}}"></use>--}}
-{{--                </svg>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+       {{-- <li class="c-header-nav-item mx-2"> --}}
+           {{-- <a class="c-header-nav-link" href="#"> --}}
+               {{-- <svg class="c-icon"> --}}
+                   {{-- <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-envelope-open')}}"></use> --}}
+               {{-- </svg> --}}
+           {{-- </a> --}}
+       {{-- </li> --}}
+
+        @livewire('chatting-index')
+
 
 
 
@@ -57,7 +60,7 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>Account</strong>
                 </div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-bell')}}"></use>
                     </svg>
@@ -65,21 +68,21 @@
                     <span class="badge badge-info ml-auto">42</span>
                 </a>
 
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-envelope-open')}}"></use>
                     </svg>
                     <div class="px-2">Messages</div>
                     <span class="badge badge-success ml-auto">42</span>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-task')}}"></use>
                     </svg>
                     <div class="px-2">Tasks</div>
                     <span class="badge badge-danger ml-auto">42</span>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-comment-square')}}"></use>
                     </svg>
@@ -89,26 +92,26 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>Settings</strong>
                 </div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                     </svg>
                     <div class="px-2">Profile</div>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-settings')}}"></use>
                     </svg>
                     <div class="px-2">Settings</div>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-credit-card')}}"></use>
                     </svg>
                     <div class="px-2">Payments</div>
                     <span class="badge badge-secondary ml-auto">42</span>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-file')}}"></use>
                     </svg>
@@ -116,13 +119,13 @@
                     <span class="badge badge-primary ml-auto">42</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
                     </svg>
                     <div class="px-2">Lock Account</div>
                 </a>
-                <a class="dropdown-item" href="{{ route('logout') }}"
+                <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="{{ route('logout') }}"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-account-logout')}}"></use>

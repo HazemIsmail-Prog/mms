@@ -43,7 +43,7 @@
     </div>
 </div>
 @include('includes.scripts')
-@yield('scripts')
+@stack('scripts')
 @livewireScripts
 </body>
 </html>
