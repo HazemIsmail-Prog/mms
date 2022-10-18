@@ -13,7 +13,6 @@ class ChattingIndex extends Component
     public $message;
     public $messages = [];
     public $selected_user;
-    public $showMessages = 'none';
     public $total_unread_messages;
 
 
@@ -53,11 +52,6 @@ class ChattingIndex extends Component
             })
             ->get();
 
-            // Set Unread Messages to read if the chat screen is visible
-            if ($this->showMessages == 'block') {
-                $this->markAsRead($this->selected_user);
-            }
-
             // Scroll to bottom after getting messages
             $this->dispatchBrowserEvent('scrollToBottom', ['user_id' => $this->selected_user]);
         }
@@ -95,12 +89,6 @@ class ChattingIndex extends Component
             $this->dispatchBrowserEvent('scrollToBottom', ['user_id' => $this->selected_user]);
         }
         $this->dispatchBrowserEvent('user_selected', ['user_id' => $this->selected_user]);
-    }
-
-    public function toggleMessages()
-    {
-        $this->showMessages == 'none' ? $this->showMessages = 'block' : $this->showMessages = 'none';            
-        $this->referehData();
     }
 
     public function markAsRead($user_id)
