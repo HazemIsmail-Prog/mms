@@ -24,7 +24,7 @@
     <div 
         style="
             display: {{ $showMessages }};
-            width: 300px;
+            width: 290px;
             padding : 0;
             " 
         class="dropdown-menu dropdown-menu-right pt-0"
