@@ -38,7 +38,7 @@
            {{-- </a> --}}
        {{-- </li> --}}
 
-        {{-- @livewire('chatting-index') --}}
+        @livewire('chatting-index')
 
 
 

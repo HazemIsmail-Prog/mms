@@ -92,12 +92,12 @@
             @this.referehData();
         });
 
-        window.addEventListener('load', event => {
-            if(localStorage.getItem("selected_user") > 0){
-                selected_user = localStorage.getItem("selected_user");
-                @this.setSelectedUser(selected_user);
-            }
-        })
+        // window.addEventListener('load', event => {
+        //     if(localStorage.getItem("selected_user") > 0){
+        //         selected_user = localStorage.getItem("selected_user");
+        //         @this.setSelectedUser(selected_user);
+        //     }
+        // })
 
         window.addEventListener('scrollToBottom', event => {
             scrollToBottom(event.detail.user_id);
@@ -114,7 +114,7 @@
         }
         
         function setLocalStorageForCurrentUser(userId){
-            localStorage.setItem("selected_user", userId );
+            // localStorage.setItem("selected_user", userId );
         }
 
     </script>
