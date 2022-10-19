@@ -218,7 +218,7 @@
 
                                     <td class="text-center" nowrap>
                                         @can('orders_show')
-                                            <a class="text-info btn btn-sm" href="{{route('orders.show',$order)}}">
+                                            <a class="text-info btn btn-sm" href="{{route('orders.show',$order)}}" target="_blank">
                                                 <svg style="width: 15px;height: 15px">
                                                     <use
                                                         xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>
