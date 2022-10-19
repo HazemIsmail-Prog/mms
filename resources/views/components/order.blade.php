@@ -31,7 +31,7 @@
         </table>
     </div>
     <div class=" d-flex justify-content-between align-items-center mb-0 p-2" style="border-top: 1px solid {{$order->status_color}}">
-        <a class="btn btn-sm" href="{{route('orders.show',$order)}}">
+        <a class="btn btn-sm" href="{{route('orders.show',$order)}}" target="_blank">
             <svg style="width: 15px;height: 15px">
                 <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>
             </svg>
