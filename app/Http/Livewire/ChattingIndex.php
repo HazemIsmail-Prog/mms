@@ -79,6 +79,7 @@ class ChattingIndex extends Component
         if($this->selected_user == $user_id)
         {
             $this->selected_user = null;
+            $this->referehData();
         } 
         else
         {
