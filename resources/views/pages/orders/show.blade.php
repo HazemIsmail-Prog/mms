@@ -159,7 +159,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script src="{{asset('js/app.js')}}"></script>
     <script>
         window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
@@ -167,4 +167,4 @@
             location.reload();
             });
     </script>
-@endsection
+@endpush
