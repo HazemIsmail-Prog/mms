@@ -185,7 +185,7 @@ return [
     'export_to_excel'                               => 'Export to Excel',
     'cancelled_at'                                  => 'Cancellation Date',
     'areas'                                         => 'Areas',
-    'add_area'                                      => 'اضافة منطقة',
+    'add_area'                                      => 'Add Area',
 
 
 
