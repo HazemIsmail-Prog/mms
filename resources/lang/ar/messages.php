@@ -185,6 +185,7 @@ return [
     'export_to_excel'                               => 'تصدير اكسيل',
     'cancelled_at'                                  => 'تاريخ الالغاء',
     'areas'                                         => 'المناطق',
+    'add_area'                                      => 'اضافة منطقة',
 
 
 
@@ -193,7 +194,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',
