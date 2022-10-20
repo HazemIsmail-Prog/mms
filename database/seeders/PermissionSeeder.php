@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +18,6 @@ class PermissionSeeder extends Seeder
     {
         $permissions = array(
             array(
-                'id' => '1', 
                 'name' => 'dashboard_menu', 
                 'section_name_ar' => 'لوحة التحكم',
                 'section_name_en' => 'dashboard',
@@ -25,246 +25,310 @@ class PermissionSeeder extends Seeder
                 'desc_en' => 'Dashboard Menu',
             ),
             array(
-                'id' => '2', 
                 'name' => 'settings_menu', 
                 'section_name_ar' => 'الاعدادات',
                 'section_name_en' => 'settings',
                 'desc_ar' => 'عرض قائمة الاعدادات', 
                 'desc_en' => 'Settings Menu',
             ),
+
+
+            //roles
             array(
-                'id' => '3', 
-                'name' => 'departments_menu', 
+                'name' => 'roles_menu',
+                'section_name_ar' => 'الأدوار',
+                'section_name_en' => 'roles',
+                'desc_ar' => 'عرض قائمة الادوار',
+                'desc_en' => 'Roles Menu',
+            ),
+            array(
+                'name' => 'roles_create',
+                'section_name_ar' => 'الأدوار',
+                'section_name_en' => 'roles',
+                'desc_ar' => 'انشاء ادوار',
+                'desc_en' => 'Roles Create',
+            ),
+            array(
+                'name' => 'roles_edit',
+                'section_name_ar' => 'الأدوار',
+                'section_name_en' => 'roles',
+                'desc_ar' => 'تعديل الادوار',
+                'desc_en' => 'Roles Edit',
+            ),
+            array(
+                'name' => 'roles_delete',
+                'section_name_ar' => 'الأدوار',
+                'section_name_en' => 'roles',
+                'desc_ar' => 'حذف الادوار',
+                'desc_en' => 'Roles Delete',
+            ),
+
+            //departments
+            array(
+                'name' => 'departments_menu',
                 'section_name_ar' => 'الأقسام',
                 'section_name_en' => 'departments',
-                'desc_ar' => 'عرض قائمة الاقسام', 
+                'desc_ar' => 'عرض قائمة الاقسام',
                 'desc_en' => 'Departments Menu',
             ),
             array(
-                'id' => '4', 
-                'name' => 'titles_menu', 
+                'name' => 'departments_create',
+                'section_name_ar' => 'الأقسام',
+                'section_name_en' => 'departments',
+                'desc_ar' => 'انشاء اقسام',
+                'desc_en' => 'Departments Create',
+            ),
+            array(
+                'name' => 'departments_edit',
+                'section_name_ar' => 'الأقسام',
+                'section_name_en' => 'departments',
+                'desc_ar' => 'تعديل الاقسام',
+                'desc_en' => 'Departments Edit',
+            ),
+            array(
+                'name' => 'departments_delete',
+                'section_name_ar' => 'الأقسام',
+                'section_name_en' => 'departments',
+                'desc_ar' => 'حذف الاقسام',
+                'desc_en' => 'Departments Delete',
+            ),
+
+
+            //titles
+            array(
+                'name' => 'titles_menu',
                 'section_name_ar' => 'الوظائف',
                 'section_name_en' => 'titles',
-                'desc_ar' => 'عرض قائمة الوظائف', 
+                'desc_ar' => 'عرض قائمة الوظائف',
                 'desc_en' => 'Titles Menu',
             ),
             array(
-                'id' => '5', 
-                'name' => 'users_menu', 
+                'name' => 'titles_create',
+                'section_name_ar' => 'الوظائف',
+                'section_name_en' => 'titles',
+                'desc_ar' => 'انشاء وظائف',
+                'desc_en' => 'Titles Create',
+            ),
+            array(
+                'name' => 'titles_edit',
+                'section_name_ar' => 'الوظائف',
+                'section_name_en' => 'titles',
+                'desc_ar' => 'تعديل الوظائف',
+                'desc_en' => 'Titles Edit',
+            ),
+            array(
+                'name' => 'titles_delete',
+                'section_name_ar' => 'الوظائف',
+                'section_name_en' => 'titles',
+                'desc_ar' => 'حذف الوظائف',
+                'desc_en' => 'Titles Delete',
+            ),
+
+
+            //users
+
+            array(
+                'name' => 'users_menu',
                 'section_name_ar' => 'المستخدمين',
                 'section_name_en' => 'users',
-                'desc_ar' => 'عرض قائمة المستخدمين', 
+                'desc_ar' => 'عرض قائمة المستخدمين',
                 'desc_en' => 'Users Menu',
             ),
             array(
-                'id' => '6', 
-                'name' => 'statuses_menu', 
+                'name' => 'users_create',
+                'section_name_ar' => 'المستخدمين',
+                'section_name_en' => 'users',
+                'desc_ar' => 'انشاء مستخدمين',
+                'desc_en' => 'Users Create',
+            ),
+            array(
+                'name' => 'users_edit',
+                'section_name_ar' => 'المستخدمين',
+                'section_name_en' => 'users',
+                'desc_ar' => 'تعديل بيانات المستخدمين',
+                'desc_en' => 'Users Edit',
+            ),
+            array(
+                'name' => 'users_delete',
+                'section_name_ar' => 'المستخدمين',
+                'section_name_en' => 'users',
+                'desc_ar' => 'حذف المستخدمين',
+                'desc_en' => 'Users Delete',
+            ),
+
+            //statuses
+
+            array(
+                'name' => 'statuses_menu',
                 'section_name_ar' => 'الحالات',
                 'section_name_en' => 'statuses',
-                'desc_ar' => 'عرض قائمة الحالات', 
+                'desc_ar' => 'عرض قائمة الحالات',
                 'desc_en' => 'Statuses Menu',
             ),
             array(
-                'id' => '7', 
-                'name' => 'operations_menu', 
-                'section_name_ar' => 'العمليات',
-                'section_name_en' => 'operations',
-                'desc_ar' => 'عرض قائمة العمليات', 
-                'desc_en' => 'Operations Menu',
+                'name' => 'statuses_edit',
+                'section_name_ar' => 'الحالات',
+                'section_name_en' => 'statuses',
+                'desc_ar' => 'تعديل الحالات',
+                'desc_en' => 'Statuses Edit',
+            ),
+
+
+            //areas
+
+            array(
+                'name' => 'areas_menu',
+                'section_name_ar' => 'المناطق',
+                'section_name_en' => 'areas',
+                'desc_ar' => 'عرض قائمة المناطق',
+                'desc_en' => 'Areas Menu',
             ),
             array(
-                'id' => '8', 
-                'name' => 'customers_menu', 
+                'name' => 'areas_create',
+                'section_name_ar' => 'المناطق',
+                'section_name_en' => 'areas',
+                'desc_ar' => 'انشاء المناطق',
+                'desc_en' => 'Areas Create',
+            ),
+            array(
+                'name' => 'areas_edit',
+                'section_name_ar' => 'المناطق',
+                'section_name_en' => 'areas',
+                'desc_ar' => 'تعديل المناطق',
+                'desc_en' => 'Areas Edit',
+            ),
+            array(
+                'name' => 'areas_delete',
+                'section_name_ar' => 'المناطق',
+                'section_name_en' => 'areas',
+                'desc_ar' => 'حذف المناطق',
+                'desc_en' => 'Areas Delete',
+            ),
+
+
+            //operations title
+            array(
+                'name' => 'operations_menu',
+                'section_name_ar' => 'العمليات',
+                'section_name_en' => 'operations',
+                'desc_ar' => 'عرض قائمة العمليات',
+                'desc_en' => 'Operations Menu',
+            ),
+
+
+
+            //customers
+
+            array(
+                'name' => 'customers_menu',
                 'section_name_ar' => 'العملاء',
                 'section_name_en' => 'customers',
-                'desc_ar' => 'عرض قائمة العملاء', 
+                'desc_ar' => 'عرض قائمة العملاء',
                 'desc_en' => 'Customers Menu',
             ),
             array(
-                'id' => '9', 
-                'name' => 'orders_menu', 
+                'name' => 'customers_create',
+                'section_name_ar' => 'العملاء',
+                'section_name_en' => 'customers',
+                'desc_ar' => 'انشاء عميل جديد',
+                'desc_en' => 'Customers Create',
+            ),
+            array(
+                'name' => 'customers_edit',
+                'section_name_ar' => 'العملاء',
+                'section_name_en' => 'customers',
+                'desc_ar' => 'تعديل بيانات العملاء',
+                'desc_en' => 'Customers Edit',
+            ),
+            array(
+                'name' => 'customers_delete',
+                'section_name_ar' => 'العملاء',
+                'section_name_en' => 'customers',
+                'desc_ar' => 'حذف العملاء',
+                'desc_en' => 'Customers Delete',
+            ),
+
+
+            //orders
+
+            array(
+                'name' => 'orders_menu',
                 'section_name_ar' => 'الطلبات',
                 'section_name_en' => 'orders',
-                'desc_ar' => 'عرض قائمة الطلبات', 
+                'desc_ar' => 'عرض قائمة الطلبات',
                 'desc_en' => 'Orders Menu',
             ),
             array(
-                'id' => '10', 
+                'name' => 'orders_create',
+                'section_name_ar' => 'الطلبات',
+                'section_name_en' => 'orders',
+                'desc_ar' => 'انشاء طلبات',
+                'desc_en' => 'Orders Create',
+            ),
+            array(
+                'name' => 'orders_edit',
+                'section_name_ar' => 'الطلبات',
+                'section_name_en' => 'orders',
+                'desc_ar' => 'تعديل الطلبات',
+                'desc_en' => 'Orders Edit',
+            ),
+            array(
+                'name' => 'orders_show',
+                'section_name_ar' => 'الطلبات',
+                'section_name_en' => 'orders',
+                'desc_ar' => 'عرض تفاصيل الطلبات',
+                'desc_en' => 'Orders Show',
+            ),
+            
+
+            //dispatching
+            
+            array(
                 'name' => 'dispatching_menu', 
                 'section_name_ar' => 'التوزيع',
                 'section_name_en' => 'dispatching',
                 'desc_ar' => 'عرض قائمة التوزيع', 
                 'desc_en' => 'Dispatching Menu',
             ),
+
+            //reports
             array(
-                'id' => '11', 
                 'name' => 'reports_menu', 
                 'section_name_ar' => 'التقارير',
                 'section_name_en' => 'reports',
                 'desc_ar' => 'عرض قائمة التقارير', 
                 'desc_en' => 'Reports Menu',
             ),
-            array(
-                'id' => '12', 
-                'name' => 'roles_menu', 
-                'section_name_ar' => 'الأدوار',
-                'section_name_en' => 'roles',
-                'desc_ar' => 'عرض قائمة الادوار', 
-                'desc_en' => 'Roles Menu',
-            ),
-            array(
-                'id' => '15', 
-                'name' => 'departments_create', 
-                'section_name_ar' => 'الأقسام',
-                'section_name_en' => 'departments',
-                'desc_ar' => 'انشاء اقسام', 
-                'desc_en' => 'Departments Create',
-            ),
-            array(
-                'id' => '16', 
-                'name' => 'departments_edit', 
-                'section_name_ar' => 'الأقسام',
-                'section_name_en' => 'departments',
-                'desc_ar' => 'تعديل الاقسام', 
-                'desc_en' => 'Departments Edit',
-            ),
-            array(
-                'id' => '17', 
-                'name' => 'departments_delete', 
-                'section_name_ar' => 'الأقسام',
-                'section_name_en' => 'departments',
-                'desc_ar' => 'حذف الاقسام', 
-                'desc_en' => 'Departments Delete',
-            ),
-            array(
-                'id' => '18', 
-                'name' => 'titles_create', 
-                'section_name_ar' => 'الوظائف',
-                'section_name_en' => 'titles',
-                'desc_ar' => 'انشاء وظائف', 
-                'desc_en' => 'Titles Create',
-            ),
-            array(
-                'id' => '19', 
-                'name' => 'titles_edit', 
-                'section_name_ar' => 'الوظائف',
-                'section_name_en' => 'titles',
-                'desc_ar' => 'تعديل الوظائف', 
-                'desc_en' => 'Titles Edit',
-            ),
-            array(
-                'id' => '20', 
-                'name' => 'titles_delete', 
-                'section_name_ar' => 'الوظائف',
-                'section_name_en' => 'titles',
-                'desc_ar' => 'حذف الوظائف', 
-                'desc_en' => 'Titles Delete',
-            ),
-            array(
-                'id' => '21', 
-                'name' => 'users_create', 
-                'section_name_ar' => 'المستخدمين',
-                'section_name_en' => 'users',
-                'desc_ar' => 'انشاء مستخدمين', 
-                'desc_en' => 'Users Create',
-            ),
-            array(
-                'id' => '22', 
-                'name' => 'users_edit', 
-                'section_name_ar' => 'المستخدمين',
-                'section_name_en' => 'users',
-                'desc_ar' => 'تعديل بيانات المستخدمين', 
-                'desc_en' => 'Users Edit',
-            ),
-            array(
-                'id' => '23', 
-                'name' => 'users_delete', 
-                'section_name_ar' => 'المستخدمين',
-                'section_name_en' => 'users',
-                'desc_ar' => 'حذف المستخدمين', 
-                'desc_en' => 'Users Delete',
-            ),
-            array(
-                'id' => '24', 
-                'name' => 'roles_create', 
-                'section_name_ar' => 'الأدوار',
-                'section_name_en' => 'roles',
-                'desc_ar' => 'انشاء ادوار', 
-                'desc_en' => 'Roles Create',
-            ),
-            array(
-                'id' => '25', 
-                'name' => 'roles_edit', 
-                'section_name_ar' => 'الأدوار',
-                'section_name_en' => 'roles',
-                'desc_ar' => 'تعديل الادوار', 
-                'desc_en' => 'Roles Edit',
-            ),
-            array(
-                'id' => '26', 
-                'name' => 'roles_delete', 
-                'section_name_ar' => 'الأدوار',
-                'section_name_en' => 'roles',
-                'desc_ar' => 'حذف الادوار', 
-                'desc_en' => 'Roles Delete',
-            ),
-            array(
-                'id' => '27', 
-                'name' => 'statuses_edit', 
-                'section_name_ar' => 'الحالات',
-                'section_name_en' => 'statuses',
-                'desc_ar' => 'تعديل الحالات', 
-                'desc_en' => 'Statuses Edit',
-            ),
-            array(
-                'id' => '28', 
-                'name' => 'customers_create', 
-                'section_name_ar' => 'العملاء',
-                'section_name_en' => 'customers',
-                'desc_ar' => 'انشاء عميل جديد', 
-                'desc_en' => 'Customers Create',
-            ),
-            array(
-                'id' => '29', 
-                'name' => 'orders_create', 
-                'section_name_ar' => 'الطلبات',
-                'section_name_en' => 'orders',
-                'desc_ar' => 'انشاء طلبات', 
-                'desc_en' => 'Orders Create',
-            ),
-            array(
-                'id' => '30', 
-                'name' => 'customers_edit', 
-                'section_name_ar' => 'العملاء',
-                'section_name_en' => 'customers',
-                'desc_ar' => 'تعديل بيانات العملاء', 
-                'desc_en' => 'Customers Edit',
-            ),
-            array(
-                'id' => '31', 
-                'name' => 'customers_delete', 
-                'section_name_ar' => 'العملاء',
-                'section_name_en' => 'customers',
-                'desc_ar' => 'حذف العملاء', 
-                'desc_en' => 'Customers Delete',
-            ),
-            array(
-                'id' => '32', 
-                'name' => 'orders_show', 
-                'section_name_ar' => 'الطلبات',
-                'section_name_en' => 'orders',
-                'desc_ar' => 'عرض تفاصيل الطلبات', 
-                'desc_en' => 'Orders Show',
-            ),
-            array(
-                'id' => '33', 
-                'name' => 'orders_edit', 
-                'section_name_ar' => 'الطلبات',
-                'section_name_en' => 'orders',
-                'desc_ar' => 'تعديل الطلبات', 
-                'desc_en' => 'Orders Edit',
-            ),
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         );
         Permission::insert($permissions);
+        $permissions = Permission::all();
+
+        foreach($permissions as $permission){
+            Role::find(1)->permissions()->attach($permission->id);
+        }
     }
 }

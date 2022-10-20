@@ -3,19 +3,147 @@
        <div>{{auth()->user()->name}}</div>
        <div style="font-size: 0.6rem">{{auth()->user()->title->name}}</div>
     </div>
-    <ul class="c-sidebar-nav">
 
-        @can('dashboard_menu')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{route('home')}}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer')}}"></use>
-                    </svg>
-                    @lang('messages.dashboard')
-                    <span class="badge badge-pill badge-info">@lang('messages.new')</span>
-                </a>
-            </li>
-        @endcan
+    @php
+        $services = [];
+        foreach (auth()->user()->departments()->where('is_service',true)->get() as $service) {
+            $services [] = [
+                'permission_name'   => 'dispatching_menu',
+                'type'              => 'nav_menu_item',
+                'route'             => route('dist_panel.index',$service->id ),
+                'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                'display_name'      => $service->name,
+            ];
+        }
+
+        $nav_menu_items = [
+            [
+                'permission_name'   => 'dashboard_menu',
+                'type'              => 'nav_menu_item',
+                'route'             => route('home'),
+                'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer'),
+                'display_name'      => __('messages.dashboard'),
+            ],
+            [
+                'permission_name'   => 'settings_menu',
+                'type'              => 'menu_header',
+                'display_name'      => __('messages.settings'),
+                'childs'            => 
+                [
+                    [
+                        'permission_name'   => 'roles_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('roles.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.roles'),
+                    ],
+                    [
+                        'permission_name'   => 'departments_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('departments.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.departments'),
+                    ],
+                    [
+                        'permission_name'   => 'titles_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('titles.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.titles'),
+                    ],
+                    [
+                        'permission_name'   => 'users_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('users.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.users'),
+                    ],
+                    [
+                        'permission_name'   => 'statuses_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('statuses.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.statuses'),
+                    ],
+                    [
+                        'permission_name'   => 'areas_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('areas.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.areas'),
+                    ],
+                ],
+            ],
+            [
+                'permission_name'   => 'operations_menu',
+                'type'              => 'menu_header',
+                'display_name'      => __('messages.operations'),
+                'childs'            => 
+                [
+                    [
+                        'permission_name'   => 'customers_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('customers.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.customers'),
+                    ],
+                    [
+                        'permission_name'   => 'orders_menu',
+                        'type'              => 'nav_menu_item',
+                        'route'             => route('orders.index'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'display_name'      => __('messages.orders'),
+                    ],
+                ],
+            ],
+            [
+                'permission_name'   => 'dispatching_menu',
+                'type'              => 'menu_header',
+                'display_name'      => __('messages.dispatching'),
+                'childs'            => $services,
+            ],
+            [
+                'permission_name'   => 'reports_menu',
+                'type'              => 'menu_header',
+                'display_name'      => __('messages.reports'),
+                'childs'            => 
+                [
+                    [
+                        'permission_name'   => 'reports_menu',
+                        'type'              => 'menu_dropdown',
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer'),
+                        'display_name'      => __('messages.reports'),
+                        'childs'            => 
+                        [
+                            [
+                                'permission_name'   => 'reports_menu',
+                                'type'              => 'nav_menu_item',
+                                'route'             => '',
+                                'icon'              => '',
+                                'display_name'      => __('messages.report1'),
+                            ],
+                            [
+                                'permission_name'   => 'reports_menu',
+                                'type'              => 'nav_menu_item',
+                                'route'             => '',
+                                'icon'              => '',
+                                'display_name'      => __('messages.report2'),
+                            ],
+                            [
+                                'permission_name'   => 'reports_menu',
+                                'type'              => 'nav_menu_item',
+                                'route'             => '',
+                                'icon'              => '',
+                                'display_name'      => __('messages.report3'),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    @endphp
+
+    <ul class="c-sidebar-nav">
 
         @if (auth()->user()->role_id == 1)  
             <li class="c-sidebar-nav-item">
@@ -28,139 +156,36 @@
             </li>
         @endif
 
-        @can('settings_menu')
-            <li class="c-sidebar-nav-title text-info">
-                @lang('messages.settings')
-            </li>
-            @can('departments_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('departments.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.departments')
-                    </a>
-                </li>
-            @endcan
-            @can('titles_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('titles.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.titles')
-                    </a>
-                </li>
-            @endcan
-            @can('users_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('users.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.users')
-                    </a>
-                </li>
-            @endcan
-            @can('roles_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('roles.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.roles')
-                    </a>
-                </li>
-            @endcan
-            @can('statuses_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('statuses.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.statuses')
-                    </a>
-                </li>
-            @endcan
-        @endcan
+        @foreach ($nav_menu_items as $item)
 
+            @switch($item['type'])
 
-        @can('operations_menu')
-            <li class="c-sidebar-nav-title text-info">
-                @lang('messages.operations')
-            </li>
-            @can('customers_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('customers.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.customers')
-                    </a>
-                </li>
-            @endcan
-            @can('orders_menu')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{route('orders.index')}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        @lang('messages.orders')
-                    </a>
-                </li>
-            @endcan
-        @endcan
+                {{-- Menu Header with Childs --}}
+                @case('menu_header')
+                    @include('includes.menu_header')
+                @break
 
+                {{-- Menu Dropdown with Childs --}}
+                @case('menu_dropdown')
+                    @include('includes.menu_dropdown')
+                @break
 
-        @can('dispatching_menu')
-            <li class="c-sidebar-nav-title text-info">
-                @lang('messages.dispatching')
-            </li>
-            @foreach(auth()->user()->departments()->where('is_service',true)->get() as $department)
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link"
-                       href="{{route('dist_panel.index',$department->id)}}">
-                        <svg class="c-sidebar-nav-icon">
-                            <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-                        </svg>
-                        {{$department->name}}
-                    </a>
-                </li>
-            @endforeach
-        @endcan
+                {{-- Nav Menu Items --}}
+                @case('nav_menu_item')
+                    @include('includes.nav_menu_item')
+                @break
 
-        @can('reports_menu')
-            <li class="c-sidebar-nav-title text-info">
-                @lang('messages.reports')
-            </li>
-            <li class="c-sidebar-nav-dropdown">
-                <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-star')}}"></use>
-                    </svg>
-                    @lang('messages.reports')
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="icons/coreui-icons-free.html">
-                            @lang('messages.report1')
-                            <span class="badge badge-pill badge-success">@lang('messages.new')</span>
-                        </a>
-                    </li>
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="icons/coreui-icons-brand.html">
-                            @lang('messages.report2')
-                        </a>
-                    </li>
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="icons/coreui-icons-flag.html">
-                            @lang('messages.report3')
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endcan
+            @endswitch
+
+        @endforeach
     </ul>
-    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
-            data-class="c-sidebar-minimized"></button>
+
+    <button 
+        class="c-sidebar-minimizer c-class-toggler" 
+        type="button" 
+        data-target="_parent"
+        data-class="c-sidebar-minimized"
+    >
+    </button>
+
 </div>

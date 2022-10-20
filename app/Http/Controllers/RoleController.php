@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function create() :View
     {
-        $permissions = Permission::orderBy('name')->get()->groupBy('section_name_en');
+        $permissions = Permission::orderBy('id')->get()->groupBy('section_name_en');
         return view('pages.roles.create',compact('permissions'));
     }
 
@@ -81,7 +81,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role):View
     {
-        $permissions = Permission::orderBy('name')->get()->groupBy('section_name_en');
+        $permissions = Permission::orderBy('id')->get()->groupBy('section_name_en');
         // dd($permissions);
         return view('pages.roles.edit',compact('role','permissions'));
     }

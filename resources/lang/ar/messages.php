@@ -184,6 +184,7 @@ return [
     'run'                                           => 'تنفيذ',
     'export_to_excel'                               => 'تصدير اكسيل',
     'cancelled_at'                                  => 'تاريخ الالغاء',
+    'areas'                                         => 'المناطق',
 
 
 
@@ -192,7 +193,6 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',

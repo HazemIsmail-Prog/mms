@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HomeController;
@@ -50,6 +51,7 @@ Route::group([
         Route::group(['middleware' => 'no_technicians'], function () {
             Route::get('/', [HomeController::class, 'index'])->name('home');
             Route::resource('/departments', DepartmentController::class);
+            Route::resource('/areas', AreaController::class);
             Route::resource('/roles', RoleController::class);
             Route::resource('/titles', TitleController::class);
             Route::resource('/statuses', StatusesController::class);
