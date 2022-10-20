@@ -11,7 +11,7 @@
                 'permission_name'   => 'dispatching_menu',
                 'type'              => 'nav_menu_item',
                 'route'             => route('dist_panel.index',$service->id ),
-                'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-truck'),
                 'display_name'      => $service->name,
             ];
         }
@@ -34,42 +34,42 @@
                         'permission_name'   => 'roles_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('roles.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked'),
                         'display_name'      => __('messages.roles'),
                     ],
                     [
                         'permission_name'   => 'departments_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('departments.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-sitemap'),
                         'display_name'      => __('messages.departments'),
                     ],
                     [
                         'permission_name'   => 'titles_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('titles.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-fork'),
                         'display_name'      => __('messages.titles'),
                     ],
                     [
                         'permission_name'   => 'users_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('users.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-group'),
                         'display_name'      => __('messages.users'),
                     ],
                     [
                         'permission_name'   => 'statuses_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('statuses.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-list'),
                         'display_name'      => __('messages.statuses'),
                     ],
                     [
                         'permission_name'   => 'areas_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('areas.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-location-pin'),
                         'display_name'      => __('messages.areas'),
                     ],
                 ],
@@ -84,14 +84,14 @@
                         'permission_name'   => 'customers_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('customers.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-contact'),
                         'display_name'      => __('messages.customers'),
                     ],
                     [
                         'permission_name'   => 'orders_menu',
                         'type'              => 'nav_menu_item',
                         'route'             => route('orders.index'),
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-user'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-library'),
                         'display_name'      => __('messages.orders'),
                     ],
                 ],
@@ -111,7 +111,7 @@
                     [
                         'permission_name'   => 'reports_menu',
                         'type'              => 'menu_dropdown',
-                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer'),
+                        'icon'              => asset('vendors/@coreui/icons/svg/free.svg#cil-chart-line'),
                         'display_name'      => __('messages.reports'),
                         'childs'            => 
                         [
@@ -149,7 +149,7 @@
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{route('artisan.index')}}">
                     <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                        <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-browser')}}"></use>
                     </svg>
                     @lang('messages.artisan_commands')
                 </a>
