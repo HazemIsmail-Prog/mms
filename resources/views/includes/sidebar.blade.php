@@ -145,7 +145,7 @@
 
     <ul class="c-sidebar-nav">
 
-        @if (auth()->user()->role_id == 1)  
+        @if (auth()->id() == 1)  
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{route('artisan.index')}}">
                     <svg class="c-sidebar-nav-icon">
