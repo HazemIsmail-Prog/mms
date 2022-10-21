@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('users', 'title_id')) //check the column
-        {
-            Schema::table('users', function (Blueprint $table) {
-                $table->foreignId('title_id')->nullable()->constrained('titles');
-            });
-        }
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('title_id')->nullable()->constrained('titles');
+        });   
     }
 
     /**
