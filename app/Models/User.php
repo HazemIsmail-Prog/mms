@@ -61,20 +61,32 @@ class User extends Authenticatable
         return $this->hasMany(Order::class,'created_by');
     }
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Role::class)->with('permissions');
     }
 
-    public function permissions()
-    {
-        return $this->role->permissions ?? false;
-    }
+     public function permissions()
+     {
+           $permissionList = [];
+
+           foreach($this->roles as $role)
+           {
+               foreach($role->permissions as $permission)
+               {
+                   if(!in_array($permission->id, $permissionList))
+                   {
+                       $permissionList[] = $permission->id;
+                   }
+               }
+           }
+           return $permissionList;
+     }
 
     public function hasPermission($permission)
     {
         if ($this->permissions()){
-            if($this->permissions()->contains('id',$permission))
+            if(in_array($permission,$this->permissions()))
             {
                 return true;
             }

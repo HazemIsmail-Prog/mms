@@ -58,40 +58,45 @@
                                 </select>
                                 @error('title_id')<span class="small text-danger">{{ $message }}</span>@enderror
                             </div>
-                            <div class="form-group">
-                                <label for="role">@lang('messages.role')</label>
-                                <select name="role"
-                                        class="form-control @error('role') is-invalid @enderror">
-                                    <option value="">---</option>
+                            <div class="card">
+                                <div class="card-header">{{__('messages.roles')}}</div>
+                                <div class="card-body">
+                                    @error('roles')<span class="small text-danger">{{ $message }}</span>@enderror
                                     @foreach($roles as $role)
-                                        <option
-                                            value="{{$role->id}}" {{old('role') == $role->id ? 'selected' : ''}}>{{$role->name}}</option>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$role->id}}"
+                                                    {{in_array($role->id, old("roles") ?: []) ? 'checked': ''}}
+                                                    name="roles[]"
+                                                    id="{{$role->id}}">
+                                            <label class="form-check-label" for="{{$role->id}}">
+                                                {{$role->name}}
+                                            </label>
+                                        </div>
                                     @endforeach
-                                </select>
-                                @error('role')<span class="small text-danger">{{ $message }}</span>@enderror
-                            </div>
-                                <div class="card">
-                                    <div class="card-header">{{__('messages.departments')}}</div>
-                                    <div class="card-body">
-                                        @error('departments')<span class="small text-danger">{{ $message }}</span>@enderror
-                                        @foreach($departments as $department)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="{{$department->id}}"
-                                                       {{in_array($department->id, old("departments") ?: []) ? 'checked': ''}}
-                                                       name="departments[]"
-                                                       id="{{$department->id}}">
-                                                <label class="form-check-label" for="{{$department->id}}">
-                                                    {{$department->name}}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">{{__('messages.departments')}}</div>
+                                <div class="card-body">
+                                    @error('departments')<span class="small text-danger">{{ $message }}</span>@enderror
+                                    @foreach($departments as $department)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$department->id}}"
+                                                    {{in_array($department->id, old("departments") ?: []) ? 'checked': ''}}
+                                                    name="departments[]"
+                                                    id="{{$department->id}}">
+                                            <label class="form-check-label" for="{{$department->id}}">
+                                                {{$department->name}}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="name">@lang('messages.status')</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"
-                                           name="active" {{old('active') ? 'checked' : ''}}>
+                                           name="active" checked>
                                     <label class="form-check-label" for="active">
                                         @lang('messages.active')
                                     </label>

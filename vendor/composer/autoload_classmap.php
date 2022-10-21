@@ -7,10 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Events\\MessageSentToEvent' => $baseDir . '/app/Events/MessageSentToEvent.php',
     'App\\Events\\OrderCreatedEvent' => $baseDir . '/app/Events/OrderCreatedEvent.php',
     'App\\Events\\OrderUpdatedPerOrderEvent' => $baseDir . '/app/Events/OrderUpdatedPerOrderEvent.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\OrdersExport' => $baseDir . '/app/Exports/OrdersExport.php',
+    'App\\Http\\Controllers\\AreaController' => $baseDir . '/app/Http/Controllers/AreaController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',

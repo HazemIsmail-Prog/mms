@@ -31,7 +31,7 @@
                                     <th class="text-center">@lang('messages.username')</th>
                                     <th class="text-center">@lang('messages.title')</th>
                                     <th class="text-center">@lang('messages.department')</th>
-                                    <th class="text-center">@lang('messages.role')</th>
+                                    <th class="text-center">@lang('messages.roles')</th>
                                     <th class="text-center">@lang('messages.status')</th>
                                     <th class="text-center">@lang('messages.actions')</th>
                                 </tr>
@@ -44,7 +44,7 @@
                                         <td class="text-center">{{$user->username}}</td>
                                         <td class="text-center">{{$user->title->name}}</td>
                                         <td class="text-center">{{$user->departments->pluck('name')->implode(' - ')}}</td>
-                                        <td class="text-center">{{$user->role->name}}</td>
+                                        <td class="text-center">{{$user->roles->pluck('name')->implode(' - ')}}</td>
                                         <td class="text-center">
                                         <span
                                             class="badge badge-pill {{$user->active == 1 ? 'badge-success' : 'badge-danger' }}">

@@ -300,33 +300,12 @@ class PermissionSeeder extends Seeder
                 'desc_en' => 'Reports Menu',
             ),
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         );
         Permission::insert($permissions);
-        $permissions = Permission::all();
 
+
+        // Attach All Created Permissions to the Super Admin Role
+        $permissions = Permission::all();
         foreach($permissions as $permission){
             Role::find(1)->permissions()->attach($permission->id);
         }

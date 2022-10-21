@@ -63,18 +63,29 @@
                                 </select>
                                 @error('title_id')<span class="small text-danger">{{ $message }}</span>@enderror
                             </div>
-                            <div class="form-group">
-                                <label for="role">@lang('messages.role')</label>
-                                <select name="role"
-                                        class="form-control @error('role') is-invalid @enderror">
-                                    <option value="">---</option>
+
+                            <div class="card">
+                                <div class="card-header">{{__('messages.roles')}}</div>
+                                <div class="card-body">
+                                    @error('roles')<span class="small text-danger">{{ $message }}</span>@enderror
                                     @foreach($roles as $role)
-                                        <option
-                                            value="{{$role->id}}" {{old('role',$user->role_id) == $role->id ? 'selected' : ''}}>{{$role->name}}</option>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$role->id}}"
+                                                   {{$user->roles->pluck('id')->contains($role->id) ? 'checked' : ''}}
+                                                   name="roles[]"
+                                                   id="{{$role->id}}">
+                                            <label class="form-check-label" for="{{$role->id}}">
+                                                {{$role->name}}
+                                            </label>
+                                        </div>
                                     @endforeach
-                                </select>
-                                @error('role')<span class="small text-danger">{{ $message }}</span>@enderror
+                                </div>
                             </div>
+
+
+
+
+
 
                             <div class="card">
                                 <div class="card-header">{{__('messages.departments')}}</div>

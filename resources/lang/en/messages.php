@@ -186,6 +186,8 @@ return [
     'cancelled_at'                                  => 'Cancellation Date',
     'areas'                                         => 'Areas',
     'add_area'                                      => 'Add Area',
+    'roles_required'                                => 'Role Required',
+
 
 
 

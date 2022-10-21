@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index(): View
     {
         $users = User::query()
-        ->with('departments','title','role')
+        ->with('departments','title','roles')
         ->paginate(1000);
         return view('pages.users.index', compact('users'));
     }
@@ -55,7 +55,7 @@ class UserController extends Controller
             'password' => ['required', 'min:5'],
             'title_id' => ['required'],
             'departments' => ['required'],
-            'role' => ['required'],
+            'roles' => ['required'],
         ],[
             'name_ar.required' => __('messages.name_required'),
             'name_en.required' => __('messages.name_required'),
@@ -66,7 +66,7 @@ class UserController extends Controller
             'password.min' => __('messages.password_min_5'),
             'title_id.required' => __('messages.title_required'),
             'departments.required' => __('messages.department_required'),
-            'role.required' => __('messages.role_required'),
+            'roles.required' => __('messages.roles_required'),
         ]);
 
         $data = [
@@ -76,12 +76,12 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'title_id' => $request->title_id,
-            'role_id' => $request->role,
             'active' => $request->active ? 1 : 0
         ];
 
         $user = User::create($data);
         $user->departments()->sync($request->departments);
+        $user->roles()->sync($request->roles);
         return redirect(route('users.index'))->with('success', __('messages.added_successfully'));
     }
 
@@ -127,7 +127,7 @@ class UserController extends Controller
             'password' => ['nullable', 'min:5'],
             'title_id' => ['required'],
             'departments' => ['required'],
-            'role' => ['required'],
+            'roles' => ['required'],
         ],[
             'name_ar.required' => __('messages.name_required'),
             'name_en.required' => __('messages.name_required'),
@@ -138,7 +138,7 @@ class UserController extends Controller
             'password.min' => __('messages.password_min_5'),
             'title_id.required' => __('messages.title_required'),
             'departments.required' => __('messages.department_required'),
-            'role.required' => __('messages.role_required'),
+            'roles.required' => __('messages.roles_required'),
         ]);
 
         $data = [
@@ -147,7 +147,6 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'title_id' => $request->title_id,
-            'role_id' => $request->role,
             'active' => $request->active ? 1 : 0
         ];
 
@@ -157,6 +156,7 @@ class UserController extends Controller
         }
 
         $user->departments()->sync($request->departments);
+        $user->roles()->sync($request->roles);
         return redirect(route('users.index'))->with('success', __('messages.updated_successfully'));    
     }
     

@@ -680,10 +680,12 @@ class ComposerStaticInit3872b7ac4c92ba82bd0f5c66fb819dae
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\MessageSentToEvent' => __DIR__ . '/../..' . '/app/Events/MessageSentToEvent.php',
         'App\\Events\\OrderCreatedEvent' => __DIR__ . '/../..' . '/app/Events/OrderCreatedEvent.php',
         'App\\Events\\OrderUpdatedPerOrderEvent' => __DIR__ . '/../..' . '/app/Events/OrderUpdatedPerOrderEvent.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\OrdersExport' => __DIR__ . '/../..' . '/app/Exports/OrdersExport.php',
+        'App\\Http\\Controllers\\AreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AreaController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',

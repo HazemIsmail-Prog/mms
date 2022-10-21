@@ -194,7 +194,7 @@ return [
 
 
     //copy from here to english
-    ''                                              => '',
+    'roles_required'                                => 'يرجى اختيار الدور',
     ''                                              => '',
     ''                                              => '',
     ''                                              => '',
