@@ -76,7 +76,8 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'title_id' => $request->title_id,
-            'active' => $request->active ? 1 : 0
+            'active' => $request->active ? 1 : 0,
+            'api_token' => bin2hex(openssl_random_pseudo_bytes(30)),
         ];
 
         $user = User::create($data);
