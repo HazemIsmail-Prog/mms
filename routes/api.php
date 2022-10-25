@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TechnicianPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/auth/login', [AuthController::class,'login']);
+Route::get('/technician_page', [TechnicianPageController::class,'getCurrenOrder'])->middleware('auth:api');
+
+// Route::middleware('auth:api')->post('/auth/login', function (Request $request) {
+//     return $request->user();
+// });
