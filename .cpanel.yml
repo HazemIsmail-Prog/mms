@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/hazonlineapps/public_html/mms/
-    - /bin/cp -r * $DEPLOYPATH
