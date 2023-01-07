@@ -106,17 +106,10 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
-        window.Echo.channel('MessageSentToEventChannel{{ auth()->id() }}')
-            .listen('MessageSentToEvent', (e) => {
-                @this.referehData();
-            });
-
-        // window.addEventListener('load', event => {
-        //     if(localStorage.getItem("selected_user") > 0){
-        //         selected_user = localStorage.getItem("selected_user");
-        //         @this.setSelectedUser(selected_user);
-        //     }
-        // })
+        // window.Echo.channel('MessageSentToEventChannel{{ auth()->id() }}')
+        //     .listen('MessageSentToEvent', (e) => {
+        //         @this.referehData();
+        //     });
 
         window.addEventListener('scrollToBottom', event => {
             scrollToBottom(event.detail.user_id);
