@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class,'created_by');
     }
 
+    public function fcm_tokens()
+    {
+        return $this->hasMany(FCMToken::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class)->with('permissions');

@@ -31,4 +31,14 @@ class AuthController extends Controller
             'message' => 'Invalid Credentials!',
         ],401);
     }
+
+    public function test()
+    {
+        $users = User::all();
+        return response([
+            'data' => UserResource::collection($users),
+            'error' => 0,
+            'message' => 'Success',
+        ]);
+    }
 }

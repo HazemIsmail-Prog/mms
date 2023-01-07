@@ -16,6 +16,34 @@ class TechnicianPageController extends Controller
             ->whereIn('status_id', [2, 3])
             ->orderBy('index')
             ->first();
-        return new OrderResource($order);
+
+            if($order){
+                $data = new OrderResource($order);
+            }else{
+                $data = [];
+            }
+            return response(['data' => $data , 'error' => 0 , 'message' => 'Success']);
+
+    }
+
+    public function accept(Request $request)
+    {
+
+        $order = Order::find($request->order_id);
+        $order->update(['status_id' => 3]);
+        return response(['error' => 0 , 'message' => 'Success']) ;
+    }
+
+
+    public function complete(Request $request)
+    {
+
+        $order = Order::find($request->order_id);
+        $order->update([
+            'status_id' => 4,
+            'completed_at' => now(),
+            'index' => null,
+        ]);
+        return response(['error' => 0 , 'message' => 'Success']) ;
     }
 }
