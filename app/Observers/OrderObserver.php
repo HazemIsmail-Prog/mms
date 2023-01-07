@@ -33,7 +33,7 @@ class OrderObserver
             'technician_id'=> $order->technician_id,
             'user_id'=> auth()->id() ?? 1,
         ]);
-        event(new OrderCreatedEvent($order->department_id));
+        // event(new OrderCreatedEvent($order->department_id));
     }
 
     /**
@@ -55,8 +55,8 @@ class OrderObserver
                 'user_id' => auth()->id(),
             ]);
         }
-        event(new OrderCreatedEvent($order->department_id));
-        event(new OrderUpdatedPerOrderEvent($order->id));
+        // event(new OrderCreatedEvent($order->department_id));
+        // event(new OrderUpdatedPerOrderEvent($order->id));
         if($order->index == 0){
             $this->toFirebase($order->technician_id, $order->id,$order->creator->name_en);
         }
