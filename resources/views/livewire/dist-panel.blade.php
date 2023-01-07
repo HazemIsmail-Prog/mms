@@ -4,12 +4,12 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>{{$department->name}}</div>
-                </div>
-                <div class="card-body">
                     {{-- Loading Spinner --}}
                     <div wire:loading>
                         @include('components.spinner')
                     </div>
+                </div>
+                <div class="card-body">
                     {{-- Show Today's Orders Only Filter --}}
                     <div class="form-check mb-2">
                         <input wire:model="todays_orders_only" class="form-check-input" type="checkbox" name="active"
