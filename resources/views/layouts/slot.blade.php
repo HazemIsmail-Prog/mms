@@ -8,6 +8,7 @@
     @include('includes.links')
     @yield('links')
     @yield('styles')
+    @yield('title')
     <title>{{ config('app.name', 'Laravel') }}</title>
     @livewireStyles
 </head>
