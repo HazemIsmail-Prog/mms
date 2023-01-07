@@ -106,10 +106,10 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
-        // window.Echo.channel('MessageSentToEventChannel{{ auth()->id() }}')
-        //     .listen('MessageSentToEvent', (e) => {
-        //         @this.referehData();
-        //     });
+        window.Echo.channel('MessageSentToEventChannel{{ auth()->id() }}')
+            .listen('MessageSentToEvent', (e) => {
+                @this.referehData();
+            });
 
         window.addEventListener('scrollToBottom', event => {
             scrollToBottom(event.detail.user_id);
