@@ -34,26 +34,15 @@ import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'localKey',
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     forceTLS: false,
-//     disableStats: true,
-// });
-
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    key: 'localKey',
     wsHost: window.location.hostname,
-    encrypted: false,
-    // wsPort: 6001, <-- Should these be commented out?
-    // wssPort: 6001, <-- Should these be commented out?
+    wsPort: 6001,
+    forceTLS: false,
     disableStats: true,
-    forceTLS: true,
-    enabledTransports: ['ws'] // removed wss
 });
+
+
+
 
