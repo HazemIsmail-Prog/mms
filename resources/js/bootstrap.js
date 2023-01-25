@@ -36,19 +36,12 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    // key: process.env.MIX_PUSHER_APP_KEY,
-    // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    key: process.env.APP_KEY,
+    key: 'localKey',
     wsHost: window.location.hostname,
-    wssHost: 'wss://127.0.0.1',
     wsPort: 6001,
     wssPort: 6001,
-    forceTLS: false,
     disableStats: true,
-    
-    cluster: "ap1",
-    forceTLS: true,
-    authEndpoint: "/broadcasting/auth",
+    forceTLS: false
 });
 
 
