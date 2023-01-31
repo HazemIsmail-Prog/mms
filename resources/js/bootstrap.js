@@ -23,6 +23,16 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+let token = document.head.querySelector('meta[name="csrf-token"]');
+if (token){
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    console.log(token.content);
+}else{
+    console.log('CSRF Not Found');
+}
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -36,12 +46,14 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'localKey',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    forceTLS: true,
     wsHost: window.location.hostname,
-    wsPort: 6001,
-    wssPort: 6001,
+    wsPort: process.env.PUSHER_PORT,
+    wssPort: process.env.PUSHER_PORT,
     disableStats: true,
-    forceTLS: false
+    encrypted: true,
 });
 
 
