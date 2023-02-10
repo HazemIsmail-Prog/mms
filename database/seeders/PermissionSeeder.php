@@ -309,5 +309,9 @@ class PermissionSeeder extends Seeder
         foreach($permissions as $permission){
             Role::find(1)->permissions()->attach($permission->id);
         }
+        Role::find(2)->permissions()->attach([1,35]);
+        Role::find(3)->permissions()->attach([1,2,21,22,23,24,25,26,27,28,29,30,31,32,33,35]);
+        Role::find(4)->permissions()->attach([1,25,26,27,30,31,33,35]);
+        Role::find(5)->permissions()->attach([1,25,26,30,33,34,35]);
     }
 }
