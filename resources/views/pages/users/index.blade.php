@@ -80,13 +80,13 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6">No results</td>
+                                        <td colspan="7">No results</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         {{$users->links()}}
                                     </td>
                                 </tr>

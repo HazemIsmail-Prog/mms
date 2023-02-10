@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             TitleSeeder::class,
             UserSeeder::class,
-            DepartmentUserSeeder::class,
+            // DepartmentUserSeeder::class,
             StatusSeeder::class,
             AreaSeeder::class,
-            CustomerSeeder::class,
-            OrderSeeder::class,
-            MessageSeeder::class,
+            // CustomerSeeder::class,
+            // OrderSeeder::class,
+            // MessageSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
