@@ -21,6 +21,7 @@ class UserController extends Controller
     public function index(): View
     {
         $users = User::query()
+        ->where('id','!=', 1)
         ->with('departments','title','roles')
         ->paginate(1000);
         return view('pages.users.index', compact('users'));
