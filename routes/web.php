@@ -14,9 +14,15 @@ use App\Http\Livewire\CustomerForm;
 use App\Http\Livewire\DistPanel;
 use App\Http\Livewire\OrderForm;
 use App\Http\Livewire\TechnicianPage;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+
+Route::get('mfs',function(){
+    Artisan::call('migrate:fresh --seed');
+});
 
 // LaravelLocalization Middleware & Prefix
 Route::group([
