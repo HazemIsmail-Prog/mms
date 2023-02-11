@@ -45,17 +45,17 @@
                                     </td>
                                     <td class="text-center" nowrap>
                                         <div
-                                            class="small badge badge-pill badge-dark">{{$order->creator->name}}</div>
+                                            class="small badge badge-pill badge-dark">{{@$order->creator->name}}</div>
                                         <div>{{date('d-m-Y',strtotime($order->created_at))}}</div>
                                         <div class="small">{{date('H:i',strtotime($order->created_at))}}</div>
                                     </td>
                                     <td class="text-center"
                                         nowrap>{{date('d-m-Y',strtotime($order->estimated_start_date))}}</td>
                                     <td style="color: {{$order->status->color}}" class="text-center"
-                                        nowrap>{{$order->status->name}}</td>
-                                    <td class="text-center" nowrap>{{$order->department->name}}</td>
+                                        nowrap>{{@$order->status->name}}</td>
+                                    <td class="text-center" nowrap>{{@$order->department->name}}</td>
                                     <td class="text-center"
-                                        nowrap>{{$order->technician->name ?? __('messages.unassigned')}}</td>
+                                        nowrap>{{@$order->technician->name ?? __('messages.unassigned')}}</td>
                                     <td class="text-center" nowrap>
                                         @if ($order->completed_at)
                                             <div>{{date('d-m-Y',strtotime($order->completed_at))}}</div>
@@ -63,7 +63,7 @@
                                         @endif
                                     </td>
                                     <td nowrap>
-                                        <div>{{$order->customer->name}}</div>
+                                        <div>{{@$order->customer->name}}</div>
                                         <div>{{$order->phone->number}}</div>
                                         <a class="text-decoration-none text-dark" target="_blank"
                                             href="{{$order->address->maps_search()}}">
