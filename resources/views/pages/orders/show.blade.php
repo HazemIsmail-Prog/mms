@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="card shadow">
                                     <div class="card-header">{{__('messages.order_progress')}}</div>
                                     <div class="card-body">
@@ -115,6 +115,10 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                @livewire('order-comments',['order_id'=>$order->id])
                             </div>
                             
                             {{-- <div class="col-md-4">

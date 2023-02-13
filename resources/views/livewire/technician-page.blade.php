@@ -1,47 +1,47 @@
 <div class="container-fluid">
-    <div class="card shadow">
-        <div class="card-header">{{__('messages.order_details')}}</div>
-        <div class="card-body">
-            @if ($order)
+    @if ($order)
+        <div class="card shadow">
+            <div class="card-header">{{ __('messages.order_details') }}</div>
+            <div class="card-body">
                 <table class="table table-striped table-borderless">
                     <tr>
-                        <th>{{__('messages.order_number')}}</th>
-                        <td>{{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}</td>
+                        <th>{{ __('messages.order_number') }}</th>
+                        <td>{{ str_pad($order->id, 8, '0', STR_PAD_LEFT) }}</td>
                     </tr>
                     <tr>
-                        <th>{{__('messages.customer_name')}}</th>
-                        <td>{{$order->customer->name}}</td>
+                        <th>{{ __('messages.customer_name') }}</th>
+                        <td>{{ $order->customer->name }}</td>
                     </tr>
                     <tr>
-                        <th>{{__('messages.phone')}}</th>
-                        <td>{{$order->phone->number}}</td>
+                        <th>{{ __('messages.phone') }}</th>
+                        <td>{{ $order->phone->number }}</td>
                     </tr>
                     <tr>
-                        <th>{{__('messages.address')}}</th>
+                        <th>{{ __('messages.address') }}</th>
                         <td>
-                            <span>{{$order->address->full_address()}}</span>
-                            <a class="text-dark btn btn-sm" target="_blank"
-                                href="{{$order->address->maps_search()}}">
+                            <span>{{ $order->address->full_address() }}</span>
+                            <a class="text-dark btn btn-sm" target="_blank" href="{{ $order->address->maps_search() }}">
                                 <svg style="width: 15px;height: 15px">
                                     <use
-                                        xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-location-pin')}}"></use>
+                                        xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-location-pin') }}">
+                                    </use>
                                 </svg>
                             </a>
                         </td>
                     </tr>
-                    @if($order->order_description)
+                    @if ($order->order_description)
                         <tr>
                             <th>@lang('messages.order_description')</th>
-                            <td>{{$order->order_description}}</td>
+                            <td>{{ $order->order_description }}</td>
                         </tr>
                     @endif
-                    @if($order->notes)
+                    @if ($order->notes)
                         <tr>
                             <th>@lang('messages.notes')</th>
-                            <td>{{$order->notes}}</td>
+                            <td>{{ $order->notes }}</td>
                         </tr>
                     @endif
-    
+
                     <tr>
                         <td colspan="2" class=" text-center">
                             @if ($order->status_id != 3)
@@ -52,33 +52,37 @@
                         </td>
                     </tr>
                 </table>
-    
-            @else
-                <div class="text-center">
-                    @lang('messages.no_orders')
-                </div>
-            @endif
+            </div>
         </div>
-    </div>
+
+        @livewire('order-comments', ['order_id' => $order->id])
+    @else
+        <div class="text-center">
+            @lang('messages.no_orders')
+        </div>
+
+    @endif
+
 </div>
 
 @push('scripts')
-    <script src="{{asset('js/app.js')}}"></script>
-    <script>            
-            window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
             .listen('OrderCreatedEvent', (e) => {
                 @this.refresh_data();
             });
-            
-            function confirmAccept() {
-                if (confirm("Are you sure to execute this action?")) {
-                    @this.accept_order();
-                }
-            }   
-            function confirmComplete() {
-                if (confirm("Are you sure to execute this action?")) {
-                    @this.complete_order();
-                }
-            }   
+
+        function confirmAccept() {
+            if (confirm("Are you sure to execute this action?")) {
+                @this.accept_order();
+            }
+        }
+
+        function confirmComplete() {
+            if (confirm("Are you sure to execute this action?")) {
+                @this.complete_order();
+            }
+        }
     </script>
 @endpush

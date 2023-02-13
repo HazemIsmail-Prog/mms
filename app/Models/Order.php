@@ -58,6 +58,11 @@ class Order extends Model
         return $this->hasMany(OrderStatus::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeFilterWhenRequest($query,$request)
     {
         return $query
