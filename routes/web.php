@@ -23,6 +23,9 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::get('mfs',function(){
     Artisan::call('migrate:fresh --seed');
 });
+Route::get('websockets',function(){
+    Artisan::call('websockets:serve');
+})->name('websockets');
 
 // LaravelLocalization Middleware & Prefix
 Route::group([
