@@ -186,6 +186,8 @@ return [
     'cancelled_at'                                  => 'تاريخ الالغاء',
     'areas'                                         => 'المناطق',
     'add_area'                                      => 'اضافة منطقة',
+    'roles_required'                                => 'الدور مطلوب',
+    'no_comments_found'                             => 'لا يوجد تعليقات',
 
 
 

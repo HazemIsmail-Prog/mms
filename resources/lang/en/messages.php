@@ -187,6 +187,7 @@ return [
     'areas'                                         => 'Areas',
     'add_area'                                      => 'Add Area',
     'roles_required'                                => 'Role Required',
+    'no_comments_found'                             => 'No Comments',
 
 
 
