@@ -189,6 +189,8 @@ return [
     'roles_required'                                => 'Role Required',
     'no_comments_found'                             => 'No Comments',
     'arrived'                                       => 'Arrived',
+    'all_areas'                                     => 'Area (All)',
+
 
 
 

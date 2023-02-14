@@ -189,6 +189,7 @@ return [
     'roles_required'                                => 'الدور مطلوب',
     'no_comments_found'                             => 'لا يوجد تعليقات',
     'arrived'                                       => 'وصول',
+    'all_areas'                                     => 'المنطقة (الكل)',
 
 
 
