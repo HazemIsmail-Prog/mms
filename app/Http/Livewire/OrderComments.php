@@ -24,7 +24,8 @@ class OrderComments extends Component
     {
         $this->order = Order::find($this->order_id);
         $this->comment = '';
-        $this->comments = $this->order->comments->load('user');    }
+        $this->comments = $this->order->comments->load('user');
+    }
 
     public function send()
     {

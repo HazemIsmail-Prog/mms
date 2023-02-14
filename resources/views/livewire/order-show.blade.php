@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -120,55 +117,19 @@
                             <div class="col-md-4">
                                 @livewire('order-comments',['order_id'=>$order->id])
                             </div>
-                            
-                            {{-- <div class="col-md-4">
-                                <div class="card shadow">
-                                    <div class="card-header">{{__('messages.order_comments')}}</div>
-                                    <div class="card-body">
-                                        <table class="table table-borderless table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th class="text-center">{{__('messages.user')}}</th>
-                                                <th>{{__('messages.comment')}}</th>
-                                                <th class="text-center">{{__('messages.date')}}</th>
-                                                <th class="text-center">{{__('messages.time')}}</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @forelse($order->actions->reverse() as $row)
-                                                <tr>
-                                                    <td class="text-center">{{$row->user->name}}</td>
-                                                    <td>{{$row->comment}}</td>
-                                                    <td nowrap
-                                                        class="text-center">{{date('d-m-Y',strtotime($row->created_at))}}</td>
-                                                    <td nowrap
-                                                        class="text-center">{{date('H:i',strtotime($row->created_at))}}</td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="4"
-                                                        class="text-center">{{__('messages.no_records_found')}}</td>
-                                                </tr>
-                                            @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
+    @push('scripts')
     <script src="{{asset('js/app.js')}}"></script>
     <script>
         window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
             .listen('OrderUpdatedPerOrderEvent', (e) => {
-            location.reload();
+            @this.render();
             });
     </script>
 @endpush

@@ -3,7 +3,6 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusesController;
@@ -11,8 +10,10 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\CustomerForm;
+use App\Http\Livewire\DashboardIndex;
 use App\Http\Livewire\DistPanel;
 use App\Http\Livewire\OrderForm;
+use App\Http\Livewire\OrderShow;
 use App\Http\Livewire\TechnicianPage;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ Route::group([
 
         // Group for All Auth Users Excluding Technicians & Formen
         Route::group(['middleware' => 'no_technicians'], function () {
-            Route::get('/', [HomeController::class, 'index'])->name('home');
+            Route::get('/', DashboardIndex::class)->name('home');
             Route::resource('/departments', DepartmentController::class);
             Route::resource('/areas', AreaController::class);
             Route::resource('/roles', RoleController::class);
@@ -56,7 +57,8 @@ Route::group([
             Route::get('/customers/form/{customer_id?}', CustomerForm::class)->name('customers.form');
             Route::resource('/customers', CustomerController::class)->only('index', 'destroy');;
             Route::get('/orders/{customer_id}/form/{order_id?}', OrderForm::class)->name('orders.form');
-            Route::resource('/orders', OrderController::class)->only('index', 'show', 'destroy');
+            Route::get('/orders/{order}',OrderShow::class)->name('orders.show');
+            Route::get('/orders', [OrderController::class,'index'])->name('orders.index');
             Route::get('/dis_panel/{id}', DistPanel::class)->name('dist_panel.index');
         });
 

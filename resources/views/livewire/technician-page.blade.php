@@ -75,11 +75,21 @@
 
                     <tr>
                         <td colspan="2" class=" text-center">
-                            @if ($order->status_id != 3)
-                                <button onclick="confirmAccept()" class="btn btn-warning">@lang('messages.accept')</button>
+                            @switch($order->status_id)
+                                @case(2)
+                                    <button onclick="confirmAccept()" class="btn btn-warning">@lang('messages.accept')</button>
+                                    @break
+                                @case(3)
+                                    <button onclick="confirmArrived()" class="btn btn-info">@lang('messages.arrived')</button> 
+                                    @break
+                                @case(7)
+                                    <button onclick="confirmComplete()" class="btn btn-success">@lang('messages.done')</button> 
+                                    @break                                    
+                            @endswitch
+                            {{-- @if ($order->status_id != 3)
                             @else
                                 <button onclick="confirmComplete()" class="btn btn-success">@lang('messages.done')</button>
-                            @endif
+                            @endif --}}
                         </td>
                     </tr>
                 </table>
@@ -97,7 +107,6 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
             .listen('OrderCreatedEvent', (e) => {
@@ -107,6 +116,12 @@
         function confirmAccept() {
             if (confirm("Are you sure to execute this action?")) {
                 @this.accept_order();
+            }
+        }
+
+        function confirmArrived() {
+            if (confirm("Are you sure to execute this action?")) {
+                @this.arrived_order();
             }
         }
 

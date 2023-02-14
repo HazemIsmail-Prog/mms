@@ -7,7 +7,6 @@ use App\Models\Area;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Status;
-use Illuminate\View\View;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,15 +31,5 @@ class OrderController extends Controller
 
         $orders = $orders->paginate(10);
         return view('pages.orders.index', compact('orders', 'areas', 'creators', 'statuses', 'technicians', 'departments'));
-    }
-
-    public function show(Order $order): View
-    {
-        return view('pages.orders.show', compact('order'));
-    }
-
-    public function destroy(Order $order)
-    {
-        //
     }
 }

@@ -21,7 +21,8 @@ class StatusSeeder extends Seeder
             array('id' => '3', 'name_ar' => 'تم استلام الطلب', 'name_en' => 'Received', 'color' => '#d6b300', 'created_at' => NULL, 'updated_at' => '2021-08-14 02:03:23', 'deleted_at' => NULL),
             array('id' => '4', 'name_ar' => 'منفذ', 'name_en' => 'Completed', 'color' => '#2eb85c', 'created_at' => NULL, 'updated_at' => NULL, 'deleted_at' => NULL),
             array('id' => '5', 'name_ar' => 'توقف مؤقت', 'name_en' => 'On Hold', 'color' => '#636f83', 'created_at' => NULL, 'updated_at' => '2021-08-14 02:06:40', 'deleted_at' => NULL),
-            array('id' => '6', 'name_ar' => 'ملغي', 'name_en' => 'Cancelled', 'color' => '#e55353', 'created_at' => NULL, 'updated_at' => NULL, 'deleted_at' => NULL)
+            array('id' => '6', 'name_ar' => 'ملغي', 'name_en' => 'Cancelled', 'color' => '#e55353', 'created_at' => NULL, 'updated_at' => NULL, 'deleted_at' => NULL),
+            array('id' => '7', 'name_ar' => 'وصول', 'name_en' => 'Arrived', 'color' => '#e356e6', 'created_at' => NULL, 'updated_at' => NULL, 'deleted_at' => NULL),
         );
         Status::insert($statuses);
     }

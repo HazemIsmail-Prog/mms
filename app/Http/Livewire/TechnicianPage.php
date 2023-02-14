@@ -25,7 +25,7 @@ class TechnicianPage extends Component
     {
         $this->order = Order::query()
             ->where('technician_id', auth()->id())
-            ->whereIn('status_id',[2,3])
+            ->whereIn('status_id',[2,3,7])
             ->orderBy('index')
             ->first();
     }
@@ -33,6 +33,11 @@ class TechnicianPage extends Component
     public function accept_order()
     {
         $this->order->update(['status_id' => 3]);
+    }
+
+    public function arrived_order()
+    {
+        $this->order->update(['status_id' => 7]);
     }
 
     public function complete_order()

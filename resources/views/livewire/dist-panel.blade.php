@@ -108,7 +108,6 @@
     <script src="{{asset('vendors/sortable/Sortable.js')}}"></script>
     <script src="{{asset('vendors/dragula/dragula.js')}}"></script>
     <link rel="stylesheet" href="{{asset('vendors/dragula/dragula.css')}}">    
-    <script src="{{asset('js/app.js')}}"></script>
     <script>
         $(document).ready(function () {
             if(screen.width<992){

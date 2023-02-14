@@ -1,7 +1,7 @@
 <div style=" border: 1px solid {{$order->status_color}}"
-    class="order{{$order->status_id == 3 ? '-non-dragable' : '' }}" 
+    class="order{{ in_array($order->status_id , [3,7]) ? '-non-dragable' : '' }}" 
     id="order{{$order->id}}"
-    draggable='{{$order->status_id == 3 ? 'false' : 'true' }}'
+    draggable='{{in_array($order->status_id , [3,7]) ? 'false' : 'true' }}'
     >
     <div class=" p-2 text-white" style="background: {{$order->status_color}}">
         <div class="d-flex justify-content-between">
