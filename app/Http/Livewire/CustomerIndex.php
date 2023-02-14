@@ -70,8 +70,7 @@ class CustomerIndex extends Component
             ->with(['phones', 'addresses'])
             ->withCount('orders')
             ->orderByDesc('id')
-            // ->get();
-            ->paginate(1);
+            ->paginate(10);
         return view('livewire.customer-index',compact('customers'))->layout('layouts.slot');
     }
 }
