@@ -23,10 +23,11 @@
                         </div>
                         <div class="form-group w-100">
                             <label for="area_id">{{ __('messages.area') }}</label>
-                            <select class="form-control" name="area_id" id="area_id">
-                                <option selected value="">---</option>
+                            <select class="form-control select2" multiple style="width: 100%" name="area_id[]" id="area_id">
+                                <option disabled value="">---</option>
                                 @foreach ($areas->sortBy->name as $area)
-                                    <option {{ request('area_id') == $area->id ? 'selected' : '' }}
+                                    <option 
+                                        {{ request('area_id') ? (in_array($area->id, request('area_id')) ? 'selected' : '') : '' }}
                                         value="{{ $area->id }}">{{ $area->name }}</option>
                                 @endforeach
                             </select>
@@ -49,11 +50,11 @@
 
                         <div class="form-group w-100">
                             <label for="creator_id">{{ __('messages.creator') }}</label>
-                            <select class="form-control" name="creator_id" id="creator_id">
-                                <option selected value="">---</option>
+                            <select class="form-control select2" multiple style="width: 100%" name="creator_id[]" id="creator_id">
+                                <option disabled value="">---</option>
                                 @foreach ($creators as $creator)
                                     <option
-                                        {{ request('creator_id') == $creator->id ? 'selected' : '' }}
+                                        {{ request('creator_id') ? (in_array($creator->id, request('creator_id')) ? 'selected' : '') : '' }}
                                         value="{{ $creator->id }}">{{ $creator->name }}</option>
                                 @endforeach
                             </select>
@@ -74,11 +75,11 @@
                         </div>
                         <div class="form-group w-100">
                             <label for="technician_id">{{ __('messages.technician') }}</label>
-                            <select class="form-control" name="technician_id" id="technician_id">
-                                <option selected value="">---</option>
+                            <select class="form-control select2" style="width: 100%" multiple name="technician_id[]" id="technician_id">
+                                <option disabled value="">---</option>
                                 @foreach ($technicians as $technician)
                                     <option
-                                        {{ request('technician_id') == $technician->id ? 'selected' : '' }}
+                                        {{ request('technician_id') ? (in_array($technician->id, request('technician_id')) ? 'selected' : '') : '' }}
                                         value="{{ $technician->id }}">{{ $technician->name }}
                                     </option>
                                 @endforeach
@@ -87,11 +88,11 @@
 
                         <div class="form-group w-100">
                             <label for="department_id">{{ __('messages.department') }}</label>
-                            <select class="form-control" name="department_id" id="department_id">
-                                <option selected value="">---</option>
+                            <select class="form-control select2" multiple style="width: 100%" name="department_id[]" id="department_id">
+                                <option disabled value="">---</option>
                                 @foreach ($departments as $department)
                                     <option
-                                        {{ request('department_id') == $department->id ? 'selected' : '' }}
+                                        {{ request('department_id') ? (in_array($department->id, request('department_id')) ? 'selected' : '') : '' }}
                                         value="{{ $department->id }}">{{ $department->name }}
                                     </option>
                                 @endforeach

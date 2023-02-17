@@ -15,7 +15,8 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $areas       = Area::whereHas('orders')->get();
+        $areas       = Area::all();
+        // $areas       = Area::whereHas('orders')->get();
         $creators    = User::whereHas('orders_creator')->get();
         $technicians = User::whereHas('orders_technician')->get();
         $departments = Department::whereHas('orders')->get();

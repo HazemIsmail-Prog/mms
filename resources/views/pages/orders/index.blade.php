@@ -116,6 +116,10 @@
             line-height: 23px !important;
         }
 
+        .select2-container--default .select2-search--inline .select2-search__field{
+            text-align: center;
+        }
+
         .select2-container--default .select2-selection--multiple {
             background-color: transparent;
             border: 1px solid #d8dbe0;
@@ -129,10 +133,12 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         $('.select2').select2({
             placeholder: "---",
-            tags: true,
+            tags: false,
             dropdownAutoWidth: true,
             // allowClear: true,
             tokenSeparators: ['/', ','],

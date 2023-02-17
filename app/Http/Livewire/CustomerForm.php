@@ -21,7 +21,19 @@ class CustomerForm extends Component
     public $areas;
     public $active = true;
 
+    protected $listeners = [
+        'selectedCompanyItem',
+    ];
 
+    public function hydrate()
+    {
+        $this->emit('select2');
+    }
+
+    public function selectedCompanyItem($index,$value)
+    {
+            $this->addresses[$index]['area_id'] = $value;
+    }
 
 
     public function render()
@@ -31,6 +43,7 @@ class CustomerForm extends Component
 
     public function mount($customer_id=null)
     {
+
         $this->customer = Customer::find($customer_id);
         $this->areas = Area::all();
 
@@ -63,6 +76,13 @@ class CustomerForm extends Component
             $this->phones = $this->customer->phones->toArray();
             $this->addresses = $this->customer->addresses->toArray();
         }
+
+    }
+
+    public function updated()
+    {
+        $this->dispatchBrowserEvent('render_select2');
+
     }
 
     public function rules()
@@ -117,6 +137,7 @@ class CustomerForm extends Component
                 'number' => null,
             ];
         }
+
     }
 
     public function delete_row($type, $index)
