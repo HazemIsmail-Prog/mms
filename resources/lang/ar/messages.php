@@ -190,6 +190,7 @@ return [
     'no_comments_found'                             => 'لا يوجد تعليقات',
     'arrived'                                       => 'وصول',
     'all_areas'                                     => 'المنطقة (الكل)',
+    'view_tech_orders'                              => 'عرض طلبات الفني',
 
 
 

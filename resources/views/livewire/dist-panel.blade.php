@@ -54,8 +54,13 @@
                             {{-- Technician Box --}}
                             <div class="card" style="min-width: 266px">
                                 <div class="card-header">
-                                    <div>{{$technician->name}}</div>
-                                    <div class=" small">@lang('messages.todays_completed') = {{$technician->todays_completed_orders_count}}</div>
+                                    <div class=" d-flex align-items-end justify-content-between m-0">
+                                        <div>
+                                            <div>{{$technician->name}}</div>
+                                            <div class=" small">@lang('messages.todays_completed') = {{$technician->todays_completed_orders_count}}</div>
+                                        </div>
+                                        <a href="{{ route('orders.index',['technician_id' => [$technician->id]]) }}" target="__blank" class=" btn btn-info btn-sm">{{ __('messages.view_tech_orders') }}</a>
+                                    </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div 

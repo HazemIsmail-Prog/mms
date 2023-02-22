@@ -190,6 +190,8 @@ return [
     'no_comments_found'                             => 'No Comments',
     'arrived'                                       => 'Arrived',
     'all_areas'                                     => 'Area (All)',
+    'view_tech_orders'                              => 'View Tech Orders',
+
 
 
 
