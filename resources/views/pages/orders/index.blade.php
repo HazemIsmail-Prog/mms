@@ -102,7 +102,7 @@
                             @endforelse
                             </tbody>
                         </table>
-                        {{$orders->links()}}
+                        {{$orders->withQueryString()->links()}}
                     </div>
                 </div>
             </div>
