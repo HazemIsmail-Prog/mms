@@ -123,3 +123,7 @@
         @endif
     </div>
 </div>
+
+@section('title')
+<title>@lang('messages.orders')</title>
+@endsection

@@ -304,3 +304,7 @@
         });
     </script>
 @endpush
+
+@section('title')
+<title>@lang('messages.customers')</title>
+@endsection
