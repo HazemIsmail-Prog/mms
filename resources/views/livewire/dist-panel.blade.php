@@ -54,7 +54,7 @@
                             {{-- Technician Box --}}
                             <div class="card" style="min-width: 266px">
                                 <div class="card-header">
-                                    <div class=" d-flex align-items-end justify-content-between m-0">
+                                    <div class=" d-flex align-items-center justify-content-between m-0">
                                         <div>
                                             <div>{{$technician->name}}</div>
                                             <div class=" small">@lang('messages.todays_completed') = {{$technician->todays_completed_orders_count}}</div>
