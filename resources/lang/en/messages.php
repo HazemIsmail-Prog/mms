@@ -191,6 +191,8 @@ return [
     'arrived'                                       => 'Arrived',
     'all_areas'                                     => 'Area (All)',
     'view_tech_orders'                              => 'View Tech Orders',
+    'no_customers_found'                            => 'No results found',
+
 
 
 

@@ -191,6 +191,7 @@ return [
     'arrived'                                       => 'وصول',
     'all_areas'                                     => 'المنطقة (الكل)',
     'view_tech_orders'                              => 'عرض طلبات الفني',
+    'no_customers_found'                            => 'لم يتم العثور على نتائج',
 
 
 
