@@ -36,8 +36,23 @@
                 <use xlink:href="{{asset('vendors/@coreui/icons/svg/free.svg#cil-featured-playlist')}}"></use>
             </svg>
         </a>
-        <button wire:click="change_technician({{ $order->id }}, 'cancel' , [])" class=" btn text-danger">
-            @lang('messages.cancel_order')
-        </button>
+        @if ($order->status_id != 5)
+            <form class="d-inline m-0" wire:submit.prevent="change_technician({{ $order->id }}, 'hold' , [])">
+                <button type="submit" class=" btn btn-sm text-dark"
+                    onclick="return confirm('{{ __('messages.hold_order_confirmation') }}')">
+                        {{ __('messages.on_hold') }}
+                </button>
+            </form>
+        @endif
+        <form class="d-inline m-0" wire:submit.prevent="change_technician({{ $order->id }}, 'cancel' , [])">
+            <button type="submit" class=" btn btn-sm text-danger"
+                onclick="return confirm('{{ __('messages.cancel_order_confirmation') }}')">
+                    <svg style="width: 15px;height: 15px">
+                        <use
+                            xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-trash') }}">
+                        </use>
+                    </svg>
+            </button>
+        </form>
     </div>
 </div>

@@ -194,6 +194,8 @@ return [
     'no_customers_found'                            => 'No results found',
     'edit_area'                                     => 'Edit Area',
     'edit_role'                                     => 'Edit Role',
+    'hold_order_confirmation'                       => 'Change Order Status to On-Hold. Are you sure?',
+    'cancel_order_confirmation'                     => 'Change Order Status to Canceled. Are you sure?',
 
 
 

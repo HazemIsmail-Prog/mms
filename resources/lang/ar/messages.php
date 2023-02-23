@@ -194,6 +194,8 @@ return [
     'no_customers_found'                            => 'لم يتم العثور على نتائج',
     'edit_area'                                     => 'تعديل منطقة',
     'edit_role'                                     => 'تعديل دور',
+    'hold_order_confirmation'                       => 'سيتم وضع الطلب في حالة التوقف المؤقت. هل انت متأكد؟',
+    'cancel_order_confirmation'                     => 'سيتم الغاء الطلب. هل انت متأكد؟',
 
 
 
