@@ -133,3 +133,7 @@
             });
     </script>
 @endpush
+
+@section('title')
+<title>@lang('messages.order_details')</title>
+@endsection

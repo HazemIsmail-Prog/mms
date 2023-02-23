@@ -17,3 +17,7 @@
         </div>
     </div>
 </div>
+
+@section('title')
+<title>@lang('messages.dashboard')</title>
+@endsection

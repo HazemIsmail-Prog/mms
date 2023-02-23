@@ -155,3 +155,7 @@
         </div>
     </div>
 </div>
+
+@section('title')
+<title>@lang('messages.customers')</title>
+@endsection
