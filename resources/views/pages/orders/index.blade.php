@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>@lang('messages.orders')</title>
+@endsection
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">

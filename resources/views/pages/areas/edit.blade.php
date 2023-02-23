@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>@lang('messages.edit_area')</title>
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -8,7 +12,7 @@
                     @csrf
                     @method('put')
                     <div class="card">
-                        <div class="card-header">@lang('messages.add_area')</div>
+                        <div class="card-header">@lang('messages.edit_area')</div>
                         <div class="card-body">
                             @if (Session::has('success'))
                                 <div class="alert alert-success alert-dismissible fade show" area="alert">

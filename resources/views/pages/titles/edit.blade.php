@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>@lang('messages.edit_title')</title>
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
