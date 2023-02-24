@@ -17,7 +17,7 @@ return [
 
     'You are logged in!'                            => 'تم تسجيل الدخول بنجاح',
     'Sign In to your account'                       => 'تسجيل الدخول لحسابك',
-    'dashboard'                                     => 'لوحة التحكم',
+    'dashboard'                                     => 'لوحة المعلومات',
     'new'                                           => 'جديد',
     'settings'                                      => 'الاعدادات',
     'users'                                         => 'المستخدمين',
@@ -196,6 +196,8 @@ return [
     'edit_role'                                     => 'تعديل دور',
     'hold_order_confirmation'                       => 'سيتم وضع الطلب في حالة التوقف المؤقت. هل انت متأكد؟',
     'cancel_order_confirmation'                     => 'سيتم الغاء الطلب. هل انت متأكد؟',
+    'orders_statistics'                             => 'احصائية الطلبات',
+    'orders_count'                                  => 'عدد الطلبات',
 
 
 

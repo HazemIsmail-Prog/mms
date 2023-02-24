@@ -11,7 +11,11 @@
                                     aria-hidden="true">×</span></button>
                         </div>
                     @endif
-                    {{ __('messages.You are logged in!') }}
+                    <div class="row">
+                        <div class="col-md-4">
+                            @livewire('dashboard.orders-status-counter')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -58,6 +58,11 @@ class Order extends Model
         return $this->hasMany(OrderStatus::class);
     }
 
+    public function latest_status()
+    {
+        return $this->hasOne(OrderStatus::class)->orderByDesc('id');
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
