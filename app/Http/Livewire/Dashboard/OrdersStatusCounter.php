@@ -3,37 +3,41 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\Status;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class OrdersStatusCounter extends Component
 {
-    public $dateFilter;
+    public $statuses;
     public $counters;
+    public $month;
+    public $year;
 
     public function mount()
     {
-        $this->dateFilter = today()->format('Y-m-d');
+        $this->statuses = Status::all();
+        $this->month = now()->format('m');
+        $this->year = now()->format('Y');
         $this->getCounters();
     }
     public function getCounters()
     {
-        $orders = Order::query()
-            ->select('id')
-            ->with('latest_status')
+        $this->counters = OrderStatus::query()
+            ->whereMonth('created_at', $this->month)
+            ->whereYear('created_at', $this->year)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count, status_id')
+            ->whereIn('id', function ($query) {
+                $query->select(DB::raw('MAX(id)'))
+                ->from('order_statuses')
+                ->groupBy('order_id');
+            })
+            ->groupBy(DB::raw('DATE(created_at)'), 'status_id')
+            ->orderByDesc('date')
             ->get();
-
-
-        $this->counters = $orders
-            ->map(
-                fn ($data) => collect($data)
-                    ->put('date', $data->latest_status->created_at->format('Y-m-d'))
-                    ->put('status_name', $data->latest_status->status->name)
-            );
-
-        $this->counters = $this->counters->where('date', $this->dateFilter)->sortBy('status_name')->groupBy('status_name');
     }
-    public function updatedDateFilter()
+    public function updated()
     {
         $this->getCounters();
     }

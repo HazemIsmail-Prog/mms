@@ -196,8 +196,16 @@ return [
     'edit_role'                                     => 'تعديل دور',
     'hold_order_confirmation'                       => 'سيتم وضع الطلب في حالة التوقف المؤقت. هل انت متأكد؟',
     'cancel_order_confirmation'                     => 'سيتم الغاء الطلب. هل انت متأكد؟',
-    'orders_statistics'                             => 'احصائية الطلبات',
-    'orders_count'                                  => 'عدد الطلبات',
+    'monthly_orders_statistics'                     => 'الاحصائية الشهرية للطلبات',
+    'month'                                         => 'الشهر',
+    'year'                                          => 'السنة',
+    'Sunday'                                        => 'الأحد',
+    'Monday'                                        => 'الاثنين',
+    'Tuesday'                                       => 'الثلاثاء',
+    'Wednesday'                                     => 'الأربعاء',
+    'Thursday'                                      => 'الخميس',
+    'Friday'                                        => 'الجمعة',
+    'Saturday'                                      => 'السبت',
 
 
 

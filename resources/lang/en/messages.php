@@ -196,6 +196,16 @@ return [
     'edit_role'                                     => 'Edit Role',
     'hold_order_confirmation'                       => 'Change Order Status to On-Hold. Are you sure?',
     'cancel_order_confirmation'                     => 'Change Order Status to Canceled. Are you sure?',
+    'monthly_orders_statistics'                     => 'Orders Monthly Statistics',
+    'month'                                         => 'Month',
+    'year'                                          => 'Year',
+    'Sunday'                                        => 'Sunday',
+    'Monday'                                        => 'Monday',
+    'Tuesday'                                       => 'Tuesday',
+    'Wednesday'                                     => 'Wednesday',
+    'Thursday'                                      => 'Thursday',
+    'Friday'                                        => 'Friday',
+    'Saturday'                                      => 'Saturday',
 
 
 
