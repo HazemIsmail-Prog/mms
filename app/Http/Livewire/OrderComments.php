@@ -34,6 +34,7 @@ class OrderComments extends Component
             'comment' => $this->comment,
             'user_id' => auth()->id(),
         ]);
+        $this->refresh();
         event(new OrderUpdatedPerOrderEvent($this->order_id));
 
     }
