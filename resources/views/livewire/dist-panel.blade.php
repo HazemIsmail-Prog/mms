@@ -12,7 +12,7 @@
                         @include('components.spinner')
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" wire:poll.visible="refresh_data">
                     {{-- Show Today's Orders Only Filter --}}
                     <div class="form-check mb-2">
                         <input wire:model="todays_orders_only" class="form-check-input" type="checkbox" name="active"
@@ -120,10 +120,10 @@
             }else{
                 loadDataFromDragulaJs();
             }
-            window.Echo.channel('OrderCreatedChannel{{ $department_id }}')
-                .listen('OrderCreatedEvent', (e) => {
-                @this.refresh_data();
-                });
+            // window.Echo.channel('OrderCreatedChannel{{ $department_id }}')
+            //     .listen('OrderCreatedEvent', (e) => {
+            //     @this.refresh_data();
+            //     });
             function loadDataFromDragulaJs() {
                 const boxNodes = document.querySelectorAll('.box');
                 const draggableBoxes = [].slice.call(boxNodes);
