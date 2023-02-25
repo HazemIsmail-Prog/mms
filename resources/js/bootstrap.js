@@ -53,7 +53,6 @@ window.Pusher = require('pusher-js');
 //     wsPort: 6001,
 //     // wssPort: 6001,
 //     disableStats: true,
-//     encrypted: true,
 // });
 
 
@@ -64,6 +63,7 @@ window.Echo = new Echo({
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
+    encrypted: false,
 });
 
 
