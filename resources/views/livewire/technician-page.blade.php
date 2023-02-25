@@ -1,4 +1,4 @@
-<div class="container-fluid" wire:poll.visible>
+<div class="container-fluid" wire:poll.visible="refresh_data">
     @if ($order)
         <div class="card shadow">
             <div class="card-header">{{ __('messages.order_details') }}</div>
