@@ -18,7 +18,7 @@
                         </div>
                     @endif
 
-                    <div class="table-responsive shadow">
+                    <div class="table-responsive">
 
                         <table class="table table-hover table-outline mb-0">
                             <thead class="thead-light">

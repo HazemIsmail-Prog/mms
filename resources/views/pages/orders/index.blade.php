@@ -24,7 +24,7 @@
                     
                     @include('pages.orders.searching_form')
 
-                    <div class="table-responsive shadow">
+                    <div class="table-responsive">
 
                         <table class="table table-hover table-outline mb-0">
                             <thead class="thead-light">
@@ -105,8 +105,14 @@
                                 </tr>
                             @endforelse
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+                                        {{$orders->withQueryString()->links()}}
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
-                        {{$orders->withQueryString()->links()}}
                     </div>
                 </div>
             </div>
