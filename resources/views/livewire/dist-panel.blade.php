@@ -121,7 +121,7 @@
                 loadDataFromDragulaJs();
             }
             window.Echo.channel('OrderCreatedChannel{{ $department_id }}')
-                .listen('.OrderCreatedEvent', (e) => {
+                .listen('.App\\Events\\OrderCreatedEvent', (e) => {
                 @this.refresh_data();
                 });
             function loadDataFromDragulaJs() {
