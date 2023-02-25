@@ -31,12 +31,12 @@
                 </div>
             </div>
             <div class=" table-responsive">
-                <table class=" table table-striped border table-bordered">
+                <table class=" table border table-bordered">
                     <thead>
                         <tr>
-                            <th class=" text-center w-50 align-middle">{{ __('messages.date') }}</th>
+                            <th class=" text-center align-middle">{{ __('messages.date') }}</th>
                             @foreach ($statuses as $status)
-                                <th class=" text-center align-middle">{{ $status->name }}</th>
+                            <th class=" text-center align-middle">{{ $status->name }}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -58,6 +58,14 @@
                             </tr>
                         @endforelse
                     </tbody>
+                    <tfoot>
+                        <tr class=" bg-light">
+                            <th class=" text-center align-middle">{{ __('messages.total') }}</th>
+                            @foreach ($statuses as $status)
+                                <th class=" text-center align-middle">{{ $counters->where('status_id',$status->id)->sum('count') }}</th>
+                            @endforeach
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 

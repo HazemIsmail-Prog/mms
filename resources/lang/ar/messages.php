@@ -206,6 +206,7 @@ return [
     'Thursday'                                      => 'الخميس',
     'Friday'                                        => 'الجمعة',
     'Saturday'                                      => 'السبت',
+    'total'                                         => 'الاجمالي',
 
 
 

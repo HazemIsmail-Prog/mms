@@ -206,6 +206,8 @@ return [
     'Thursday'                                      => 'Thursday',
     'Friday'                                        => 'Friday',
     'Saturday'                                      => 'Saturday',
+    'total'                                         => 'Total',
+
 
 
 

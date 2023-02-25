@@ -118,9 +118,9 @@
                             [
                                 'permission_name'   => 'reports_menu',
                                 'type'              => 'nav_menu_item',
-                                'route'             => '',
+                                'route'             => route('reports.monthly_orders_statistics'),
                                 'icon'              => '',
-                                'display_name'      => __('messages.report1'),
+                                'display_name'      => __('messages.monthly_orders_statistics'),
                             ],
                             [
                                 'permission_name'   => 'reports_menu',

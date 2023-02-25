@@ -25,6 +25,7 @@ class OrdersStatusCounter extends Component
     public function getCounters()
     {
         $this->counters = OrderStatus::query()
+        ->withOut(['status', 'creator', 'technician'])
             ->whereMonth('created_at', $this->month)
             ->whereYear('created_at', $this->year)
             ->selectRaw('DATE(created_at) as date, COUNT(*) as count, status_id')
@@ -43,6 +44,6 @@ class OrdersStatusCounter extends Component
     }
     public function render()
     {
-        return view('livewire.dashboard.orders-status-counter');
+        return view('livewire.dashboard.orders-status-counter')->layout('layouts.slot');
     }
 }
