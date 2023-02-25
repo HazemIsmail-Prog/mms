@@ -122,6 +122,13 @@
                                 'icon'              => '',
                                 'display_name'      => __('messages.monthly_orders_statistics'),
                             ],
+                            [
+                                'permission_name'   => 'reports_menu',
+                                'type'              => 'nav_menu_item',
+                                'route'             => route('reports.department_technician_statistics'),
+                                'icon'              => '',
+                                'display_name'      => __('messages.department_technician_statistics'),
+                            ],
                         ],
                     ],
                 ],

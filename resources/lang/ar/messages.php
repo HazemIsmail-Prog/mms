@@ -207,6 +207,10 @@ return [
     'Friday'                                        => 'الجمعة',
     'Saturday'                                      => 'السبت',
     'total'                                         => 'الاجمالي',
+    'department_technician_statistics'              => 'احصائية تنفيذ الاقسام والفنيين',
+    'completed'                                     => 'منفذ',
+
+
 
 
 

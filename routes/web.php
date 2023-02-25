@@ -10,6 +10,7 @@ use App\Http\Controllers\TitleController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\CustomerForm;
 use App\Http\Livewire\CustomerIndex;
+use App\Http\Livewire\Dashboard\DepartmentTechnicianCounter;
 use App\Http\Livewire\Dashboard\OrdersStatusCounter;
 use App\Http\Livewire\DashboardIndex;
 use App\Http\Livewire\DistPanel;
@@ -70,6 +71,7 @@ Route::group([
 
             //Reports
             Route::get('/reports/monthly_orders_statistics', OrdersStatusCounter::class)->name('reports.monthly_orders_statistics'); //livewire
+            Route::get('/reports/department_technician_statistics', DepartmentTechnicianCounter::class)->name('reports.department_technician_statistics'); //livewire
 
         });
 

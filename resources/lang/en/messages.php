@@ -207,6 +207,8 @@ return [
     'Friday'                                        => 'Friday',
     'Saturday'                                      => 'Saturday',
     'total'                                         => 'Total',
+    'department_technician_statistics'              => 'Department & Tech Compeletion Statistics',
+    'completed'                                     => 'Completed',
 
 
 
