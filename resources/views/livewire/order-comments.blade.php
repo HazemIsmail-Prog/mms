@@ -29,10 +29,29 @@
 
 @push('scripts')
     <script>
-        window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
-            .listen('OrderUpdatedPerOrderEvent', (e) => {
+        // Pusher.logToConsole = true;
+        var pusher = new Pusher('eb6e9c0ae00849725f96', {
+            cluster: 'mt1'
+        });
+        var channel = pusher.subscribe("OrderUpdatedPerOrderChannel{{ $order->id }}");
+        var callback = (eventName, data) => {
                 @this.refresh();
-            // location.reload();
-            });
+
+        };
+        channel.bind_global(callback);
+
+
+
+
+
+
+
+
+
+        // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+        //     .listen('OrderUpdatedPerOrderEvent', (e) => {
+        //         @this.refresh();
+        //         // location.reload();
+        //     });
     </script>
 @endpush

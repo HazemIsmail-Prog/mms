@@ -104,10 +104,18 @@
 
 @push('scripts')
     <script>
-        window.Echo.channel('MessageSentToEventChannel{{ auth()->id() }}')
-            .listen('MessageSentToEvent', (e) => {
-                @this.referehData();
+
+
+            // Pusher.logToConsole = true;
+            var pusher = new Pusher('eb6e9c0ae00849725f96', {
+                cluster: 'mt1'
             });
+            var channel = pusher.subscribe("MessageSentToEventChannel{{ auth()->id() }}");
+            var callback = (eventName, data) => {
+                @this.referehData();
+
+            };
+            channel.bind_global(callback);
 
         window.addEventListener('scrollToBottom', event => {
             scrollToBottom(event.detail.user_id);

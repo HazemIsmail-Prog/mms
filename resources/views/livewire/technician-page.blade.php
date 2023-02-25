@@ -108,10 +108,23 @@
 
 @push('scripts')
     <script>
-        window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
-            .listen('OrderCreatedEvent', (e) => {
-                @this.refresh_data();
-            });
+
+                        // Pusher.logToConsole = true;
+        var pusher = new Pusher('eb6e9c0ae00849725f96', {
+            cluster: 'mt1'
+        });
+        var channel = pusher.subscribe("OrderCreatedChannel{{ auth()->user()->departments->first()->id }}");
+        var callback = (eventName, data) => {
+            @this.render();
+
+        };
+        channel.bind_global(callback);
+
+
+        // window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
+        //     .listen('OrderCreatedEvent', (e) => {
+        //         @this.refresh_data();
+        //     });
 
         function confirmAccept() {
             if (confirm("Are you sure to execute this action?")) {

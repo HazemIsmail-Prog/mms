@@ -127,10 +127,23 @@
     @push('scripts')
     <script src="{{asset('js/app.js')}}"></script>
     <script>
-        window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
-            .listen('OrderUpdatedPerOrderEvent', (e) => {
+
+                // Pusher.logToConsole = true;
+        var pusher = new Pusher('eb6e9c0ae00849725f96', {
+            cluster: 'mt1'
+        });
+        var channel = pusher.subscribe("OrderUpdatedPerOrderChannel{{ $order->id }}");
+        var callback = (eventName, data) => {
             @this.render();
-            });
+
+        };
+        channel.bind_global(callback);
+
+
+        // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+        //     .listen('OrderUpdatedPerOrderEvent', (e) => {
+        //     @this.render();
+        //     });
     </script>
 @endpush
 
