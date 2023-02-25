@@ -2,7 +2,6 @@
     <div class=" card">
         <div class="card-header">{{ __('messages.monthly_orders_statistics') }}</div>
         <div class="card-body">
-
             <div class="d-flex">
                 <div class=" form-group w-100">
                     <label for="month">{{ __('messages.month') }}</label>
@@ -36,7 +35,7 @@
                         <tr>
                             <th class=" text-center align-middle">{{ __('messages.date') }}</th>
                             @foreach ($statuses as $status)
-                            <th class=" text-center align-middle">{{ $status->name }}</th>
+                                <th class=" text-center align-middle">{{ $status->name }}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -44,7 +43,7 @@
                         @forelse ($counters->groupBy('date') as $row)
                             <tr>
                                 <td nowrap class=" text-center">
-                                    <div>{{ __("messages.".date('l', strtotime($row[0]->date))) }}</div>
+                                    <div>{{ __('messages.' . date('l', strtotime($row[0]->date))) }}</div>
                                     <div>{{ date('d-m-Y', strtotime($row[0]->date)) }}</div>
                                 </td>
                                 @foreach ($statuses as $status)
@@ -62,50 +61,19 @@
                         <tr class=" bg-light">
                             <th class=" text-center align-middle">{{ __('messages.total') }}</th>
                             @foreach ($statuses as $status)
-                                <th class=" text-center align-middle">{{ $counters->where('status_id',$status->id)->sum('count') }}</th>
+                                <th class=" text-center align-middle">
+                                    {{ $counters->where('status_id', $status->id)->sum('count') }}</th>
                             @endforeach
                         </tr>
                     </tfoot>
                 </table>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {{-- <table class=" table table-striped border">
-                <thead>
-                    <tr>
-                        <th class=" text-center w-50">{{ __('messages.status') }}</th>
-                        <th class=" text-center w-50">{{ __('messages.orders_count') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($counters as $key=>$row)
-                    <tr>
-                        <td class=" text-center">{{ $key }}</td>
-                        <td class=" text-center">{{ $row->count() }}</td>
-                    </tr>
-                        
-                    @empty
-                        <tr>
-                            <td colspan="2" class=" text-center">{{ __('messages.no_orders') }}</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table> --}}
         </div>
     </div>
 </div>
+
+@if (Route::is('reports.monthly_orders_statistics'))
+    @section('title')
+        <title>@lang('messages.monthly_orders_statistics')</title>
+    @endsection
+@endif
