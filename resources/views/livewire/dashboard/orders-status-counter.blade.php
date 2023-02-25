@@ -39,7 +39,7 @@
                             @endforeach
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody wire:poll.60000ms="getCounters">
                         @forelse ($counters->groupBy('date') as $row)
                             <tr>
                                 <td nowrap class=" text-center">
