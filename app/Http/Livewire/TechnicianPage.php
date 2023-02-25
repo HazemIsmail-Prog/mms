@@ -33,11 +33,15 @@ class TechnicianPage extends Component
     public function accept_order()
     {
         $this->order->update(['status_id' => 3]);
+        $this->refresh_data();
+
     }
 
     public function arrived_order()
     {
         $this->order->update(['status_id' => 7]);
+        $this->refresh_data();
+
     }
 
     public function complete_order()
@@ -47,5 +51,7 @@ class TechnicianPage extends Component
             'completed_at' => now(),
             'index' => null,
         ]);
+
+        $this->refresh_data();
     }
 }
