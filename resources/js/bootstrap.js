@@ -49,9 +49,9 @@ window.Echo = new Echo({
     key: 'local',
     wsHost: window.location.hostname,
     wsPort: 6001,
-    forceTLS: true,
+    forceTLS: false,
     disableStats: true,
-    encrypted: false,
+    encrypted: true,
 });
 
 
