@@ -32,28 +32,30 @@
             <div class=" table-responsive">
                 <table class=" table border table-bordered">
                     <thead>
-                        <tr>
+                        <tr class=" bg-light">
                             <th class=" text-center align-middle">{{ __('messages.date') }}</th>
                             @foreach ($statuses as $status)
                                 <th class=" text-center align-middle">{{ $status->name }}</th>
                             @endforeach
+                            <th class=" text-center align-middle">{{ __('messages.total') }}</th>
                         </tr>
                     </thead>
                     <tbody wire:poll.60000ms="getCounters">
                         @forelse ($counters->groupBy('date') as $row)
                             <tr>
-                                <td nowrap class=" text-center">
+                                <th nowrap class=" text-center bg-light">
                                     <div>{{ __('messages.' . date('l', strtotime($row[0]->date))) }}</div>
                                     <div>{{ date('d-m-Y', strtotime($row[0]->date)) }}</div>
-                                </td>
+                                </th>
                                 @foreach ($statuses as $status)
                                     <td class=" text-center">
                                         {{ $row->where('status_id', $status->id)->pluck('count')->first() }}</td>
                                 @endforeach
+                                <th class=" text-center bg-light">{{ $row->sum('count') }}</th>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class=" text-center">{{ __('messages.no_orders') }}</td>
+                                <td colspan="9" class=" text-center">{{ __('messages.no_orders') }}</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -64,6 +66,8 @@
                                 <th class=" text-center align-middle">
                                     {{ $counters->where('status_id', $status->id)->sum('count') }}</th>
                             @endforeach
+                            <th class=" text-center align-middle">
+                                {{ $counters->sum('count') }}</th>
                         </tr>
                     </tfoot>
                 </table>
