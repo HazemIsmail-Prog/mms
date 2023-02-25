@@ -23,9 +23,10 @@ class OrderComments extends Component
     public function refresh()
     {
         $this->order = Order::find($this->order_id);
+        $this->comment = '';
         $this->comments = $this->order->comments->load('user');
     }
-    
+
     public function send()
     {
         $this->validate(['comment' => 'required']);
@@ -33,7 +34,6 @@ class OrderComments extends Component
             'comment' => $this->comment,
             'user_id' => auth()->id(),
         ]);
-        $this->comment = '';
         $this->refresh();
         event(new OrderUpdatedPerOrderEvent($this->order_id));
 
