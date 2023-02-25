@@ -5,7 +5,7 @@
                     <div class="card-header">@lang('messages.view_order')</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4" wire:poll.visible="render">
                                 <div class="card shadow">
                                     <div class="card-header">{{__('messages.order_details')}}</div>
                                     <div class="card-body">
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" wire:poll.visible="render">
                                 <div class="card shadow">
                                     <div class="card-header">{{__('messages.order_progress')}}</div>
                                     <div class="card-body">
@@ -125,12 +125,11 @@
     </div>
 
     @push('scripts')
-    <script src="{{asset('js/app.js')}}"></script>
     <script>
-        window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
-            .listen('OrderUpdatedPerOrderEvent', (e) => {
-            @this.render();
-            });
+        // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+        //     .listen('OrderUpdatedPerOrderEvent', (e) => {
+        //     @this.render();
+        //     });
     </script>
 @endpush
 

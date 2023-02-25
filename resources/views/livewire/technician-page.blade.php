@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" wire:poll.visible="refresh_data">
     @if ($order)
         <div class="card shadow">
             <div class="card-header">{{ __('messages.order_details') }}</div>
@@ -108,10 +108,10 @@
 
 @push('scripts')
     <script>
-        window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
-            .listen('OrderCreatedEvent', (e) => {
-                @this.refresh_data();
-            });
+        // window.Echo.channel('OrderCreatedChannel{{ auth()->user()->departments->first()->id }}')
+        //     .listen('OrderCreatedEvent', (e) => {
+        //         @this.refresh_data();
+        //     });
 
         function confirmAccept() {
             if (confirm("Are you sure to execute this action?")) {

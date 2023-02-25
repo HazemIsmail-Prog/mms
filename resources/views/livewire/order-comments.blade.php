@@ -2,7 +2,7 @@
     <div class="card-header">{{ __('messages.order_comments') }}</div>
     <div class="card-body">
         <table class="table table-borderless table-striped">
-            <tbody>
+            <tbody wire:poll.visible="refresh">
                 @forelse($comments as $row)
                     <tr>
                         <td class="text-center">{{ $row->comment }}</td>
@@ -29,10 +29,10 @@
 
 @push('scripts')
     <script>
-        window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
-            .listen('OrderUpdatedPerOrderEvent', (e) => {
-                @this.refresh();
-            // location.reload();
-            });
+        // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+        //     .listen('OrderUpdatedPerOrderEvent', (e) => {
+        //         @this.refresh();
+        //     // location.reload();
+        //     });
     </script>
 @endpush
