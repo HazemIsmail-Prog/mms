@@ -38,13 +38,6 @@
         {{-- </a> --}}
         {{-- </li> --}}
 
-        <a class="btn btn-ghost-dark" href="{{ route('websockets') }}">
-            <svg style="width: 15px;height: 15px">
-                <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-reload') }}">
-                </use>
-            </svg>
-        </a>
-
 
         @livewire('chatting-index')
 
