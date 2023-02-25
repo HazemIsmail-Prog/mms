@@ -10,6 +10,11 @@ class OrderShow extends Component
     public $order;
     public function mount(Order $order)
     {
+        $this->refresh($order);
+    }
+
+    public function refresh($order)
+    {
         $this->order = $order;
     }
 
