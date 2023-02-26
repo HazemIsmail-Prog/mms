@@ -30,23 +30,14 @@
 @push('scripts')
     <script>
         // Pusher.logToConsole = true;
-        var pusher = new Pusher('eb6e9c0ae00849725f96', {
-            cluster: 'mt1'
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
         });
         var channel = pusher.subscribe("OrderUpdatedPerOrderChannel{{ $order->id }}");
         var callback = (eventName, data) => {
-                @this.refresh();
-
+            @this.refresh();
         };
         channel.bind_global(callback);
-
-
-
-
-
-
-
-
 
         // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
         //     .listen('OrderUpdatedPerOrderEvent', (e) => {

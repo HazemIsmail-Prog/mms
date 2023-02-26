@@ -7,73 +7,74 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card shadow">
-                                    <div class="card-header">{{__('messages.order_details')}}</div>
+                                    <div class="card-header">{{ __('messages.order_details') }}</div>
                                     <div class="card-body">
                                         <table class="table table-striped table-borderless">
                                             <tr>
-                                                <th>{{__('messages.order_number')}}</th>
-                                                <td>{{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}</td>
+                                                <th>{{ __('messages.order_number') }}</th>
+                                                <td>{{ str_pad($order->id, 8, '0', STR_PAD_LEFT) }}</td>
                                             </tr>
                                             <tr>
-                                                <th>{{__('messages.customer_name')}}</th>
-                                                <td>{{$order->customer->name}}</td>
+                                                <th>{{ __('messages.customer_name') }}</th>
+                                                <td>{{ $order->customer->name }}</td>
                                             </tr>
                                             <tr>
-                                                <th>{{__('messages.phone')}}</th>
-                                                <td>{{$order->phone->number}}</td>
+                                                <th>{{ __('messages.phone') }}</th>
+                                                <td>{{ $order->phone->number }}</td>
                                             </tr>
                                             <tr>
-                                                <th>{{__('messages.address')}}</th>
-                                                <td>{{$order->address->full_address()}}</td>
+                                                <th>{{ __('messages.address') }}</th>
+                                                <td>{{ $order->address->full_address() }}</td>
                                             </tr>
                                             <tr>
                                                 <th>@lang('messages.service_type')</th>
-                                                <td>{{$order->department->name}}</td>
+                                                <td>{{ $order->department->name }}</td>
                                             </tr>
                                             <tr>
                                                 <th>@lang('messages.estimated_start_date')</th>
-                                                <td>{{date('d-m-Y',strtotime($order->estimated_start_date))}}</td>
+                                                <td>{{ date('d-m-Y', strtotime($order->estimated_start_date)) }}</td>
                                             </tr>
                                             <tr>
                                                 <th>@lang('messages.status')</th>
-                                                <td style="color: {{$order->status->color}}">{{$order->status->name}}</td>
+                                                <td style="color: {{ $order->status->color }}">
+                                                    {{ $order->status->name }}</td>
                                             </tr>
-                                            @if($order->completed_at)
+                                            @if ($order->completed_at)
                                                 <tr>
                                                     <th>@lang('messages.completed_date')</th>
                                                     <td>
-                                                        <div>{{date('d-m-Y',strtotime($order->completed_at))}}</div>
-                                                        <div>{{date('H:i',strtotime($order->completed_at))}}</div>
+                                                        <div>{{ date('d-m-Y', strtotime($order->completed_at)) }}</div>
+                                                        <div>{{ date('H:i', strtotime($order->completed_at)) }}</div>
                                                     </td>
                                                 </tr>
                                             @endif
 
                                             <tr>
                                                 <th>@lang('messages.technician')</th>
-                                                <td>{{$order->technician->name ?? __('messages.unassigned') }}</td>
+                                                <td>{{ $order->technician->name ?? __('messages.unassigned') }}</td>
                                             </tr>
-                                            @if($order->order_description)
+                                            @if ($order->order_description)
                                                 <tr>
                                                     <th>@lang('messages.order_description')</th>
-                                                    <td>{{$order->order_description}}</td>
+                                                    <td>{{ $order->order_description }}</td>
                                                 </tr>
                                             @endif
-                                            @if($order->notes)
+                                            @if ($order->notes)
                                                 <tr>
                                                     <th>@lang('messages.notes')</th>
-                                                    <td>{{$order->notes}}</td>
+                                                    <td>{{ $order->notes }}</td>
                                                 </tr>
                                             @endif
                                             <tr>
                                                 <th>@lang('messages.created_at')</th>
                                                 <td>
-                                                    <div>{{date('d-m-Y',strtotime($order->created_at))}}</div>
-                                                    <div>{{date('H:i',strtotime($order->created_at))}}</div>
+                                                    <div>{{ date('d-m-Y', strtotime($order->created_at)) }}</div>
+                                                    <div>{{ date('H:i', strtotime($order->created_at)) }}</div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>@lang('messages.creator')</th>
-                                                <td>{{$order->creator->name}}</td>
+                                                <td>{{ $order->creator->name }}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -81,33 +82,36 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card shadow">
-                                    <div class="card-header">{{__('messages.order_progress')}}</div>
+                                    <div class="card-header">{{ __('messages.order_progress') }}</div>
                                     <div class="card-body">
                                         <table class="table table-borderless table-striped">
                                             <thead>
-                                            <tr>
-                                                <th class="text-center">{{__('messages.status')}}</th>
-                                                <th class="text-center">{{__('messages.technician')}}</th>
-                                                <th class="text-center">{{__('messages.date')}}</th>
-                                                <th class="text-center">{{__('messages.time')}}</th>
-                                                <th class="text-center">{{__('messages.user')}}</th>
-                                            </tr>
+                                                <tr>
+                                                    <th class="text-center">{{ __('messages.status') }}</th>
+                                                    <th class="text-center">{{ __('messages.technician') }}</th>
+                                                    <th class="text-center">{{ __('messages.date') }}</th>
+                                                    <th class="text-center">{{ __('messages.time') }}</th>
+                                                    <th class="text-center">{{ __('messages.user') }}</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            @forelse($order->statuses as $row)
-                                                <tr>
-                                                    <td style="color: {{$row->status->color}}" class="text-center">{{$row->status->name}}</td>
-                                                    <td class="text-center">{{@$row->technician->name}}</td>
-                                                    <td class="text-center">{{$row->created_at->format('d-m-Y')}}</td>
-                                                    <td class="text-center">{{$row->created_at->format('H:i')}}</td>
-                                                    <td class="text-center">{{$row->creator->name}}</td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="4"
-                                                        class="text-center">{{__('messages.no_records_found')}}</td>
-                                                </tr>
-                                            @endforelse
+                                                @forelse($order->statuses as $row)
+                                                    <tr>
+                                                        <td style="color: {{ $row->status->color }}"
+                                                            class="text-center">{{ $row->status->name }}</td>
+                                                        <td class="text-center">{{ @$row->technician->name }}</td>
+                                                        <td class="text-center">{{ $row->created_at->format('d-m-Y') }}
+                                                        </td>
+                                                        <td class="text-center">{{ $row->created_at->format('H:i') }}
+                                                        </td>
+                                                        <td class="text-center">{{ $row->creator->name }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4" class="text-center">
+                                                            {{ __('messages.no_records_found') }}</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -115,7 +119,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                @livewire('order-comments',['order_id'=>$order->id])
+                                @livewire('order-comments', ['order_id' => $order->id])
                             </div>
                         </div>
                     </div>
@@ -125,28 +129,26 @@
     </div>
 
     @push('scripts')
-    <script src="{{asset('js/app.js')}}"></script>
-    <script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            // Pusher.logToConsole = true;
+            var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+                cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
+            });
+            var channel = pusher.subscribe("OrderUpdatedPerOrderChannel{{ $order->id }}");
+            var callback = (eventName, data) => {
+                @this.render();
 
-                // Pusher.logToConsole = true;
-        var pusher = new Pusher('eb6e9c0ae00849725f96', {
-            cluster: 'mt1'
-        });
-        var channel = pusher.subscribe("OrderUpdatedPerOrderChannel{{ $order->id }}");
-        var callback = (eventName, data) => {
-            @this.render();
+            };
+            channel.bind_global(callback);
 
-        };
-        channel.bind_global(callback);
+            // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
+            //     .listen('OrderUpdatedPerOrderEvent', (e) => {
+            //     @this.render();
+            //     });
+        </script>
+    @endpush
 
-
-        // window.Echo.channel('OrderUpdatedPerOrderChannel{{ $order->id }}')
-        //     .listen('OrderUpdatedPerOrderEvent', (e) => {
-        //     @this.render();
-        //     });
-    </script>
-@endpush
-
-@section('title')
-<title>@lang('messages.order_details')</title>
-@endsection
+    @section('title')
+        <title>@lang('messages.order_details')</title>
+    @endsection

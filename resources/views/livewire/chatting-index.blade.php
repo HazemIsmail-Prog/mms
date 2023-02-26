@@ -107,8 +107,8 @@
 
 
             // Pusher.logToConsole = true;
-            var pusher = new Pusher('eb6e9c0ae00849725f96', {
-                cluster: 'mt1'
+            var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+                cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
             });
             var channel = pusher.subscribe("MessageSentToEventChannel{{ auth()->id() }}");
             var callback = (eventName, data) => {
