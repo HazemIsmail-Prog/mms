@@ -113,8 +113,6 @@
     <script src="{{ asset('vendors/sortable/Sortable.js') }}"></script>
     <script src="{{ asset('vendors/dragula/dragula.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('vendors/dragula/dragula.css') }}">
-    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-
     <script>
         $(document).ready(function() {
             if (screen.width < 992) {
@@ -123,44 +121,20 @@
                 loadDataFromDragulaJs();
             }
 
-
-
             // Pusher.logToConsole = true;
-            var pusher = new Pusher('eb6e9c0ae00849725f96', {
-                cluster: 'mt1'
+            var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+                cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
             });
             var channel = pusher.subscribe("OrderCreatedChannel{{ $department_id }}");
             var callback = (eventName, data) => {
                 @this.refresh_data();
-
             };
             channel.bind_global(callback);
-
-
-
-
 
             // window.Echo.channel('OrderCreatedChannel{{ $department_id }}')
             //     .listen('OrderCreatedEvent', (e) => {
             //         @this.refresh_data();
             //     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             function loadDataFromDragulaJs() {
                 const boxNodes = document.querySelectorAll('.box');

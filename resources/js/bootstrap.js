@@ -46,9 +46,9 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'eb6e9c0ae00849725f96',
+    key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
-    wsPort: 6001,
+    wssHost: window.location.hostname,
     forceTLS: true,
     disableStats: true,
 });

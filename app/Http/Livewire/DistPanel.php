@@ -10,6 +10,7 @@ use Livewire\Component;
 class DistPanel extends Component
 {
     public $orders;
+    public $technicians;
     public $department_id;
     public $department;
     public $todays_orders_only = false;
