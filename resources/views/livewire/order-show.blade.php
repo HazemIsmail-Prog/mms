@@ -90,7 +90,6 @@
                                                     <th class="text-center">{{ __('messages.status') }}</th>
                                                     <th class="text-center">{{ __('messages.technician') }}</th>
                                                     <th class="text-center">{{ __('messages.date') }}</th>
-                                                    <th class="text-center">{{ __('messages.time') }}</th>
                                                     <th class="text-center">{{ __('messages.user') }}</th>
                                                 </tr>
                                             </thead>
@@ -100,9 +99,9 @@
                                                         <td style="color: {{ $row->status->color }}"
                                                             class="text-center">{{ $row->status->name }}</td>
                                                         <td class="text-center">{{ @$row->technician->name }}</td>
-                                                        <td class="text-center">{{ $row->created_at->format('d-m-Y') }}
-                                                        </td>
-                                                        <td class="text-center">{{ $row->created_at->format('H:i') }}
+                                                        <td class="text-center">
+                                                            <div>{{ $row->created_at->format('d-m-Y') }}</div>
+                                                            <div>{{ $row->created_at->format('H:i') }}</div>
                                                         </td>
                                                         <td class="text-center">{{ $row->creator->name }}</td>
                                                     </tr>
