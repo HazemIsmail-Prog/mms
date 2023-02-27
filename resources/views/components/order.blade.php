@@ -12,10 +12,10 @@
     </div>
     <div class=" p-2" >
         <table class="table table-sm table-striped table-borderless mb-0">
-            <tr>
+            {{-- <tr>
                 <th>@lang('messages.creator')</th>
                 <td>{{$order->creator_name}}</td>
-            </tr>
+            </tr> --}}
             <tr>
                 <th>@lang('messages.order_number')</th>
                 <td>{{str_pad($order->id, 8, "0", STR_PAD_LEFT)}}</td>
