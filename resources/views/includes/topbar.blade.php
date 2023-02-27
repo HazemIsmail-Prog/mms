@@ -56,7 +56,7 @@
                         alt="user@email.com">
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-right pt-0">
+            <div class="dropdown-menu dropdown-menu-right py-0">
                 <div class="dropdown-header bg-light py-2">
                     <strong>Account</strong>
                 </div>
@@ -118,7 +118,7 @@
                     <div class="px-2">Projects</div>
                     <span class="badge badge-primary ml-auto">42</span>
                 </a> --}}
-                <div class="dropdown-divider"></div>
+                <div class="dropdown-divider m-0"></div>
                 {{-- <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : '' }}" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
